@@ -6,12 +6,10 @@ The code for the techup.mk website, using Tailwind CSS and Laravel. This website
 - Tailwind CSS
 
 # How to install
-<hr>
 Start by cloning the project then running the following commands:
 
 - composer install
 - npm install
 
 # How to use it
-<hr>
 - php artisan serve
