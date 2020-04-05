@@ -70,4 +70,12 @@
         </div>
     </div>
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col text-center">
+                <a class="btn btn-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+        </div>
+    </div>
+</div>
 @endsection
