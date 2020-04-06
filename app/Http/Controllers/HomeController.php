@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
+use App\User;
 use Illuminate\Http\Request;
+use App\Mail\ContactForm;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -28,16 +32,23 @@ class HomeController extends Controller
     
     public function courses()
     {
-        return view('courses');
+        $courses = Course::latest()->paginate(9);
+
+        return view('courses', compact('courses'));
     }
+
     public function instructors()
     {
-        return view('instructors');
+        $users = User::where('role', '!=' , "admin")->latest()->paginate(9);
+
+        return view('instructors', compact('users'));
     }
+
     public function blog()
     {
         return view('blog');
     }
+
     public function contact()
     {
         return view('contact');

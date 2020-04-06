@@ -23,9 +23,11 @@
     <div id="app">
         @include('partials.menu')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
+
+    <footer>
+        @include('partials.footer')
+    </footer> 
 </body>
 </html>
