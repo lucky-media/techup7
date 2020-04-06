@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/admin', 'UsersController@index')->middleware('role:admin');
+Route::get('/admin/{user}/edit', 'UsersController@edit')->middleware('role:admin');
+Route::patch('/admin/{user}', 'UsersController@update')->name('admin.update')->middleware('role:admin');
+Route::delete('/admin/{user}', 'UsersController@destroy')->middleware('role:admin');
+
 Route::get('/courses/create', 'CoursesController@create')->middleware('role:admin,instructor');
 Route::post('/courses/store', 'CoursesController@store')->middleware('role:admin,instructor');
 Route::get('/courses/{course}/edit', 'CoursesController@edit')->name('courses.edit')->middleware('role:admin,instructor');
@@ -29,6 +34,15 @@ Route::patch('/lessons/{lesson}', 'LessonsController@update')->name('lessons.upd
 Route::get('/lessons/{slug}', 'LessonsController@show')->name('lessons.show');
 Route::delete('/lessons/{lesson}', 'LessonsController@destroy')->middleware('role:admin,instructor');
 Route::post('/lessons/image/upload', 'LessonsController@uploadImage');
+
+Route::post('/reply/store', 'CommentsController@reply');
+Route::post('/comments/store', 'CommentsController@store');
+Route::delete('/comments/{comment}', 'CommentsController@destroy');
+Route::put('/comments/{comment}', 'CommentsController@approved')->middleware('role:admin');
+Route::get('/comments/{comment}/edit', 'CommentsController@edit');
+Route::patch('/comments/{comment}', 'CommentsController@update');
+Route::patch('/comments/flag/{comment}', 'CommentsController@flag');
+Route::get('/comments', 'CommentsController@index')->middleware('role:admin');
 
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
