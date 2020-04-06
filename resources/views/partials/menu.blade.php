@@ -10,13 +10,13 @@
         <div class="col-5 hidden md:flex flex-row items-center justify-end">
             <a class="{{ Request::path() === '/' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('index') }}">Home</a>
-            <a class="{{ Request::path() === '/courses' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
+            <a class="{{ Request::path() === 'courses' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('courses') }}">All Courses</a>
-            <a class="{{ Request::path() === '/instructors' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
+            <a class="{{ Request::path() === 'instructors' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('instructors') }}">Instructors</a>
-            <a class="{{ Request::path() === '/blog' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
+            <a class="{{ Request::path() === 'blog' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('blog') }}">Blog</a>
-            <a class="{{ Request::path() === '/contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
+            <a class="{{ Request::path() === 'contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
                 href="{{ route('contact') }}">Contact</a>
         </div>
         <div class="col-3 hidden md:flex flex-row items-center justify-end">
