@@ -16,7 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
-
+    @stack('styles')
 
 </head>
 <body class="font-sans text-black antialiased flex flex-col">

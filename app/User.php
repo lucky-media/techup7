@@ -36,4 +36,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class)->orderBy('created_at', 'DESC');
+    }
+    
+    public function hasRole($role)
+    {
+        if ($role == $this->role)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
 }

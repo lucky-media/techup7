@@ -19,19 +19,19 @@
             <a class="{{ Request::path() === 'contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
                 href="{{ route('contact') }}">Contact</a>
         </div>
-        <div class="col-3 hidden md:flex flex-row items-center justify-end">
+        <div class="col-4 hidden md:flex flex-row items-center justify-end">
             <!-- Authentication Links -->
             @guest
-            <a class="transition duration-200 ease-in-out bg-blue-500 text-white ml-8 py-2 px-6 rounded hover:bg-gray-600"
+            <a class="transition duration-200 ease-in-out bg-blue-500 text-white ml-2 py-2 px-6 rounded hover:bg-gray-600"
                 href="{{ route('login') }}">{{ __('Login') }}</a>
             @else
             <div
-                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
+                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
                 {{ Auth::user()->username }} 
             </div>
             @if (Auth::user()->role == 'admin')
             <div
-                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
+                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
                 <a href="/admin">
                     Dashboard
                 </a>
