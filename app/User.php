@@ -42,6 +42,16 @@ class User extends Authenticatable
         return $this->hasMany(Course::class)->orderBy('created_at', 'DESC');
     }
     
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function hasRole($role)
     {
         if ($role == $this->role)
