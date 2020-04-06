@@ -32,7 +32,7 @@
 
                 <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                     <a class="flex items-center no-underline hover:underline text-black" href="/profile/{{ $course->user->id }}">
-                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}">
+                        {{-- <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}"> --}}
                         <p class="ml-2 text-sm">
                             {{ $course->user->name }}
                         </p>

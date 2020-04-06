@@ -27,3 +27,11 @@ Route::get('/courses/{course}/edit', 'CoursesController@edit')->name('courses.ed
 Route::patch('/courses/{course}', 'CoursesController@update')->name('courses.update')->middleware('role:admin,instructor');
 Route::get('/courses/{slug}', 'CoursesController@show')->name('courses.show');
 Route::delete('/courses/{course}', 'CoursesController@destroy')->middleware('role:admin,instructor');
+
+Route::get('/lessons/create/{course}', 'LessonsController@create')->middleware('role:admin,instructor');
+Route::post('/lessons/store', 'LessonsController@store')->middleware('role:admin,instructor');
+Route::get('/lessons/{lesson}/edit', 'LessonsController@edit')->name('lessons.edit')->middleware('role:admin,instructor');
+Route::patch('/lessons/{lesson}', 'LessonsController@update')->name('lessons.update')->middleware('role:admin,instructor');
+Route::get('/lessons/{slug}', 'LessonsController@show')->name('lessons.show');
+Route::delete('/lessons/{lesson}', 'LessonsController@destroy')->middleware('role:admin,instructor');
+Route::post('/lessons/image/upload', 'LessonsController@uploadImage');
