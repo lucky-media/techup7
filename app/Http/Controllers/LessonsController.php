@@ -58,6 +58,8 @@ class LessonsController extends Controller
 
         $courseSlug = $lesson->course->slug;
 
+        $lesson->children()->delete();
+
         $lesson->delete();
         
         return redirect('/courses/'. $courseSlug);

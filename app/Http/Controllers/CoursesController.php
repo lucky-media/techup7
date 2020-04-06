@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\User;
 use App\Lesson;
+use App\Comment;
 use File;
 
 use Illuminate\Support\Str;
@@ -58,6 +59,13 @@ class CoursesController extends Controller
 
     public function destroy(Course $course)
     {
+        foreach ($course->lesson as $lesson) {
+            foreach ($lesson->children as $comment) {
+                $comment->delete();
+            }
+            $lesson->delete();
+        }
+
         $course->delete();
 
         File::delete('storage/{$course->image}');

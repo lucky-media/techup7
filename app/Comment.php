@@ -22,4 +22,8 @@ class Comment extends Model
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }
+
+    public function children(){
+        return $this->hasMany(Comment::class, 'parent_id', 'id');
+    }
 }

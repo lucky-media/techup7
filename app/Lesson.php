@@ -17,6 +17,11 @@ class Lesson extends Model
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
+    
+    public function children()
+    {
+        return $this->hasMany(Comment::class, 'commentable_id', 'id');
+    }
 
     public function commentsCount()
     {

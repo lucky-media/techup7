@@ -13,8 +13,12 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function lessons()
+    public function lesson()
     {
         return $this->hasMany(Lesson::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function children(){
+        return $this->hasMany(Lesson::class, 'course_id', 'id');
     }
 }

@@ -81,13 +81,29 @@ class CommentsController extends Controller
         return redirect('/comments');
     }
 
-    public function destroy(Comment $comment)
-    {
-        $this->middleware('role');
+    public function destroy($id){
+        // Getting the parent category
+        $parent = Comment::findOrFail($id);
 
-        $comment->delete();
-        
+        // Getting all children ids
+        $array_of_ids = $this->getChildren($parent);
+
+        // Appending the parent category id
+        array_push($array_of_ids, $id);
+
+        // Destroying all of them
+        Comment::destroy($array_of_ids);
+
         return back();
+    }
+    
+    private function getChildren($category){
+        $ids = [];
+        foreach ($category->children as $cat) {
+            $ids[] = $cat->id;
+            $ids = array_merge($ids, $this->getChildren($cat));
+        }
+        return $ids;
     }
 
     public function edit(Comment $comment)
@@ -101,17 +117,16 @@ class CommentsController extends Controller
     public function update(Comment $comment)
     {
         $data = request()->validate([
-            'lesson_id' => 'required',
             'body' => 'required|min:2',
         ]);
 
         $comment->update([
-            'lesson_id' => $data['lesson_id'],
-            'user_id' => auth()->user()->id,
             'body' => $data['body'],
         ]);
         
-        return redirect('/lessons/'. $comment->lesson->id);
+        $lesson = Lesson::find($comment->commentable_id);
+        
+        return redirect('/lessons/'. $lesson->slug);
     }
 
     public function flag(Comment $comment)

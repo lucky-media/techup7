@@ -1,49 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <form action="/comments/{{$comment->id}}" enctype="multipart/form-data" method="post">
- 
-     @csrf
-     @method('PATCH')
+<div class="container my-10">
+    <div class="row justify-center">
+        <div class="col-10">
+            <div class="bg-blue-500 border rounded mb-10 lg:mb-0">
+                <div class="m-10">
+                    <h2 class="text-4xl font-bold text-white">Edit Comment</h2>
 
-     <div class="row">
-            <div class="col-8 offset-2">
-            <div class="row">
-                <h3>Edit Comment</h3>
-            </div>
+                    <form action="/comments/{{$comment->id}}" enctype="multipart/form-data" method="post">
 
-        <div class="form-group row">
-                    <input id="lesson_id"
-                        type="text"
-                        name="lesson_id"
-                        value="{{ old('lesson_id') ?? $comment->lesson->id }}" hidden>
-        </div>
+                        @csrf
+                        @method('PATCH')
 
-        <div class="form-group row">
-                    <label for="body" class="col-md-4 col-form-label">Body</label>
-                    
-                    <input id="body"
-                    type="text"
-                    class="form-control @error('body') is-invalid @enderror"
-                    name="body"
-                    value="{{ old('body') ?? $comment->body }}"
-                    autocomplete="body">
+                        <div class="col-md-6 mb-5">
+                            <label for="body" class="text-small text-white">Body</label>
+                            <input id="body" type="text" class="rounded bg-gray-100 py-6 pl-2 text-black w-full
+                            @error('body') border-2 border-red-600 @enderror" name="body"
+                                value="{{ old('body') ?? $comment->body }}" required autofocus>
 
-                        @error('body')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            @error('body')
+                            <span role="alert">
+                                <strong>{{ $message }}</strong><br>
                             </span>
-                        @enderror
-                </div>
+                            @enderror
+                        </div>
 
-                <div class="row pt-4">
-                    <button class="btn btn-primary">
-                        Save Changes
-                    </button>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-4">
+                                    <button type="submit"
+                                class="mt-4 transition duration-200 ease-in-out bg-orange-500 font-bold text-white py-6 px-10 rounded hover:bg-gray-200 hover:text-gray-600">
+                                {{ __('Save') }}
+                                    </button>
+                                </div>
+                                <div class="col-auto text-right">
+                                    <a href="{{ url()->previous() }}">
+                                    <div
+                                        class="mt-8 transition duration-200 ease-in-out bg-white font-bold text-orange-500 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                                        {{ __('Cancel') }}
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    
                 </div>
-             </div>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
 @endsection
