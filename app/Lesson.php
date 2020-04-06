@@ -12,4 +12,16 @@ class Lesson extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+    
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function commentsCount()
+    {
+        $comments = Comment::where('commentable_id', '=', $this->id)->get();
+
+        return $comments->count();
+    }
 }

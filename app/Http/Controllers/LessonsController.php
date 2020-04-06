@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Purifier;
 use App\Lesson;
 use App\Course;
-// use App\Comment;
+use App\Comment;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -108,13 +108,13 @@ class LessonsController extends Controller
         return redirect('/lessons/'. $customSlug);
     }
 
-    public function show($slug)
+    public function show($slug, Comment $comments)
     {
         $lesson = Lesson::where('slug', $slug)->first();
         
         $lessons = Lesson::where('course_id', $lesson->course->id)->get();
         
-        //$comments = Comment::where('commentable_id', $lesson->id)->get();
+        $comments = Comment::where('commentable_id', $lesson->id)->get();
 
         return view('lessons.show', compact('lesson', 'lessons'));
     }
