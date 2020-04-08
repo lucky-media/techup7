@@ -110,15 +110,11 @@ class LessonsController extends Controller
         return redirect('/lessons/'. $customSlug);
     }
 
-    public function show($slug, Comment $comments)
+    public function show($slug, Course $course)
     {
         $lesson = Lesson::where('slug', $slug)->first();
-        
-        $lessons = Lesson::where('course_id', $lesson->course->id)->get();
-        
-        $comments = Comment::where('commentable_id', $lesson->id)->get();
 
-        return view('lessons.show', compact('lesson', 'lessons'));
+        return view('lessons.show', compact('lesson'));
     }
 
     public function uploadImage(Request $request)

@@ -18,7 +18,7 @@ class CommentsController extends Controller
     {
         $this->middleware('role');
         
-        $comments = Comment::where('approved', '!=', 'true')->latest()->paginate(10);
+        $comments = Comment::where('approved', '=', 'false')->paginate(10);
         
         return view('comments.index', compact('comments'));
     }
@@ -66,34 +66,20 @@ class CommentsController extends Controller
         return back();
     }
 
-    public function approved(Comment $comment)
-    {
-        $this->middleware('role');
-        
-        $data = request()->validate([
-            'approved' => 'required',
-        ]);
-
-        $comment->update([
-            'approved' => $data['approved'],
-        ]);
-        
-        return redirect('/comments');
-    }
-
+    
     public function destroy($id){
         // Getting the parent category
         $parent = Comment::findOrFail($id);
-
+        
         // Getting all children ids
         $array_of_ids = $this->getChildren($parent);
-
+        
         // Appending the parent category id
         array_push($array_of_ids, $id);
-
+        
         // Destroying all of them
         Comment::destroy($array_of_ids);
-
+        
         return back();
     }
     
@@ -105,28 +91,26 @@ class CommentsController extends Controller
         }
         return $ids;
     }
-
+    
     public function edit(Comment $comment)
     {
-
+        
         $this->authorize('update', $comment);
-
+        
         return view('comments.edit', compact('comment'));
     }
-
+    
     public function update(Comment $comment)
     {
         $data = request()->validate([
             'body' => 'required|min:2',
-        ]);
-
+            ]);
+            
         $comment->update([
             'body' => $data['body'],
-        ]);
-        
-        $lesson = Lesson::find($comment->commentable_id);
-        
-        return redirect('/lessons/'. $lesson->slug);
+            ]);
+                
+        return redirect('/lessons/'. $comment->lesson->slug);
     }
 
     public function flag(Comment $comment)
@@ -136,9 +120,24 @@ class CommentsController extends Controller
         ]);
         
         $comment->update([
+        'approved' => $data['approved'],
+        ]);
+
+        return redirect('/lessons/'. $comment->lesson->slug);
+    }
+    
+    public function approved(Comment $comment)
+    {
+        $this->middleware('role');
+        
+        $data = request()->validate([
+            'approved' => 'required',
+        ]);
+    
+        $comment->update([
             'approved' => $data['approved'],
         ]);
-        dd($comment);
-        return redirect('/lessons/'. $comment->lesson["slug"]);
+        
+        return redirect('/comments');
     }
 }

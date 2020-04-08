@@ -10,7 +10,7 @@ class Comment extends Model
     
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lesson::class, 'commentable_id', 'id');
     }
 
     public function user()

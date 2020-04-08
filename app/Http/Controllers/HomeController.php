@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function instructors()
     {
-        $users = User::where('role', '!=' , "admin")->latest()->paginate(9);
+        $users = User::where('role', '=' , "instructor")->latest()->paginate(9);
 
         return view('instructors', compact('users'));
     }

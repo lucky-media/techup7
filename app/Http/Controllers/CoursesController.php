@@ -66,9 +66,9 @@ class CoursesController extends Controller
             $lesson->delete();
         }
 
-        $course->delete();
-
         File::delete('storage/{$course->image}');
+        
+        $course->delete();
 
         return redirect('/profile/'. auth()->user()->id);
     }
@@ -134,10 +134,8 @@ class CoursesController extends Controller
 
     public function show($slug, Course $course, Lesson $lesson)
     {
-        $course = Course::where('slug', '=', $slug)->first();
-        
-        $lessons = Lesson::where('course_id', $course->id)->get();
+        $course = Course::where('slug', $slug)->first();
 
-        return view('courses.show', compact('course', 'lessons'));
+        return view('courses.show', compact('course'));
     }
 }

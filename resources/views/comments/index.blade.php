@@ -26,7 +26,7 @@
             <div class="col-6 my-4">
                     <div class="flex flex-row items-center mb-4">
                         <div>
-                            <a href="/lessons/{{ $comment->lesson->id }}">
+                            <a href="/lessons/{{ $comment->lesson->slug }}">
                                 <h2 class="text-2xl font-bold">{{ $comment->lesson->title }}</h2>
                                 <p>{{ $comment->body }}</p>
                             </a>
