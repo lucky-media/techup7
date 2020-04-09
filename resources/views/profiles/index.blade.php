@@ -59,7 +59,7 @@
 
     <div class="row">
         @forelse($user->courses as $course)
-            <div class="col-6 items-center mb-12">
+            <div class="col-4 items-center mb-12">
                 <div class="container my-4">
                     <div class="row justify-center">
                         <div class="col-4">

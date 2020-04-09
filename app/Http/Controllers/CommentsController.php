@@ -30,15 +30,12 @@ class CommentsController extends Controller
             'body' => 'required|min:2',
         ]);
 
-        $comment = new Comment;
-
-        $comment->body = $data['body'];
-
-        $comment->user_id = auth()->user()->id;
-
         $lesson = Lesson::find($data['lesson_id']);
-
-        $lesson->comments()->save($comment);
+        
+        $lesson->comments()->create([
+            'user_id' => auth()->user()->id,
+            'body' => $data['body'],
+        ]);
 
         return back();
     }
@@ -50,23 +47,18 @@ class CommentsController extends Controller
             'lesson_id' => 'required',
             'comment_id' => 'required',
         ]);
-
-        $reply = new Comment();
-
-        $reply->body = $data['body'];
-
-        $reply->user_id = auth()->user()->id;
-
-        $reply->parent_id = $data['comment_id'];
-
+        
         $lesson = Lesson::find($data['lesson_id']);
-
-        $lesson->comments()->save($reply);
+        
+        $lesson->comments()->create([
+            'user_id' => auth()->user()->id,
+            'parent_id' => $data['comment_id'],
+            'body' => $data['body'],
+        ]);
 
         return back();
     }
 
-    
     public function destroy($id){
         // Getting the parent category
         $parent = Comment::findOrFail($id);
@@ -85,6 +77,7 @@ class CommentsController extends Controller
     
     private function getChildren($category){
         $ids = [];
+
         foreach ($category->children as $cat) {
             $ids[] = $cat->id;
             $ids = array_merge($ids, $this->getChildren($cat));
@@ -93,8 +86,7 @@ class CommentsController extends Controller
     }
     
     public function edit(Comment $comment)
-    {
-        
+    {        
         $this->authorize('update', $comment);
         
         return view('comments.edit', compact('comment'));
