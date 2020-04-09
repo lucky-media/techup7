@@ -6,9 +6,9 @@ use App\Course;
 use App\User;
 use App\Lesson;
 use App\Comment;
-use File;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -54,7 +54,6 @@ class CoursesController extends Controller
         ]);
         
         return redirect('/profile/'. auth()->user()->id);
-        
     }
 
     public function destroy(Course $course)
@@ -65,9 +64,9 @@ class CoursesController extends Controller
             }
             $lesson->delete();
         }
-
-        File::delete('storage/{$course->image}');
         
+        File::delete(public_path("storage/{$course->image}"));
+
         $course->delete();
 
         return redirect('/profile/'. auth()->user()->id);
@@ -132,7 +131,7 @@ class CoursesController extends Controller
         return redirect('/courses/'. $course->$customSlug);
     }
 
-    public function show($slug, Course $course, Lesson $lesson)
+    public function show($slug, Course $course)
     {
         $course = Course::where('slug', $slug)->first();
 
