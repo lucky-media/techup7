@@ -17,14 +17,11 @@ class ProfilesController extends Controller
 
     public function index(User $user)
     {       
-        $courseCount = Cache::remember(
-            'count.courses.' . $user->id,
-            now()->addSeconds(30),
-            function () use ($user) {
-                return $user->courses->count();
-            });        
-
-        return view('profiles.index', compact('user', 'courseCount'));
+        if ($user->role == 'instructor'){
+            return view('profiles.index', compact('user'));
+        }
+        else
+        return view('index');
     }
 
     public function edit(User $user)

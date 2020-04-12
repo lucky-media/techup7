@@ -33,7 +33,7 @@
 
                 <div class="col-6 px-4">
                     @can('delete', $course)
-                    <form action="/courses/{{ $course->id }}" enctype="multipart/form-data" method="post">
+                    <form action="/courses/{{ $course->slug }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" onclick="return confirm('Are you sure?')"

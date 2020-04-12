@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-9">
             <div class="my-10">
-                <h2 class="text-2xl font-semibold"> <strong>{{ $courseCount }}</strong> Courses: </h2>
+                <h2 class="text-2xl font-semibold"> <strong>{{ $user->courses->count() }}</strong> Courses: </h2>
             </div>
         </div>
         <div class="col-3">
@@ -59,22 +59,34 @@
 
     <div class="row">
         @forelse($user->courses as $course)
-            <div class="col-4 items-center mb-12">
-                <div class="container my-4">
-                    <div class="row justify-center">
-                        <div class="col-4">
-                            <a href="/courses/{{ $course->slug }}">
-                                <img src="/storage/{{ $course->image }}" class="rounded-top">
-                            </a>
-                        </div>
-                        <div class="col-7">
-                            <a href="/courses/{{ $course->slug }}">
-                                <h2 class="text-2xl font-bold">{{ $course->title }}</h2>
-                            </a>
-                        </div>
+        <div class="my-4 px-4 col-4">
+            <article class="overflow-hidden rounded-lg shadow-lg">
+                <a href="/courses/{{ $course->slug }}">
+                    <img alt="course cover" class="block h-64 w-full" src="/storage/{{ $course->image }}">
+                </a>
+
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
+                    <h1 class="text-lg">
+                        <a class="no-underline hover:underline text-black" href="/courses/{{ $course->slug }}">
+                            {{ $course->title }}
+                        </a>
+                    </h1>
+                </header>
+
+                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
+                    <a class="flex items-center no-underline hover:underline text-black" href="/profile/{{ $course->user->id }}">
+                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}">
+                        <p class="ml-2 text-sm">
+                            {{ $course->user->name }}
+                        </p>
+                    </a>
+                    <div class="no-underline text-grey-darker hover:text-red-dark">
+                        {{ $course->updated_at->format('M Y') }}
                     </div>
-                </div>
-            </div>
+                </footer>
+
+            </article>
+        </div>
         @empty
         <div>
             
