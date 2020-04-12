@@ -33,23 +33,22 @@ class UsersController extends Controller
     {
         $this->middleware('role');
         
-        $data = request()->validate([
+        $user->update(request()->validate([
             'role' => 'required',
-        ]);
+        ]));
 
-        $user->update([
-            'role' => $data['role'],
-        ]);
-
-        if ($data['role'] == 'student'){
+        if (request('role') == 'student'){
             $user->profile()->delete();
         }
         else
         {
-            $user->profile()->create([
-                'bio' => 'Some personal information',
-                'image' => 'uploads/noimage.png',
-            ]);
+            if (!$user->profile()->exists())
+            {
+                $user->profile()->create([
+                    'bio' => 'Some personal information',
+                    'image' => 'uploads/noimage.png',
+                    ]);
+            }
         }
 
         return redirect("/admin");
