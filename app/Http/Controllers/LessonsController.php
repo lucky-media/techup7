@@ -34,11 +34,7 @@ class LessonsController extends Controller
             'body' => 'required',
         ]);
 
-        $customSlug = Str::slug($data['title'], '-');
-
-        if (Lesson::where('slug', $customSlug)->first()){
-            $customSlug = $customSlug . '-' . rand(10,100);
-        }
+        $customSlug = $this->createMySlug($data['title']);
 
         Lesson::create([
             'course_id' => $data['course_id'],
@@ -49,7 +45,7 @@ class LessonsController extends Controller
 
         $course = Course::where('id', $data['course_id'])->first();
 
-        return redirect('/courses/'. $course->slug);   
+        return redirect('/courses/'. $course->slug);
     }
 
     public function destroy(Lesson $lesson)
@@ -79,29 +75,17 @@ class LessonsController extends Controller
         $this->middleware('role');
         
         $data = request()->validate([
-            'id' => 'required',
-            'course_id' => 'required',
-            'title' => 'required',
-            'body' => 'required',
+            'title' => '',
+            'body' => '',
         ]);
 
-        $titleChanged = Lesson::where('id', $data['id'])->first();
+        $customSlug = Str::slug($data['title'], '-');
 
-        if ($titleChanged->title != $data['title']){
-
-            $customSlug = Str::slug($data['title'], '-');
-            
-            if (Lesson::where('slug', $customSlug)->first()){
-                $customSlug = $customSlug . '-' . rand(10,100);
-            }
-        }
-        else
-        {
-            $customSlug = $titleChanged->slug;
-        }
+        if ($lesson->slug != $customSlug) {
+            $customSlug = $this->createMySlug($data['title']);
+           }
 
         $lesson->update([
-            'course_id' => $data['course_id'],
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => Purifier::clean($data['body']),
@@ -119,5 +103,28 @@ class LessonsController extends Controller
     {
         $imgpath = $request->file('file')->store('uploads', 'public');
         return response()->json(['location' => "/storage/$imgpath"]);
+    }
+
+    public function createMySlug($title)
+    {    
+        $customSlug = Str::slug($title, '-');
+
+        $allSlugs = $this->getRelatedSlugs($customSlug);
+
+        if (! $allSlugs->contains('slug', $customSlug)){
+            return $customSlug;
+        }
+        
+        for ($i = 1; $i <= 10; $i++) {
+             $newSlug = $customSlug.'-'.$i;
+             if (! $allSlugs->contains('slug', $newSlug)) {
+                 return $newSlug;
+            }
+        }
+    }
+
+    protected function getRelatedSlugs($slug)
+    {
+        return Lesson::select('slug')->where('slug', 'like', $slug.'%')->get();
     }
 }

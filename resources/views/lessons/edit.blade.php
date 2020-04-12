@@ -10,13 +10,10 @@
                 <div class="m-10">
                     <h2 class="text-4xl font-bold text-white">Edit Lesson</h2>
 
-                    <form action="/lessons/{{ $lesson->id }}" enctype="multipart/form-data" method="post">
+                    <form action="/lessons/{{ $lesson->slug }}" enctype="multipart/form-data" method="post">
 
                         @csrf
                         @method('PATCH')
-
-                        <input type="hidden" name="id" value="{{ old('id') ?? $lesson->id }}">
-                        <input type="hidden" name="course_id" value="{{ old('course_id') ?? $lesson->course->id }}">
 
                         <div class="col-md-6 mb-5">
                             <label for="title" class="text-small text-white">Title</label>

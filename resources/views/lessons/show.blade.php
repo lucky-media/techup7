@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-6 px-4">
                 @can('update', $lesson)    
-                    <form action="/lessons/{{ $lesson->id }}/edit" enctype="multipart/form-data" method="get">
+                    <form action="/lessons/{{ $lesson->slug }}/edit" enctype="multipart/form-data" method="get">
                             <button type="submit" 
                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                             {{ __('Edit') }}</button>
@@ -33,7 +33,7 @@
 
                 <div class="col-6 px-4">
                 @can('delete', $lesson)
-                    <form action="/lessons/{{ $lesson->id }}" enctype="multipart/form-data" method="post">
+                    <form action="/lessons/{{ $lesson->slug }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" onclick="return confirm('Are you sure?')"
@@ -73,7 +73,7 @@
             <br>
             @can('delete', $lesson)
             <div>
-                <form action="/lessons/create/{{ $lesson->course->id }}" enctype="multipart/form-data" method="get">
+                <form action="/lessons/create/{{ $lesson->course->slug }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                     {{ __('Create New Lesson') }}</button>
