@@ -29,4 +29,9 @@ class Lesson extends Model
 
         return $comments->count();
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

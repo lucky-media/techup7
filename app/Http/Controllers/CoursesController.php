@@ -131,10 +131,8 @@ class CoursesController extends Controller
         return redirect('/courses/'. $course->$customSlug);
     }
 
-    public function show($slug, Course $course)
+    public function show(Course $course)
     {
-        $course = Course::where('slug', $slug)->first();
-
         return view('courses.show', compact('course'));
     }
 }

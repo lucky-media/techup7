@@ -110,10 +110,8 @@ class LessonsController extends Controller
         return redirect('/lessons/'. $customSlug);
     }
 
-    public function show($slug, Course $course)
+    public function show(Lesson $lesson)
     {
-        $lesson = Lesson::where('slug', $slug)->first();
-
         return view('lessons.show', compact('lesson'));
     }
 
