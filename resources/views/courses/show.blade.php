@@ -55,7 +55,7 @@
         </div>
         <div class="col-5">
             <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $course->title }}</h2>
-            @forelse($course->lesson as $lesson)
+            @forelse($course->lesson->reverse() as $lesson)
                     <a href="/lessons/{{ $lesson->slug }}">
                         <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>    
                     </a>

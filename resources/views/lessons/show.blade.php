@@ -60,7 +60,7 @@
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
             </a>
             
-            @foreach ($lesson->course->lesson as $lessons)
+            @foreach ($lesson->course->lesson->reverse() as $lessons)
                 @if ($lessons->id == $lesson->id)
                         <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
                 @else
