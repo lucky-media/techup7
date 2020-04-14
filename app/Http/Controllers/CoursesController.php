@@ -17,7 +17,7 @@ class CoursesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('index');
     }
 
     public function create()
@@ -131,8 +131,8 @@ class CoursesController extends Controller
         return redirect('/courses/'. $course->$customSlug);
     }
 
-    public function show(Course $course)
+    public function index(Course $course)
     {
-        return view('courses.show', compact('course'));
+        return view('courses.index', compact('course'));
     }
 }

@@ -26,13 +26,13 @@
             <div class="col-6 my-4">
                     <div class="flex flex-row items-center mb-4">
                         <div>
-                            <a href="/lessons/{{ $comment->lesson->slug }}">
+                            <a href="{{ route('lessons.index', $comment->lesson->slug) }}">
                                 <h2 class="text-2xl font-bold">{{ $comment->lesson->title }}</h2>
                                 <p>{{ $comment->body }}</p>
                             </a>
                             <div class="row">
                                 <div class="col-6">  
-                                    <form action="/comments/{{ $comment->id }}" shenctype="multipart/form-data" method="post">
+                                    <form action="{{ route('comments.approved', $comment) }}" shenctype="multipart/form-data" method="post">
                                         {{ csrf_field() }}                                            
                                         {{ method_field('PUT') }}
                                             <input id="approved"
@@ -47,7 +47,7 @@
                                 </div>
                 
                                 <div class="col-6 px-2">
-                                    <form action="/comments/{{ $comment->id }}" enctype="multipart/form-data" method="post">
+                                    <form action="{{ route('comments.destroy', $comment) }}" enctype="multipart/form-data" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" onclick="return confirm('Are you sure?')"

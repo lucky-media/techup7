@@ -8,7 +8,7 @@
                 <div class="m-10">
                     <h2 class="text-4xl font-bold text-white">Edit Comment</h2>
 
-                    <form action="/comments/{{$comment->id}}" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('comments.update', $comment) }}" enctype="multipart/form-data" method="post">
 
                         @csrf
                         @method('PATCH')

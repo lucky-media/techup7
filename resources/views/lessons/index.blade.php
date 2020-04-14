@@ -16,14 +16,14 @@
     <div class="row">
         <div class="col-8">
             <div class="text-sm">
-                By <a href="/profile/{{ $lesson->course->user->id }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
+                By <a href="{{ route('profile.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
         <div class="col-3">
             <div class="row">
                 <div class="col-6 px-4">
                 @can('update', $lesson)    
-                    <form action="/lessons/{{ $lesson->slug }}/edit" enctype="multipart/form-data" method="get">
+                    <form action="{{ route('lessons.edit', $lesson) }}" enctype="multipart/form-data" method="get">
                             <button type="submit" 
                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                             {{ __('Edit') }}</button>
@@ -33,7 +33,7 @@
 
                 <div class="col-6 px-4">
                 @can('delete', $lesson)
-                    <form action="/lessons/{{ $lesson->slug }}" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('lessons.destroy', $lesson) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" onclick="return confirm('Are you sure?')"
@@ -56,7 +56,7 @@
         </div>
         
         <div class="col-5 mb-10">
-            <a href="/courses/{{ $lesson->course->slug }}">
+            <a href="{{ route('courses.index', $lesson->course->slug) }}">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
             </a>
             
@@ -64,7 +64,7 @@
                 @if ($lessons->id == $lesson->id)
                         <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
                 @else
-                    <a href="/lessons/{{ $lessons->slug }}">
+                    <a href="{{ route('lessons.index', $lessons) }}">
                         <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>    
                     </a>
                 @endif
@@ -73,7 +73,7 @@
             <br>
             @can('delete', $lesson)
             <div>
-                <form action="/lessons/create/{{ $lesson->course->slug }}" enctype="multipart/form-data" method="get">
+                <form action="{{ route('lessons.destroy', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                     {{ __('Create New Lesson') }}</button>
@@ -95,7 +95,7 @@
     </div>
 </div>
 
-<form action="/comments/store" enctype="multipart/form-data" method="post">
+<form action="{{ route('comments.store') }}" enctype="multipart/form-data" method="post">
     @csrf
 <div class="container">
     <div class="row">

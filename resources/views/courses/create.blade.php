@@ -10,7 +10,7 @@
                 <div class="m-10">
                     <h2 class="text-4xl font-bold text-white">Add New Course</h2>
 
-                    <form action="/courses/store" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('courses.store') }}" enctype="multipart/form-data" method="post">
 
                         @csrf
 

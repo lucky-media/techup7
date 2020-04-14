@@ -23,7 +23,7 @@
             <p class="py-1"><strong>Email:</strong> {{ $user->email }}</p>
             <p class="py-1"><strong>Role:</strong> {{ $user->role }}</p>
             @can('update', $user->profile)
-                <form action="/profile/{{ $user->id }}/edit" enctype="multipart/form-data" method="get">
+                <form action="{{ route('profile.edit', $user) }}" enctype="multipart/form-data" method="get">
                         <button type="submit" 
                         class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                         {{ __('Update Profile') }}</button>
@@ -36,17 +36,18 @@
 
 <div class="container my-10">
 
-    @can('create', $user->profile)
+    
     <div class="row">
         <div class="col-9">
             <div class="my-10">
                 <h2 class="text-2xl font-semibold"> <strong>{{ $user->courses->count() }}</strong> Courses: </h2>
             </div>
         </div>
+        @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
                 
-                    <form action="/courses/create" enctype="multipart/form-data" method="get">
+                    <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
                             <button type="submit" 
                             class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                             {{ __('Add New Course') }}</button>
@@ -54,27 +55,27 @@
                 
             </div>
         </div>
+        @endcan
     </div>
-    @endcan
 
     <div class="row">
         @forelse($user->courses as $course)
         <div class="my-4 px-4 col-4">
             <article class="overflow-hidden rounded-lg shadow-lg">
-                <a href="/courses/{{ $course->slug }}">
+                <a href="{{ route('courses.index', $course) }}">
                     <img alt="course cover" class="block h-64 w-full" src="/storage/{{ $course->image }}">
                 </a>
 
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4">
                     <h1 class="text-lg">
-                        <a class="no-underline hover:underline text-black" href="/courses/{{ $course->slug }}">
+                        <a class="no-underline hover:underline text-black" href="{{ route('courses.index', $course) }}">
                             {{ $course->title }}
                         </a>
                     </h1>
                 </header>
 
                 <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                    <a class="flex items-center no-underline hover:underline text-black" href="/profile/{{ $course->user->id }}">
+                    <a class="flex items-center no-underline hover:underline text-black" href="{{ route('profile.index', $course->user->id) }}}}">
                         <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}">
                         <p class="ml-2 text-sm">
                             {{ $course->user->name }}

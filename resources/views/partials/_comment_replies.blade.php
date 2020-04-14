@@ -3,7 +3,7 @@
 <div class="container my-10 ml-10">
     <div class="row no-gutters">
         <div class="px-0">
-            <img src="{{ $comment->user->profile->profileImage() }}" alt="profile image" class="rounded-full w-12 h-12">
+            <img src="{{ $comment->user->profile()->exists() ? $comment->user->profile->profileImage() : '/storage/uploads/noimage.png' }}" alt="profile image" class="rounded-full w-12 h-12">
         </div>
         <div class="col-10">
             <div class="container">
@@ -12,7 +12,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <a href="/profile/{{ $comment->user->id }}">
+                                    <a href="{{ route('profile.index', $comment->user->id) }}">
                                         <span class="font-bold underline"> {{ $comment->user->name }} </span> &nbsp;
                                         <span class="text-xs"> ({{ $comment->created_at->diffForHumans() }})</span>
                                     </a>
@@ -26,7 +26,7 @@
                                     <div class="row">
                                         <div class="col-2">      
                                             @can('update', $comment)
-                                                <form action="/comments/{{ $comment->id }}/edit" enctype="multipart/form-data" method="get">
+                                                <form action="{{ route('comments.edit', $comment) }}" enctype="multipart/form-data" method="get">
                                                     <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                                                     {{ __('Edit') }}</button>
                                                 </form>
@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-2">
                                             @can('delete', $comment)
-                                                <form action="/comments/{{ $comment->id }}" enctype="multipart/form-data" method="post">
+                                                <form action="{{ route('comments.destroy', $comment) }}" enctype="multipart/form-data" method="post">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded"
@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="col-2">
                                             @can('flagInappropriate', $comment)
-                                                <form action="/comments/flag/{{ $comment->id }}" enctype="multipart/form-data" method="post">
+                                                <form action="{{ route('comments.flag', $comment) }}" enctype="multipart/form-data" method="post">
                                                     {{ csrf_field() }}
                                                     {{ method_field('PATCH') }}
                                                     <input id="approved" type="text" name="approved" value="false" hidden>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <form action="/reply/store" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('comments.reply') }}" enctype="multipart/form-data" method="post">
                             @csrf
                             <div class="container">
                                 <div class="row">

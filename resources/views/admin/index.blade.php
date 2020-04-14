@@ -15,7 +15,7 @@
 <div class="container my-6">
     <div class="row">
         <div class="col-4"> 
-            <form action="/comments" enctype="multipart/form-data" method="get">
+            <form action="{{ route('comments.index') }}" enctype="multipart/form-data" method="get">
                     <button type="submit" 
                     class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                     Manage Comments</button>
@@ -39,17 +39,17 @@
                 <tbody>
                     @foreach($instructors as $instructor)
                         <tr>
-                            <td class="px-4 py-2"><a href="/profile/{{ $instructor->id }}">{{ $instructor->name }}<a></td>
+                            <td class="px-4 py-2"><a href="{{ route('profile.index', $instructor) }}">{{ $instructor->name }}<a></td>
                             <td class="px-4 py-2">{{ $instructor->role }}</td>
                             <td class="px-4 py-2">
-                                <form action="/admin/{{ $instructor->id }}/edit" enctype="multipart/form-data" method="get">
+                                <form action="{{ route('admin.edit', $instructor) }}" enctype="multipart/form-data" method="get">
                                     <button type="submit" 
                                     class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                                     {{ __('Edit') }}</button>
                                 </form>
                             </td>
                             <td class="px-4 py-2">
-                                <form action="/admin/{{ $instructor->id }}" enctype="multipart/form-data" method="post">
+                                <form action="{{ route('admin.destroy', $instructor) }}" enctype="multipart/form-data" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit" onclick="return confirm('Are you sure?')"
@@ -75,17 +75,17 @@
                 <tbody>
                     @foreach($students as $student)
                         <tr>
-                            <td class="px-4 py-2"><a href="/profile/{{ $student->id }}">{{ $student->name }}<a></td>
+                            <td class="px-4 py-2">{{ $student->name }}</td>
                             <td class="px-4 py-2">{{ $student->role }}</td>
                             <td class="px-4 py-2">
-                                <form action="/admin/{{ $student->id }}/edit" enctype="multipart/form-data" method="get">
+                                <form action="{{ route('admin.edit', $student) }}" enctype="multipart/form-data" method="get">
                                     <button type="submit" 
                                     class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                                     {{ __('Edit') }}</button>
                                 </form>
                             </td>
                             <td class="px-4 py-2">
-                                <form action="/admin/{{ $student->id }}" enctype="multipart/form-data" method="post">
+                                <form action="{{ route('admin.destroy', $student) }}" enctype="multipart/form-data" method="post">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit" onclick="return confirm('Are you sure?')"
