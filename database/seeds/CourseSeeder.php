@@ -11,11 +11,14 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 20)->create(['role' => 'instructor'])->each(function ($user) {
-            $user->courses()->saveMany(factory(App\Course::class, 20)
+        factory(App\User::class, 5)->create(['role' => 'instructor'])->each(function ($user) {
+            $user->courses()->saveMany(factory(App\Course::class, 5)
                 ->make())
                 ->each(function ($course) {
-                    $course->lesson()->saveMany(factory(App\Lesson::class, 10)->make());
+                    $course->lesson()->saveMany(factory(App\Lesson::class, 5)->make())
+                        ->each(function ($lesson) use ($course) {
+                            $lesson->comments()->saveMany(factory(App\Comment::class, 3)->make(['user_id' => $course->user_id]));
+                        });
                 });
         });
     }
