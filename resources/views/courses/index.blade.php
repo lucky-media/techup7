@@ -22,9 +22,9 @@
         <div class="col-3">
             <div class="row">
                 <div class="col-6 px-4">
-                    @can('update', $course)    
+                    @can('update', $course)
                     <form action="{{ route('courses.edit', $course) }}" enctype="multipart/form-data" method="get">
-                            <button type="submit" 
+                            <button type="submit"
                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                             {{ __('Edit') }}</button>
                     </form>
@@ -50,7 +50,7 @@
 <div class="container my-20">
     <div class="row">
         <div class="col-7 text-justify">
-            <img src="/storage/{{ $course->image }}" class="rounded-circle" alt="course cover">
+            <img src="{{ asset($course->image) }}" class="rounded-circle" alt="course cover">
             <p class="py-6">{!! $course->body !!}</p>
         </div>
         <div class="col-5">
@@ -59,7 +59,7 @@
             </h2>
             @forelse($course->lesson->reverse() as $lesson)
                     <a href="/lessons/{{ $lesson->slug }}">
-                        <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>    
+                        <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>
                     </a>
             @empty
                 <p>There are no lessons yet.</p>

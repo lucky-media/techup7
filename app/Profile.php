@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     protected $guarded = [];
-    
+
     public function profileImage()
     {
-        $imagePath = $this->image ?? 'uploads/noimage.png';
-        
-        return '/storage/' . $imagePath;
+        $imagePath = $this->image ?? 'storage/noimage.png';
+
+        return $imagePath;
     }
 
     public function user()

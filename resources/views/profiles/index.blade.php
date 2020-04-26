@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div style="background:url('/storage/title_img.png'); ">
+<div style="background:url({{ asset('/storage/title_img.png') }}); ">
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-4">
@@ -24,7 +24,7 @@
             <p class="py-1"><strong>Role:</strong> {{ $user->role }}</p>
             @can('update', $user->profile)
                 <form action="{{ route('profile.edit', $user) }}" enctype="multipart/form-data" method="get">
-                        <button type="submit" 
+                        <button type="submit"
                         class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                         {{ __('Update Profile') }}</button>
                 </form>
@@ -36,7 +36,7 @@
 
 <div class="container my-10">
 
-    
+
     <div class="row">
         <div class="col-9">
             <div class="my-10">
@@ -46,13 +46,13 @@
         @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
-                
+
                     <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
-                            <button type="submit" 
+                            <button type="submit"
                             class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                             {{ __('Add New Course') }}</button>
                     </form>
-                
+
             </div>
         </div>
         @endcan
@@ -90,7 +90,7 @@
         </div>
         @empty
         <div>
-            
+
         </div>
         @endforelse
     </div>

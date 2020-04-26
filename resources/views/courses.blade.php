@@ -19,7 +19,7 @@
          <div class="my-4 px-4 col-4">
             <article class="overflow-hidden rounded-lg shadow-lg">
                 <a href="/courses/{{ $course->slug }}">
-                    <img alt="course cover" class="block h-64 w-full" src="/storage/{{ $course->image }}">
+                    <img alt="course cover" class="block h-64 w-full" src="{{ asset($course->image) }}">
                 </a>
 
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4">
