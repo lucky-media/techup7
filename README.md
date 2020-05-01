@@ -15,6 +15,7 @@ The code for the techup.mk website, using Tailwind CSS and Laravel. This website
 
 - composer install
 - npm install
+- php artisan key:generate
 - php artisan migrate --seed
 
 
