@@ -17,6 +17,7 @@ The code for the techup.mk website, using Tailwind CSS and Laravel. This website
 - npm install
 - php artisan key:generate
 - php artisan migrate --seed
+- npm run dev
 
 
 # How to use it
@@ -27,3 +28,8 @@ The code for the techup.mk website, using Tailwind CSS and Laravel. This website
 - Instructor: "instructor@test.com", password "secret"
 - Student: "student@test.com", password "secret"
 
+##### Images not showing
+If you have a problem with displaying images, make sure your port number 80 is not blocked and run the following command:
+- php artisan serve --port=80
+
+Then, you can access your site through visiting http://localhost/

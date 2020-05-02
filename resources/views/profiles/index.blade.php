@@ -15,7 +15,7 @@
 <div class="container my-20">
     <div class="row items-center">
         <div class="col-4">
-            <img src="{{ $user->profile->profileImage() ?? 'svg/techup.svg' }}" class="rounded-lg">
+            <img src="{{ $user->profile->profileImage() ?? asset('/svg/techup.svg') }}" class="rounded-lg">
         </div>
         <div class="col-6">
             <h2 class="font-semibold text-2xl text-orange-500 py-2">{{ $user->name }}</h2>
@@ -63,7 +63,7 @@
         <div class="my-4 px-4 col-4">
             <article class="overflow-hidden rounded-lg shadow-lg">
                 <a href="{{ route('courses.index', $course) }}">
-                    <img alt="course cover" class="block h-64 w-full" src="/storage/{{ $course->image }}">
+                    <img alt="course cover" class="block h-64 w-full" src="{{ asset($course->image) }}">
                 </a>
 
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4">
@@ -75,8 +75,8 @@
                 </header>
 
                 <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                    <a class="flex items-center no-underline hover:underline text-black" href="{{ route('profile.index', $course->user->id) }}}}">
-                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}">
+                    <a class="flex items-center no-underline hover:underline text-black" href="{{ route('profile.index', $course->user->id) }}">
+                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ asset($course->user->profile->profileImage()) }}">
                         <p class="ml-2 text-sm">
                             {{ $course->user->name }}
                         </p>

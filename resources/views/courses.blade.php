@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div style="background:url('/storage/title_img.png'); ">
+<div style="background:url({{ asset('/storage/title_img.png') }}); ">
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-6">
@@ -32,7 +32,7 @@
 
                 <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                     <a class="flex items-center no-underline hover:underline text-black" href="/profile/{{ $course->user->id }}">
-                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ $course->user->profile->profileImage() }}">
+                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ asset($course->user->profile->profileImage()) }}">
                         <p class="ml-2 text-sm">
                             {{ $course->user->name }}
                         </p>

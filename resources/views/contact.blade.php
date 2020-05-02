@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="background:url('/storage/title_img.png'); ">
+<div style="background:url({{ asset('/storage/title_img.png') }}); ">
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-4">
@@ -120,7 +120,7 @@
 <div class="container">
     <div class="row">
         <div class="w-ful h-auto lg:col-6 my-8">
-            <img src="/storage/contact_img.png" alt="Contact_img">
+            <img src="{{ asset('/storage/contact_img.png') }}" alt="Contact_img">
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="container my-10 ml-10">
     <div class="row no-gutters">
         <div class="px-0">
-            <img src="{{ $comment->user->profile()->exists() ? $comment->user->profile->profileImage() : '/storage/uploads/noimage.png' }}" alt="profile image" class="rounded-full w-12 h-12">
+            <img src="{{ $comment->user->profile()->exists() ? asset($comment->user->profile->profileImage()) : asset('/storage/no_image.jpg') }}" alt="profile image" class="rounded-full w-12 h-12">
         </div>
         <div class="col-10">
             <div class="container">

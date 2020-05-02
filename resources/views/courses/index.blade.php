@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div style="background:url('/storage/title_img.png'); ">
+<div style="background:url({{ asset('/storage/title_img.png') }}); ">
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-6">

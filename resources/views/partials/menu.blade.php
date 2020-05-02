@@ -4,7 +4,7 @@
     <div class="row justify-between py-8 text-base text-black">
         <div class="col-3 items-left">
             <a href="{{ route('index') }}">
-                <img src="/svg/techup.svg" style="max-height: 50px;">
+                <img src="{{ asset('/svg/techup.svg') }}" style="max-height: 50px;">
             </a>
         </div>
         <div class="col-5 hidden md:flex flex-row items-center justify-end">

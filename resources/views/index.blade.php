@@ -11,7 +11,7 @@
             </div>
 
             <div class="lg:col-6 order-first lg:order-none">
-                <img class="w-full h-auto py-8" src="/storage/home_intro.png" alt="home_intro">
+                <img class="w-full h-auto py-8" src="{{ asset('/storage/home_intro.png') }}" alt="home_intro">
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
     <div class="container">
         <div class="row items-center py-8">
             <div class="lg:col-5 lg:offset-1">
-                <img src="/storage/brain.png" alt="brain">
+                <img src="{{ asset('/storage/brain.png') }}" alt="brain">
                 <h2 class="mt-8 font-bold text-2xl text-base">Learn by Doing</h2>
 
                 <p class="mt-5">Learn by theory and with IRL projects!<br>
@@ -83,7 +83,7 @@
                 </p>
             </div>
             <div class="lg:col-6 mt-8 lg:mt-0">
-                <img class="w-full h-auto" src="/storage/home_learn.png" alt="">
+                <img class="w-full h-auto" src="{{ asset('/storage/home_learn.png') }}" alt="">
             </div>
         </div>
     </div>
