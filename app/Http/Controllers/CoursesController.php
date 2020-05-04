@@ -131,8 +131,15 @@ class CoursesController extends Controller
         return redirect('/courses/'. $course->$customSlug);
     }
 
-    public function index(Course $course)
+    public function show(Course $course)
     {
-        return view('courses.index', compact('course'));
+        return view('courses.show', compact('course'));
+    }
+
+    public function index()
+    {
+        $courses = Course::latest()->paginate(9);
+
+        return view('courses.index', compact('courses'));
     }
 }

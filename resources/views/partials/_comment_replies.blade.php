@@ -12,7 +12,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <a href="{{ route('profile.index', $comment->user->id) }}">
+                                    <a href="{{ route('profiles.index', $comment->user->id) }}">
                                         <span class="font-bold underline"> {{ $comment->user->name }} </span> &nbsp;
                                         <span class="text-xs"> ({{ $comment->created_at->diffForHumans() }})</span>
                                     </a>

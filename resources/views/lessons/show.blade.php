@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-8">
             <div class="text-sm">
-                By <a href="{{ route('profile.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
+                By <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
         <div class="col-3">
@@ -56,7 +56,7 @@
         </div>
         
         <div class="col-5 mb-10">
-            <a href="{{ route('courses.index', $lesson->course->slug) }}">
+            <a href="{{ route('courses.show', $lesson->course->slug) }}">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
             </a>
             
@@ -64,7 +64,7 @@
                 @if ($lessons->id == $lesson->id)
                         <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
                 @else
-                    <a href="{{ route('lessons.index', $lessons) }}">
+                    <a href="{{ route('lessons.show', $lessons) }}">
                         <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>    
                     </a>
                 @endif

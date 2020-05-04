@@ -94,9 +94,9 @@ class LessonsController extends Controller
         return redirect('/lessons/'. $customSlug);
     }
 
-    public function index(Lesson $lesson)
+    public function show(Lesson $lesson)
     {
-        return view('lessons.index', compact('lesson'));
+        return view('lessons.show', compact('lesson'));
     }
 
     public function uploadImage(Request $request)

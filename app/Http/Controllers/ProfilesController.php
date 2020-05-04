@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 
 use App\User;
+use App\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ProfilesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
 
-    public function index(User $user)
-    {       
+    public function show(User $user)
+    {   
+        //This will redirect to home if the requested user profile is not that of an instructor
         if ($user->role == 'instructor'){
-            return view('profiles.index', compact('user'));
+            $courses = Course::where('user_id', '=' , $user->id)->latest()->paginate(3);
+            return view('profiles.show', compact('user', 'courses'));
         }
         else
         return view('index');
@@ -56,5 +60,12 @@ class ProfilesController extends Controller
         ));
 
         return redirect("/profile/{$user->id}");
+    }
+
+    public function index()
+    {
+        $users = User::where('role', '=' , "instructor")->latest()->paginate(6);
+
+        return view('profiles.index', compact('users'));
     }
 }

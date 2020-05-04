@@ -11,9 +11,9 @@
             <a class="{{ Request::path() === '/' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('index') }}">Home</a>
             <a class="{{ Request::path() === 'courses' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('courses') }}">All Courses</a>
+                href="{{ route('courses.index') }}">All Courses</a>
             <a class="{{ Request::path() === 'instructors' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('instructors') }}">Instructors</a>
+                href="{{ route('profiles.index') }}">Instructors</a>
             <a class="{{ Request::path() === 'blog' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('blog') }}">Blog</a>
             <a class="{{ Request::path() === 'contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
@@ -32,7 +32,7 @@
             @if (Auth::user()->role == 'admin')
             <div
                 class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
-                <a href="/admin">
+                <a href="{{ route('admin.index') }}">
                     Dashboard
                 </a>
             </div>
@@ -40,7 +40,7 @@
             @if (Auth::user()->role == 'instructor')
             <div
                 class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
-                <a href="/profile/{{ Auth::user()->id }}">
+                <a href="{{ route('profiles.show', Auth::user()->id) }}">
                     Profile
                 </a>
             </div>

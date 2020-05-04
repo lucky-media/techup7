@@ -23,7 +23,7 @@
             <p class="text-center">From graphic design to web development, it’s all here!
                 <br>You will learn how to code front end websites with HTML, Javascript & CSS, as well as the back end
                 of websites with PHP & .NET </p>
-                <form action="/courses" enctype="multipart/form-data" method="get">
+                <form action="{{ route('courses.index') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="mt-6 bg-blue-500 text-white px-5 py-2 rounded transition duration-200 ease-in-out hover:bg-gray-600">
                     {{ __('View All Courses') }}</button>
@@ -39,7 +39,7 @@
         <div class="row py-32 items-center">
             <div class="lg:col-7">
                 <h1 class="text-white text-3xl lg:text-5xl font-bold">Don't forget to register</h1>
-                <form action="/register" enctype="multipart/form-data" method="get">
+                <form action="{{ route('register') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in text-white py-2 px-5 border border-white rounded hover:bg-white hover:text-indigo-900">
                     {{ __('Register') }}</button>
@@ -61,7 +61,7 @@
                     and Macedonian.
                 </p>
                 <p>Enhance your skills in your field of choice</p>
-                <form action="/courses" enctype="multipart/form-data" method="get">
+                <form action="{{ route('courses.index') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="mt-6 bg-blue-500 text-white px-5 py-2 rounded transition duration-200 ease-in-out hover:bg-gray-600">
                     {{ __('View All Courses') }}</button>
