@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Course;
-use App\User;
-use App\Lesson;
-use App\Comment;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -53,7 +50,7 @@ class CoursesController extends Controller
             'lang' => $data['lang'],
         ]);
         
-        return redirect('/profile/'. auth()->user()->id);
+        return redirect('/profiles/'. auth()->user()->id);
     }
 
     public function destroy(Course $course)
@@ -69,7 +66,7 @@ class CoursesController extends Controller
 
         $course->delete();
 
-        return redirect('/profile/'. auth()->user()->id);
+        return redirect('/profiles/'. auth()->user()->id);
     }
 
     public function edit(Course $course)

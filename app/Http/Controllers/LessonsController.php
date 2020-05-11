@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Purifier;
 use App\Lesson;
 use App\Course;
-use App\Comment;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

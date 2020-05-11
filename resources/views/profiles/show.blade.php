@@ -33,10 +33,7 @@
     </div>
 </div>
 
-
 <div class="container my-10">
-
-
     <div class="row">
         <div class="col-9">
             <div class="my-10">

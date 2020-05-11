@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Course;
-use App\User;
 use Illuminate\Http\Request;
-use App\Mail\ContactForm;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
