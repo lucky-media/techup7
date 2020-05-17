@@ -37,8 +37,11 @@
                             {{ Str::limit($course->user->name, 20) }}
                         </p>
                     </a>
-                    <div class="no-underline text-grey-darker hover:text-red-dark">
-                        {{ $course->updated_at->format('M Y') }}
+                    <div class="no-underline text-grey-darker text-right text-sm hover:text-red-dark">
+                            {{ $course->created_at->format('M Y') }}<br>
+                        <a class="no-underline hover:underline text-black" href="{{ route('courses.index') }}">
+                            {{ Str::limit($course->category->name, 10) }}
+                        </a>
                     </div>
                 </footer>
 

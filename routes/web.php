@@ -45,6 +45,13 @@ Route::patch('/comments/{comment}', 'CommentsController@update')->name('comments
 Route::patch('/comments/flag/{comment}', 'CommentsController@flag')->name('comments.flag');
 Route::get('/comments', 'CommentsController@index')->name('comments.index')->middleware('role:admin');
 
+Route::get('/categories/create', 'CategoryController@create')->name('categories.create')->middleware('role:admin');
+Route::post('/categories/store', 'CategoryController@store')->name('categories.store')->middleware('role:admin');
+Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy')->middleware('role:admin');
+Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('categories.edit')->middleware('role:admin');
+Route::patch('/categories/{category}', 'CategoryController@update')->name('categories.update')->middleware('role:admin');
+Route::get('/categories', 'CategoryController@index')->name('categories.index')->middleware('role:admin');
+
 Route::get('/profiles/{user}', 'ProfilesController@show')->name('profiles.show');
 Route::get('/profiles/{user}/edit', 'ProfilesController@edit')->name('profiles.edit');
 Route::patch('/profiles/{user}', 'ProfilesController@update')->name('profiles.update');

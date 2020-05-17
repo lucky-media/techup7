@@ -21,6 +21,13 @@
                     Manage Comments</button>
             </form>
         </div>
+        <div class="col-4"> 
+            <form action="{{ route('categories.index') }}" enctype="multipart/form-data" method="get">
+                    <button type="submit" 
+                    class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                    Manage Categories</button>
+            </form>
+        </div>
     </div>
 </div>
 

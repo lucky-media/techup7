@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
 
         foreach($users as $user) {
             $user->profile()->create([
-               'bio' => 'My goal is to help my society evolve and develop in every aspect. To be part of a group that will only do what\'s the best for the people. A group that will aid the students on reaching their goals as they are the future. I will give my best for this cause and our society will improve if God wills.',
+               'bio' => 'My goal is to help my society evolve and develop in every aspect.',
                 'image' => asset('storage/no_image.jpg')
             ]);
         }

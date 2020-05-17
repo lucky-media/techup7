@@ -11,11 +11,8 @@ $factory->define(Course::class, function (Faker $faker) {
         'slug' => $faker->slug,
         'body' => $faker->text,
         'image' => asset('storage/no_image.jpg'),
-        'lang' => $faker->randomElement(['mk', 'sq']),
+        'lang' => $faker->randomElement(['sq', 'mk']),
+        'category_id' => $faker->numberBetween(1,5),
+        'created_at' => $faker->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = null),
     ];
 });
-
-//
-//$factory->afterCreating(Course::class, function ($course) {
-//    $course->lesson()->saveMany(factory(App\Lesson::class, 10)->make());
-//});

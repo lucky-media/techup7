@@ -29,6 +29,7 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => 'required|image',
             'lang' => 'required',
+            'category' => 'required',
         ]);
         
         $imagePath = request('image')->store('uploads','public');
@@ -48,6 +49,7 @@ class CoursesController extends Controller
             'body' => $data['body'],
             'image' => $imagePath,
             'lang' => $data['lang'],
+            'category' => $data['category'],
         ]);
         
         return redirect('/profiles/'. auth()->user()->id);
@@ -86,6 +88,7 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => '',
             'lang' => 'required',
+            'category' => 'required',
         ]);
 
         if (request('image'))
@@ -118,6 +121,7 @@ class CoursesController extends Controller
             'slug' => $customSlug,
             'body' => $data['body'],
             'lang' => $data['lang'],
+            'category' => $data['category'],
         ];
                
         $course->update(array_merge(
