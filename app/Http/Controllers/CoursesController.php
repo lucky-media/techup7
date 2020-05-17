@@ -8,6 +8,7 @@ use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use Intervention\Image\Facades\Image;
 
 class CoursesController extends Controller
@@ -32,13 +33,14 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => 'required|image',
             'lang' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
         ]);
         
-        $imagePath = request('image')->store('uploads','public');
+        $image = request()->file('image');
+
+        $imageName = time(). '.' . $image->getClientOriginalExtension();
         
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(300,300);
-        $image->save();
+        $image->move('storage/uploads', $imageName);
 
         $customSlug = Str::slug($data['title'], '-');
 
@@ -50,9 +52,9 @@ class CoursesController extends Controller
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => $data['body'],
-            'image' => $imagePath,
+            'image' => 'storage/uploads/'.$imageName,
             'lang' => $data['lang'],
-            'category' => $data['category'],
+            'category_id' => $data['category_id'],
         ]);
         
         return redirect('/profiles/'. auth()->user()->id);
@@ -67,7 +69,7 @@ class CoursesController extends Controller
             $lesson->delete();
         }
         
-        File::delete(public_path("storage/{$course->image}"));
+        File::delete(public_path("{$course->image}"));
 
         $course->delete();
 
@@ -78,7 +80,9 @@ class CoursesController extends Controller
     {
         $this->authorize('update', $course);
 
-        return view('courses.edit', compact('course'));
+        $categories = Category::get();
+
+        return view('courses.edit', compact('course', 'categories'));
     }
 
     public function update(Course $course)
@@ -91,17 +95,20 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => '',
             'lang' => 'required',
-            'category' => 'required',
+            'category_id' => 'required',
         ]);
 
         if (request('image'))
         {
-            $imagePath = request('image')->store('uploads','public');
+            File::delete(public_path("{$course->image}"));
+            
+            $image = request()->file('image');
 
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(300,300);
-            $image->save();    
+            $imageName = time(). '.' . $image->getClientOriginalExtension();
+            
+            $image->move('storage/uploads', $imageName);
 
-            $imageArray = ['image' => $imagePath];
+            $imageArray = ['image' => 'storage/uploads/'.$imageName];
         }
 
         $titleChanged = Course::where('id', $data['id'])->first();
@@ -124,7 +131,7 @@ class CoursesController extends Controller
             'slug' => $customSlug,
             'body' => $data['body'],
             'lang' => $data['lang'],
-            'category' => $data['category'],
+            'category_id' => $data['category_id'],
         ];
                
         $course->update(array_merge(

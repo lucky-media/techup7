@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $guarded = [];
-    protected $fillable = ['title', 'slug', 'body', 'image', 'lang', 'category'];
-
+    
     public function user()
     {
         return $this->belongsTo(User::class);

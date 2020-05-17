@@ -69,17 +69,17 @@
                         </div>
                         
                         <div class="col-md-6 mb-5">
-                            <label for="category" class="text-small text-white">Category</label>
+                            <label for="category_id" class="text-small text-white">Category</label>
                             <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
-                            focus:outline-none focus:bg-white focus:border-gray-500 @error('category') border-2 border-red-600 @enderror"
-                            id="category" name="category">
+                            focus:outline-none focus:bg-white focus:border-gray-500 @error('category_id') border-2 border-red-600 @enderror"
+                            id="category_id" name="category_id">
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
 
-                            @error('category')
+                            @error('category_id')
                             <span role="alert">
                                 <strong>{{ $message }}</strong><br>
                             </span>

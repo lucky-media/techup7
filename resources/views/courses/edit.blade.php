@@ -51,13 +51,40 @@
                             @enderror
                         </div>
 
-                        <select
+                        <div class="col-md-6 mb-5">
+                            <label for="lang" class="text-small text-white">Language</label>
+                            <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                             focus:outline-none focus:bg-white focus:border-gray-500 @error('lang') border-2 border-red-600 @enderror"
                             id="lang" name="lang">
-                                <option value="shqip" {{ $course->lang == "shqip" ? "selected" : "" }}>Shqip</option>
-                                <option value="македонски" {{ $course->lang == "македонски" ? "selected" : "" }}>Македонски</option>
-                        </select>
+                                <option value="al" {{ $course->lang == "al" ? "selected" : "" }}>Shqip</option>
+                                <option value="mk" {{ $course->lang == "mk" ? "selected" : "" }}>Македонски</option>
+                            </select>
+
+                            @error('lang')
+                            <span role="alert">
+                                <strong>{{ $message }}</strong><br>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-5">
+                            <label for="category_id" class="text-small text-white">Category</label>
+                            <select
+                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
+                            focus:outline-none focus:bg-white focus:border-gray-500 @error('category_id') border-2 border-red-600 @enderror"
+                            id="category_id" name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('category_id')
+                            <span role="alert">
+                                <strong>{{ $message }}</strong><br>
+                            </span>
+                            @enderror
+                        </div>
 
                         <div class="col-md-6">
                             <div class="row">
