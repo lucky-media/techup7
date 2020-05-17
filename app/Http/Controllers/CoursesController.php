@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Category;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -19,7 +20,9 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('courses.create');
+        $categories = Category::get();
+        
+        return view('courses.create', compact('categories'));
     }
     
     public function store()

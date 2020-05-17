@@ -10,7 +10,6 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware('role');
     }
 
     /**
@@ -20,6 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->middleware('role');
+
         $categories = Category::get();
         
         return view('categories.index', compact('categories'));
@@ -32,6 +33,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->middleware('role');
+
         return view('categories.create');
     }
 
@@ -43,6 +46,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('role');
+
         $data = request()->validate([
             'name' => 'required|min:2',
         ]);
@@ -62,6 +67,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->middleware('role');
+        
         return view('categories.edit', compact('category'));
     }
 
@@ -74,6 +81,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->middleware('role');
+        
         $data = request()->validate([
             'name' => 'required|min:2',
         ]);
@@ -93,6 +102,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->middleware('role');
+        
         $category->delete();
 
         return redirect("/categories");
