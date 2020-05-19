@@ -8,7 +8,6 @@ use App\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Intervention\Image\Facades\Image;
 
 class CoursesController extends Controller
@@ -36,11 +35,8 @@ class CoursesController extends Controller
             'category_id' => 'required',
         ]);
         
-        $image = request()->file('image');
-
-        $imageName = time(). '.' . $image->getClientOriginalExtension();
-        
-        $image->move('storage/uploads', $imageName);
+        $image = request()->file('image')->store('storage/uploads');
+        Image::make($image)->fit(600,400)->save();
 
         $customSlug = Str::slug($data['title'], '-');
 
@@ -52,7 +48,7 @@ class CoursesController extends Controller
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => $data['body'],
-            'image' => 'storage/uploads/'.$imageName,
+            'image' => $image,
             'lang' => $data['lang'],
             'category_id' => $data['category_id'],
         ]);
@@ -102,13 +98,10 @@ class CoursesController extends Controller
         {
             File::delete(public_path("{$course->image}"));
             
-            $image = request()->file('image');
+            $image = request()->file('image')->store('storage/uploads');
+            Image::make($image)->fit(600,400)->save();
 
-            $imageName = time(). '.' . $image->getClientOriginalExtension();
-            
-            $image->move('storage/uploads', $imageName);
-
-            $imageArray = ['image' => 'storage/uploads/'.$imageName];
+            $imageArray = ['image' => $image];
         }
 
         $titleChanged = Course::where('id', $data['id'])->first();
