@@ -52,8 +52,8 @@ Route::get('/categories/{category}/edit', 'CategoryController@edit')->name('cate
 Route::patch('/categories/{category}', 'CategoryController@update')->name('categories.update')->middleware('role:admin');
 Route::get('/categories', 'CategoryController@index')->name('categories.index')->middleware('role:admin');
 
-Route::get('/profiles/{user}', 'ProfilesController@show')->name('profiles.show');
 Route::get('/profiles/{user}/edit', 'ProfilesController@edit')->name('profiles.edit');
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('profiles.show');
 Route::patch('/profiles/{user}', 'ProfilesController@update')->name('profiles.update');
 Route::get('/instructors', 'ProfilesController@index')->name('profiles.index');
 

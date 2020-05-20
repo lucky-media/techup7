@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Course;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Intervention\Image\Facades\Image;
+
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
@@ -21,7 +22,7 @@ class ProfilesController extends Controller
     {   
         //This will redirect to home if the requested user profile is not that of an instructor
         if ($user->role == 'instructor'){
-            $courses = Course::where('user_id', '=' , $user->id)->latest()->paginate(3);
+            $courses = Course::where("user_id", $user->id)->latest()->paginate(3);
             return view('profiles.show', compact('user', 'courses'));
         }
         else
@@ -41,17 +42,15 @@ class ProfilesController extends Controller
         
         $data = request()->validate([
             'bio' => 'required',
-            'img' => '',
+            'image' => '',
         ]);
         
         if (request('image'))
         {
-            $imagePath = request('image')->store('uploads', 'public');
-            
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(300,300);
-            $image->save();
+            $image = request()->file('image')->store('storage/uploads');
+            Image::make($image)->fit(300)->save();
 
-            $imageArray = ['image' => $imagePath];
+            $imageArray = ['image' => $image];
         }
         
         auth()->user()->profile->update(array_merge(
@@ -59,7 +58,7 @@ class ProfilesController extends Controller
             $imageArray ?? []
         ));
 
-        return redirect("/profile/{$user->id}");
+        return redirect(route('profiles.show', $user->id));
     }
 
     public function index()

@@ -15,7 +15,7 @@
 <div class="container my-20">
     <div class="row items-center">
         <div class="col-4">
-            <img src="{{ $user->profile->profileImage() ?? asset('/svg/techup.svg') }}" class="rounded-lg">
+            <img src="{{ asset($user->profile->profileImage()) ?? asset('/svg/techup.svg') }}" class="rounded-lg">
         </div>
         <div class="col-6">
             <h2 class="font-semibold text-2xl text-orange-500 py-2">{{ $user->name }}</h2>
