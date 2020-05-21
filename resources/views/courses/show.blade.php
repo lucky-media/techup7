@@ -67,7 +67,7 @@
             <br>
             @can('create', $course)
                 <div>
-                    <form action="{{ route('lessons.create', $course->slug) }}" enctype="multipart/form-data" method="get">
+                    <form action="{{ route('lessons.create', $course) }}" enctype="multipart/form-data" method="get">
                         <button type="submit"
                         class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                         {{ __('Create New Lesson') }}</button>

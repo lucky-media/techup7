@@ -4,7 +4,7 @@
 <script type="text/javascript">
   tinymce.init({
     selector: '#body',
-    plugins: 'link image preview anchor codesample wordcount autoresize',
+    plugins: 'link preview anchor codesample wordcount autoresize',
     toolbar: 'undo redo | formatselect bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | codesample wordcount image preview',
     menubar: false
   });

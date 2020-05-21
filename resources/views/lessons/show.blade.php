@@ -73,7 +73,7 @@
             <br>
             @can('delete', $lesson)
             <div>
-                <form action="{{ route('lessons.destroy', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
+                <form action="{{ route('lessons.create', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                     {{ __('Create New Lesson') }}</button>

@@ -8,6 +8,9 @@ use App\Course;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class LessonsController extends Controller
 {
@@ -34,17 +37,15 @@ class LessonsController extends Controller
         ]);
 
         $customSlug = $this->createMySlug($data['title']);
-
-        Lesson::create([
+        
+        $lesson = Lesson::create([
             'course_id' => $data['course_id'],
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => Purifier::clean($data['body']),
         ]);
 
-        $course = Course::where('id', $data['course_id'])->first();
-
-        return redirect('/courses/'. $course->slug);
+        return redirect('/lessons/'. $lesson->slug);
     }
 
     public function destroy(Lesson $lesson)
@@ -95,13 +96,43 @@ class LessonsController extends Controller
 
     public function show(Lesson $lesson)
     {
+        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
+        $elements = $matches[1];
+
+        foreach($elements as $element){
+            $imagesWanted[] = '/storage/uploads/'.pathinfo($element)["basename"];
+        }
+
+        $allImagesInFolder = Storage::files('/storage/uploads/');
+        $allImagesInFolder = array_diff($allImagesInFolder, ["storage/uploads/.gitignore"]);
+
+        foreach($allImagesInFolder as $image){
+            if (strpos($image,'t') !== false) {
+                $imagesSaved[] = $image;
+            } else {
+                dd('no such images');
+            }
+        }
+                
+        $imagesDelete = array_diff($imagesSaved, $imagesWanted);
+        print_r($imagesDelete);
+
         return view('lessons.show', compact('lesson'));
     }
 
     public function uploadImage(Request $request)
     {
-        $imgpath = $request->file('file')->store('uploads', 'public');
-        return response()->json(['location' => "/storage/$imgpath"]);
+        $ext = request()->file('file')->getClientOriginalExtension();
+                
+        $currentTime = $request->header('currentTime');
+        $image = request()->file('file')->storeAs('storage/uploads', time().'t'.$currentTime.'.'.$ext);
+        
+        Image::make($image)->resize(600, null, function ($constraint)
+            {
+                $constraint->aspectRatio();
+            })->save();
+
+        return response()->json(['location' => url($image)]);
     }
 
     public function createMySlug($title)
