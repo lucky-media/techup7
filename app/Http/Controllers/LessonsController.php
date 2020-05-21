@@ -96,36 +96,12 @@ class LessonsController extends Controller
 
     public function show(Lesson $lesson)
     {
-        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
-        $elements = $matches[1];
-
-        foreach($elements as $element){
-            $imagesWanted[] = '/storage/uploads/'.pathinfo($element)["basename"];
-        }
-
-        $allImagesInFolder = Storage::files('/storage/uploads/');
-        $allImagesInFolder = array_diff($allImagesInFolder, ["storage/uploads/.gitignore"]);
-
-        foreach($allImagesInFolder as $image){
-            if (strpos($image,'t') !== false) {
-                $imagesSaved[] = $image;
-            } else {
-                dd('no such images');
-            }
-        }
-                
-        $imagesDelete = array_diff($imagesSaved, $imagesWanted);
-        print_r($imagesDelete);
-
         return view('lessons.show', compact('lesson'));
     }
 
     public function uploadImage(Request $request)
     {
-        $ext = request()->file('file')->getClientOriginalExtension();
-                
-        $currentTime = $request->header('currentTime');
-        $image = request()->file('file')->storeAs('storage/uploads', time().'t'.$currentTime.'.'.$ext);
+        $image = request()->file('file')->store('storage/uploads/lessons');
         
         Image::make($image)->resize(600, null, function ($constraint)
             {
