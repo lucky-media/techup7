@@ -54,6 +54,18 @@ class LessonsController extends Controller
 
         $courseSlug = $lesson->course->slug;
 
+        preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
+        if(!empty($matches[1])) {
+            foreach($matches[1] as $match)
+            $elements[] = $match;
+        }
+        
+        foreach($elements as $element){
+            $imagesWanted[] = 'storage/uploads/lessons/'.pathinfo($element)["basename"];
+        }
+        
+        Storage::disk('local')->delete($imagesWanted);
+        
         $lesson->children()->delete();
 
         $lesson->delete();
@@ -95,7 +107,7 @@ class LessonsController extends Controller
     }
 
     public function show(Lesson $lesson)
-    {
+    {        
         return view('lessons.show', compact('lesson'));
     }
 
