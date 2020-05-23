@@ -31,8 +31,10 @@
     </div>
 </div>
 
+{{-- Listing all users --}}
 <div class="container my-10">
     <div class="row justify-center">
+        {{-- Instructors --}}
         <div class="col-6">
             <table class="table-auto">
                 <thead>
@@ -69,6 +71,7 @@
                 </tbody>
             </table>
         </div>
+        {{-- Students --}}
         <div class="col-6">
             <table class="table-auto">
                 <thead>

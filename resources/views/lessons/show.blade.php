@@ -12,6 +12,7 @@
     </div>
 </div>      
 
+{{-- The owner can edit or delete the lesson --}}
 <div class="container my-4">
     <div class="row">
         <div class="col-8">
@@ -47,6 +48,7 @@
     </div>
 </div>
 
+{{-- We display the lesson body on the left and a list of all sibling lessons on the right --}}
 <div class="container my-20">
     <div class="row">
         <div class="col-7 text-justify">
@@ -85,7 +87,7 @@
 </div>
 
 
-{{-- Comments section. Add comment --}}
+{{-- Comments section. We can see total comments count and add a new comment --}}
 
 <div class="container mt-10">
     <div class="row">
@@ -121,7 +123,7 @@
 </form>
 
 
-{{-- Show comments --}}
+{{-- Show comments, replies and add new replies from another view. --}}
 
 <div class="container my-10">
     <div class="row">

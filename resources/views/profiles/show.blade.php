@@ -12,6 +12,7 @@
     </div>
 </div>
 
+{{-- Details about the instructor --}}
 <div class="container my-20">
     <div class="row items-center">
         <div class="col-4">
@@ -33,6 +34,7 @@
     </div>
 </div>
 
+{{-- The instructor views a button for adding new courses --}}
 <div class="container my-10">
     <div class="row">
         <div class="col-9">
@@ -55,6 +57,7 @@
         @endcan
     </div>
 
+    {{-- List all courses created by the instructor --}}
     <div class="row">
         @forelse($courses as $course)
         <div class="my-4 px-4 col-4">

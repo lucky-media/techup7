@@ -11,7 +11,7 @@
         </div>
     </div>
 </div>
-
+{{-- Display all instructors for the instructors page. --}}
 <div class="container my-20">
     <div class="row text-center">
         @foreach($users as $user)

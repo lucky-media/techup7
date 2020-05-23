@@ -15,8 +15,11 @@ use Illuminate\Support\Str;
 | your application. Factories provide a convenient way to generate new
 | model instances for testing / seeding your application's database.
 |
+| 
+| The User is created with a fake name, username and a unique email
+| The role is by default set as student, and the password is set as "password"
+| 
 */
-
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
@@ -29,6 +32,7 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
+// When creating instructors, we also create a profile page for them
 $factory->afterCreating(User::class, function ($user) {
     $user->profile()->save(factory('App\Profile')->make());
 });

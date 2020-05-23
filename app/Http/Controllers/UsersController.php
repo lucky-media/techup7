@@ -12,6 +12,7 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+    // The admin can view all the users and manage their roles
     public function index()
     {
         $this->middleware('role');
@@ -37,13 +38,17 @@ class UsersController extends Controller
             'role' => 'required',
         ]));
 
+        // If we switch an instructor back to a student role,
+        // then we delete the profile of that user
         if (request('role') == 'student'){
             $user->profile()->delete();
         }
         else
         {
+            // We check if the profile already exists
             if (!$user->profile()->exists())
             {
+                // If there is no profile, then we create one for that instructor
                 $user->profile()->create([
                     'bio' => 'Some personal information',
                     'image' => 'uploads/noimage.png',

@@ -39,8 +39,10 @@ class ImageCleanup extends Command
      */
     public function handle()
     {
+        // We get all the lessons from the database
         $lessons = DB::table('lessons')->get();
 
+        // We get only the images of the lessons
         foreach($lessons as $lesson){
                 preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
                 if(!empty($matches[1])) {
@@ -48,15 +50,22 @@ class ImageCleanup extends Command
                     $elements[] = $match;
                 }
             }
-        
+
+        // We format the image names to match the names of those images in the folder
         foreach($elements as $element){
             $imagesWanted[] = 'storage/uploads/lessons/'.pathinfo($element)["basename"];
         }
         
+        // We get all lesson images that are uploaded on the server
         $allImagesInFolder = Storage::files('/storage/uploads/lessons/');
+
+        // We remove the .gitignore file from the selection
         $allImagesInFolder = array_diff($allImagesInFolder, ["storage/uploads/lessons/.gitignore"]);
 
+        // The difference shows which images are still in the server but unused from lessons
         $imagesDelete = array_diff($allImagesInFolder, $imagesWanted);
+
+        // We delete all unused images from the server
         Storage::disk('local')->delete($imagesDelete);
 
         $this->info('All unused lesson images are deleted successfully');

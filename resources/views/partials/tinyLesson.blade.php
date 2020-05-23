@@ -1,7 +1,8 @@
+{{-- These tinyMCE settings are for the body of lessons. We can also upload images --}}
+
 @push('styles')
 <script src="https://cdn.tiny.cloud/1/5qv3svvxrwpsb73doi9u71fu6hbeg7cofai1w5snueebquuj/tinymce/5/tinymce.min.js"></script>
   <script>
-      var currentTime = Date.now();
   tinymce.init({
         selector: '#body',
         plugins: 'link image preview anchor codesample wordcount autoresize',
@@ -17,15 +18,14 @@
         images_upload_url: "{{ route('lessons.upload') }}",
         file_picker_types: 'image',
         
+        // This function manages the image upload. It connects with the uploadImage function at the LessonController
         images_upload_handler: function (blobInfo, success, failure) {
            var xhr, formData;
-        //    var currentTime = currentTime;
            xhr = new XMLHttpRequest();
            xhr.withCredentials = false;
            xhr.open('POST', "{{ route('lessons.upload') }}");
            var token = '{{ csrf_token() }}';
            xhr.setRequestHeader("X-CSRF-Token", token);
-           xhr.setRequestHeader("currentTime", currentTime);
            xhr.onload = function() {
                var json;
                if (xhr.status != 200) {

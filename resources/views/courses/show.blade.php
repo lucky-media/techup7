@@ -12,6 +12,7 @@
     </div>
 </div>
 
+{{-- The owner of the course can edit or delete --}}
 <div class="container my-4">
     <div class="row">
         <div class="col-8">
@@ -47,6 +48,7 @@
     </div>
 </div>
 
+{{-- We display the course with the cover image, body and a list of all lessons belonging to that course --}}
 <div class="container my-20">
     <div class="row">
         <div class="col-7 text-justify">

@@ -36,8 +36,10 @@ class LessonsController extends Controller
             'body' => 'required',
         ]);
 
+        // We create a slug from the title, but we also check for unique slug
         $customSlug = $this->createMySlug($data['title']);
         
+        // The Purifier is used to check for malicious code and purifies the HTML code
         $lesson = Lesson::create([
             'course_id' => $data['course_id'],
             'title' => $data['title'],
@@ -54,20 +56,25 @@ class LessonsController extends Controller
 
         $courseSlug = $lesson->course->slug;
 
+        // We search for all the images within the lesson body column
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
         if(!empty($matches[1])) {
             foreach($matches[1] as $match)
             $elements[] = $match;
         }
         
+        // We format the images that we got from lesson body
         foreach($elements as $element){
             $imagesWanted[] = 'storage/uploads/lessons/'.pathinfo($element)["basename"];
         }
         
+        // We delete the lesson images that were uploaded in the lessons folder
         Storage::disk('local')->delete($imagesWanted);
         
+        // We delete all relationships of the lesson
         $lesson->children()->delete();
 
+        // We delete the lesson
         $lesson->delete();
         
         return redirect('/courses/'. $courseSlug);
@@ -91,8 +98,10 @@ class LessonsController extends Controller
             'body' => '',
         ]);
 
+        // We create a slug from the title
         $customSlug = Str::slug($data['title'], '-');
 
+        // If the title has changed we create a new slug
         if ($lesson->slug != $customSlug) {
             $customSlug = $this->createMySlug($data['title']);
            }
@@ -111,10 +120,12 @@ class LessonsController extends Controller
         return view('lessons.show', compact('lesson'));
     }
 
+    // We upload the images that the user adds through the WYSIWYG editor
     public function uploadImage(Request $request)
     {
         $image = request()->file('file')->store('storage/uploads/lessons');
         
+        // We set the width of the image to 600 and auto height before saving
         Image::make($image)->resize(600, null, function ($constraint)
             {
                 $constraint->aspectRatio();
@@ -123,17 +134,22 @@ class LessonsController extends Controller
         return response()->json(['location' => url($image)]);
     }
 
+    // We make sure that the slug is always unique and it increases by 1
     public function createMySlug($title)
     {    
         $customSlug = Str::slug($title, '-');
 
+        // We get all related slugs from the database
         $allSlugs = $this->getRelatedSlugs($customSlug);
 
+        // If the slug is not used before, we return the result
         if (! $allSlugs->contains('slug', $customSlug)){
             return $customSlug;
         }
         
-        for ($i = 1; $i <= 10; $i++) {
+        // If there is a match, we see how many iterations of that slug exist
+        // If we have "hello-world-7" then we create a slug "hello-world-8"
+        for ($i = 1; $i <= 20; $i++) {
              $newSlug = $customSlug.'-'.$i;
              if (! $allSlugs->contains('slug', $newSlug)) {
                  return $newSlug;
@@ -141,6 +157,7 @@ class LessonsController extends Controller
         }
     }
 
+    // We get all related slugs from the Lesson table
     protected function getRelatedSlugs($slug)
     {
         return Lesson::select('slug')->where('slug', 'like', $slug.'%')->get();

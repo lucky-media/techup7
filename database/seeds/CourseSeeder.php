@@ -8,6 +8,9 @@ class CourseSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * 
+     * We create 5 instructors, each one has 5 courses, each course has 5 lessons, each lesson has 3 comments
+     * 
      */
     public function run()
     {

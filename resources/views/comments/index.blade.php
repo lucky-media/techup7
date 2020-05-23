@@ -14,6 +14,7 @@
     </div>
 </div>
 
+{{-- Tthe admin manages comments that are flagged as inappropriate. He can delete or approve them --}}
 <div class="container my-4">
     <div class="row">
         <div class="col-8">
@@ -28,6 +29,7 @@
             <div class="col-6 my-4">
                     <div class="flex flex-row items-center mb-4">
                         <div>
+                            {{-- We have a link to the lesson where the comment is posted --}}
                             <a href="{{ route('lessons.show', $comment->lesson->slug) }}">
                                 <h2 class="text-2xl font-bold">{{ $comment->lesson->title }}</h2>
                                 <p>{{ $comment->body }}</p>

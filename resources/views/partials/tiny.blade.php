@@ -1,3 +1,4 @@
+{{-- These tinyMCE settings are for the body of courses. --}}
 @push('styles')
 <script src="https://cdn.tiny.cloud/1/5qv3svvxrwpsb73doi9u71fu6hbeg7cofai1w5snueebquuj/tinymce/5/tinymce.min.js"></script>
 

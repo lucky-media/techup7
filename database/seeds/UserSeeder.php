@@ -13,6 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // We create the superadmin, an instructor and a student for testing purposes
+        // The password for all of them is "secret"
         $users = [
             [
                 'name' => 'Admin',
@@ -37,15 +39,16 @@ class UserSeeder extends Seeder
             ],
         ];
 
+        // We insert the three above mentioned users
         User::insert($users);
 
-        $users = User::all();
+        // We get the created instructor
+        $instructor = User::find(2);
 
-        foreach($users as $user) {
-            $user->profile()->create([
-               'bio' => 'My goal is to help my society evolve and develop in every aspect.',
-                'image' => asset('storage/no_image.jpg')
-            ]);
-        }
+        // We create a profile page for that instructor
+        $instructor->profile()->create([
+            'bio' => 'My goal is to help my society evolve and develop in every aspect.',
+            'image' => asset('storage/no_image.jpg')
+        ]);
     }
 }

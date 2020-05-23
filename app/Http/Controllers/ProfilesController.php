@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\User;
 use App\Course;
 
@@ -31,13 +30,16 @@ class ProfilesController extends Controller
 
     public function edit(User $user)
     {
+        // Editing is authorized only if the user has a profile
         $this->authorize('update', $user->profile);
 
         return view('profiles.edit', compact('user'));
     }
 
+    // Each instructor can update their own profile
     public function update(User $user)
     {
+        // Updating is authorized only if the user has a profile
         $this->authorize('update', $user->profile);
         
         $data = request()->validate([
@@ -45,6 +47,7 @@ class ProfilesController extends Controller
             'image' => '',
         ]);
         
+        // This part executes only if the instructor wants to change the profile image
         if (request('image'))
         {
             $image = request()->file('image')->store('storage/uploads');

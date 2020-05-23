@@ -31,6 +31,7 @@
     </div>
 </div>
 
+{{-- Display all categories, edit or delete --}}
 <div class="container my-10">
     <div class="row justify-center">
         @forelse($categories as $category)
