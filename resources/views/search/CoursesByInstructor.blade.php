@@ -39,11 +39,11 @@
     <div class="row">
         <div class="col-3">
             <div class="my-10">
-                <h2 class="text-2xl font-semibold"> <strong>{{ $user->courses->count() }}</strong> Courses: </h2>
+                <h2 class="text-2xl font-semibold"> <strong>{{ $courses->count() }}</strong> Courses: </h2>
             </div>
         </div>
         <div class="col-6">
-            <form action="{{ route('search.coursesByInstructor', $user) }}" method="POST">
+            <form action="{{ route('search.coursesByInstructor', $user->id) }}" method="POST">
                 {{ csrf_field() }}
                 
                 <input id="searchTerm" type="text" name="searchTerm" class="rounded bg-gray-100 border-2 border-orange-500 py-2 pl-2 text-black w-4/12" required>
@@ -55,19 +55,17 @@
         @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
-
-                    <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
-                            <button type="submit"
-                            class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('Add New Course') }}</button>
-                    </form>
-
+                <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
+                        <button type="submit"
+                        class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                        {{ __('Add New Course') }}</button>
+                </form>
             </div>
         </div>
         @endcan
     </div>
 
-    {{-- List all courses created by the instructor --}}
+    {{-- List all courses where the title or the body has the search term that the user provided and they belong to this particular instructor --}}
     <div class="row">
         @forelse($courses as $course)
         <div class="my-4 px-4 col-4">
@@ -100,7 +98,7 @@
         </div>
         @empty
         <div>
-            We couldn't find a course with that name.
+            We couldn't find a course with that search term.
         </div>
         @endforelse
     </div>

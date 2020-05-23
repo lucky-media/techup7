@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-6">
-                <h2 class="text-4xl"> Try our Courses </h2>
+                <h2 class="text-4xl"> Search Courses </h2>
             </div>
             <div class="col-6">
                 <form action="{{ route('search.courses') }}" method="POST">
@@ -23,10 +23,10 @@
     </div>
 </div>
 
-{{-- We display all courses with a link, cover image, date created, owner and category --}}
+{{-- List all courses where the title or the body has the search term that the user provided --}}
 <div class="container my-12 mx-auto px-4 md:px-12">
     <div class="flex flex-wrap -mx-1 lg:-mx-4">
-        @foreach($courses as $course)
+        @forelse($courses as $course)
          <div class="my-4 px-4 col-4">
             <article class="overflow-hidden rounded-lg shadow-lg">
                 <a href="{{ route('courses.show', $course->slug) }}">
@@ -58,7 +58,11 @@
 
             </article>
         </div>
-        @endforeach
+        @empty
+        <div>
+            We couldn't find a course with that search term.
+        </div>
+    @endforelse
     </div>
     <div class="row justify-center mt-4">
         <div class="col-6 justify-content-center">

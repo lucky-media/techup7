@@ -57,6 +57,11 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profiles.show');
 Route::patch('/profiles/{user}', 'ProfileController@update')->name('profiles.update');
 Route::get('/instructors', 'ProfileController@index')->name('profiles.index');
 
+Route::post('/search/instructors', 'SearchController@searchInstructors')->name('search.instructors');
+Route::post('/search/courses', 'SearchController@searchCourses')->name('search.courses');
+Route::post('/search/{user}/courses/', 'SearchController@searchCoursesByInstructor')->name('search.coursesByInstructor');
+Route::post('/search/{course}', 'SearchController@searchLessonsByCourse')->name('search.lessonsByCourse');
+
 Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/', 'HomeController@index')->name('index');
