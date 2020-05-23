@@ -12,6 +12,8 @@ class UserRoles
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     * 
+     * Checks the role of the user before returning the request
      */
     public function handle($request, Closure $next, ...$role)
     {
