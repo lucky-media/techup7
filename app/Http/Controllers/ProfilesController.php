@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class ProfilesController extends Controller
+class ProfileController extends Controller
 {
     public function __construct()
     {

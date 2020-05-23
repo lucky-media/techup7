@@ -7,7 +7,7 @@ use App\Comment;
 
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
     public function __construct()
     {

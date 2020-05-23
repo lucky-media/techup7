@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class CoursesController extends Controller
+class CourseController extends Controller
 {
 
     public function __construct()
