@@ -14,44 +14,42 @@
     </div>
 </div>
 
-{{-- Tthe admin manages comments that are flagged as inappropriate. He can delete or approve them --}}
 <div class="container my-4">
     <div class="row">
         <div class="col-8">
-                <h2 class="text-3xl">These comments need approval:</h2>
+                <h2 class="text-3xl">All categories:</h2>
+        </div>
+        <div class="col-3">
+            <div>
+                <form action="{{ route('categories.create') }}" enctype="multipart/form-data" method="get">
+                    <button type="submit"
+                    class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                    {{ __('Create New Category') }}</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
+{{-- Display all categories, edit or delete --}}
 <div class="container my-10">
     <div class="row justify-center">
-        @forelse($comments as $comment)
+        @forelse($categories as $category)
             <div class="col-6 my-4">
                     <div class="flex flex-row items-center mb-4">
                         <div>
-                            {{-- We have a link to the lesson where the comment is posted --}}
-                            <a href="{{ route('lessons.show', $comment->lesson->slug) }}">
-                                <h2 class="text-2xl font-bold">{{ $comment->lesson->title }}</h2>
-                                <p>{{ $comment->body }}</p>
-                            </a>
+                            <p>{{ $category->name }}</p>
                             <div class="row">
                                 <div class="col-6">  
-                                    <form action="{{ route('comments.approved', $comment) }}" shenctype="multipart/form-data" method="post">
-                                        {{ csrf_field() }}                                            
-                                        {{ method_field('PUT') }}
-                                            <input id="approved"
-                                            type="text"
-                                            name="approved"
-                                            value="true" hidden>
-
+                                    <form action="{{ route('categories.edit', $category) }}" shenctype="multipart/form-data" method="get">
                                             <button type="submit" 
                                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                                            {{ __('Approve') }}</button>
+                                            {{ __('Edit') }}</button>
                                     </form>
                                 </div>
                 
                                 <div class="col-6 px-2">
-                                    <form action="{{ route('comments.destroy', $comment) }}" enctype="multipart/form-data" method="post">
+                                    <form action="{{ route('categories.destroy', $category) }}" enctype="multipart/form-data" method="post">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" onclick="return confirm('Are you sure?')"
@@ -65,7 +63,7 @@
             </div>
             @empty
             <div>
-                No comments to display
+                No categories to display
             </div>
     @endforelse
     </div>

@@ -21,11 +21,20 @@
                     Manage Comments</button>
             </form>
         </div>
+        <div class="col-4"> 
+            <form action="{{ route('categories.index') }}" enctype="multipart/form-data" method="get">
+                    <button type="submit" 
+                    class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                    Manage Categories</button>
+            </form>
+        </div>
     </div>
 </div>
 
+{{-- Listing all users --}}
 <div class="container my-10">
     <div class="row justify-center">
+        {{-- Instructors --}}
         <div class="col-6">
             <table class="table-auto">
                 <thead>
@@ -39,7 +48,7 @@
                 <tbody>
                     @foreach($instructors as $instructor)
                         <tr>
-                            <td class="px-4 py-2"><a href="{{ route('profile.index', $instructor) }}">{{ $instructor->name }}<a></td>
+                            <td class="px-4 py-2"><a href="{{ route('profiles.index', $instructor) }}">{{ $instructor->name }}<a></td>
                             <td class="px-4 py-2">{{ $instructor->role }}</td>
                             <td class="px-4 py-2">
                                 <form action="{{ route('admin.edit', $instructor) }}" enctype="multipart/form-data" method="get">
@@ -62,6 +71,7 @@
                 </tbody>
             </table>
         </div>
+        {{-- Students --}}
         <div class="col-6">
             <table class="table-auto">
                 <thead>

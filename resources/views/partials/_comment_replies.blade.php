@@ -3,7 +3,9 @@
 <div class="container my-10 ml-10">
     <div class="row no-gutters">
         <div class="px-0">
-            <img src="{{ $comment->user->profile()->exists() ? asset($comment->user->profile->profileImage()) : asset('/storage/no_image.jpg') }}" alt="profile image" class="rounded-full w-12 h-12">
+            {{-- Display profile image for instructors, or display no_image for students --}}
+            <img src="{{ $comment->user->profile()->exists() ? asset($comment->user->profile->profileImage()) : asset('/storage/no_image.jpg') }}"
+                 alt="profile image" class="rounded-full w-12 h-12">
         </div>
         <div class="col-10">
             <div class="container">
@@ -12,7 +14,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <a href="{{ route('profile.index', $comment->user->id) }}">
+                                    <a href="{{ route('profiles.index', $comment->user->id) }}">
                                         <span class="font-bold underline"> {{ $comment->user->name }} </span> &nbsp;
                                         <span class="text-xs"> ({{ $comment->created_at->diffForHumans() }})</span>
                                     </a>
@@ -43,6 +45,7 @@
                                                 </form>
                                             @endcan
                                         </div>
+                                        {{-- Comments can be flagged as inappropriate by students or instructors. Admin manages flagged comments. --}}
                                         <div class="col-2">
                                             @can('flagInappropriate', $comment)
                                                 <form action="{{ route('comments.flag', $comment) }}" enctype="multipart/form-data" method="post">
@@ -63,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- Add a reply. We send the lesson_id and comment_id as hidden, because the CommentController needs them. --}}
                     <div class="col">
                         <form action="{{ route('comments.reply') }}" enctype="multipart/form-data" method="post">
                             @csrf
@@ -97,6 +101,7 @@
             </div>
         </div>
     </div>
+    {{-- By calling this view again, we can add a new reply. --}}
     <div class="row">
         <div class="col-12">
             @include('partials._comment_replies', ['comments' => $comment->replies])

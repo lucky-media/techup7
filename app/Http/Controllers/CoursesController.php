@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Purifier;
 use App\Course;
-use App\User;
-use App\Lesson;
-use App\Comment;
+use App\Category;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class CoursesController extends Controller
+class CourseController extends Controller
 {
 
     public function __construct()
@@ -22,7 +21,9 @@ class CoursesController extends Controller
 
     public function create()
     {
-        return view('courses.create');
+        $categories = Category::get();
+        
+        return view('courses.create', compact('categories'));
     }
     
     public function store()
@@ -32,32 +33,32 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => 'required|image',
             'lang' => 'required',
+            'category_id' => 'required',
         ]);
         
-        $imagePath = request('image')->store('uploads','public');
-        
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(300,300);
-        $image->save();
+        // We get the uploaded image and store it in the storage/uploads folder
+        // With intervention image we change the dimensions to 600x400 and we save it
+        $image = request()->file('image')->store('storage/uploads');
+        Image::make($image)->fit(600,400)->save();
 
-        $customSlug = Str::slug($data['title'], '-');
-
-        if (Course::where('slug', $customSlug)->first()){
-            $customSlug = $customSlug . '-' . rand(10,100);
-        }
+        // We create a slug from the title, but we also check for unique slug
+        $customSlug = $this->createMySlug($data['title']);
         
         auth()->user()->courses()->create([
             'title' => $data['title'],
             'slug' => $customSlug,
-            'body' => $data['body'],
-            'image' => $imagePath,
+            'body' => Purifier::clean($data['body']),
+            'image' => $image,
             'lang' => $data['lang'],
+            'category_id' => $data['category_id'],
         ]);
         
-        return redirect('/profile/'. auth()->user()->id);
+        return redirect('/profiles/'. auth()->user()->id);
     }
 
     public function destroy(Course $course)
     {
+        // We delete all the relationships of the course such as lessons and comments
         foreach ($course->lesson as $lesson) {
             foreach ($lesson->children as $comment) {
                 $comment->delete();
@@ -65,18 +66,21 @@ class CoursesController extends Controller
             $lesson->delete();
         }
         
-        File::delete(public_path("storage/{$course->image}"));
+        // The cover image of the course is deleted from the folder
+        File::delete(public_path("{$course->image}"));
 
         $course->delete();
 
-        return redirect('/profile/'. auth()->user()->id);
+        return redirect('/profiles/'. auth()->user()->id);
     }
 
     public function edit(Course $course)
     {
         $this->authorize('update', $course);
 
-        return view('courses.edit', compact('course'));
+        $categories = Category::get();
+
+        return view('courses.edit', compact('course', 'categories'));
     }
 
     public function update(Course $course)
@@ -89,38 +93,35 @@ class CoursesController extends Controller
             'body' => 'required',
             'image' => '',
             'lang' => 'required',
+            'category_id' => 'required',
         ]);
 
+        // During the update we check if the user wants to change the cover image
         if (request('image'))
-        {
-            $imagePath = request('image')->store('uploads','public');
+        {            
+            $image = request()->file('image')->store('storage/uploads');
+            Image::make($image)->fit(600,400)->save();
 
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(300,300);
-            $image->save();    
+            $imageArray = ['image' => $image];
 
-            $imageArray = ['image' => $imagePath];
+            // We delete the old cover image from folder after successfully uploading new image
+            File::delete(public_path("{$course->image}"));
         }
 
-        $titleChanged = Course::where('id', $data['id'])->first();
+         // We create a slug from the title
+         $customSlug = Str::slug($data['title'], '-');
 
-        if ($titleChanged->title != $data['title']){
-
-            $customSlug = Str::slug($data['title'], '-');
-            
-            if (Course::where('slug', $customSlug)->first()){
-                $customSlug = $customSlug . '-' . rand(10,100);
+         // If the title has changed we create a new slug
+         if ($lesson->slug != $customSlug) {
+             $customSlug = $this->createMySlug($data['title']);
             }
-        }
-        else
-        {
-            $customSlug = $titleChanged->slug;
-        }
 
         $data = [
             'title' => $data['title'],
             'slug' => $customSlug,
-            'body' => $data['body'],
+            'body' => Purifier::clean($data['body']),
             'lang' => $data['lang'],
+            'category_id' => $data['category_id'],
         ];
                
         $course->update(array_merge(
@@ -131,8 +132,44 @@ class CoursesController extends Controller
         return redirect('/courses/'. $course->$customSlug);
     }
 
-    public function index(Course $course)
+    public function show(Course $course)
     {
-        return view('courses.index', compact('course'));
+        return view('courses.show', compact('course'));
+    }
+
+    public function index()
+    {
+        $courses = Course::latest()->paginate(9);
+
+        return view('courses.index', compact('courses'));
+    }
+
+    // We make sure that the slug is always unique and it increases by 1
+    public function createMySlug($title)
+    {    
+        $customSlug = Str::slug($title, '-');
+
+        // We get all related slugs from the database
+        $allSlugs = $this->getRelatedSlugs($customSlug);
+
+        // If the slug is not used before, we return the result
+        if (! $allSlugs->contains('slug', $customSlug)){
+            return $customSlug;
+        }
+        
+        // If there is a match, we see how many iterations of that slug exist
+        // If we have "hello-world-7" then we create a slug "hello-world-8"
+        for ($i = 1; $i <= 20; $i++) {
+             $newSlug = $customSlug.'-'.$i;
+             if (! $allSlugs->contains('slug', $newSlug)) {
+                 return $newSlug;
+            }
+        }
+    }
+
+    // We get all related slugs from the Course table
+    protected function getRelatedSlugs($slug)
+    {
+        return Course::select('slug')->where('slug', 'like', $slug.'%')->get();
     }
 }

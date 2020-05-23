@@ -12,11 +12,12 @@
     </div>
 </div>      
 
+{{-- The owner can edit or delete the lesson --}}
 <div class="container my-4">
     <div class="row">
         <div class="col-8">
             <div class="text-sm">
-                By <a href="{{ route('profile.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
+                By <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
         <div class="col-3">
@@ -47,6 +48,7 @@
     </div>
 </div>
 
+{{-- We display the lesson body on the left and a list of all sibling lessons on the right --}}
 <div class="container my-20">
     <div class="row">
         <div class="col-7 text-justify">
@@ -56,7 +58,7 @@
         </div>
         
         <div class="col-5 mb-10">
-            <a href="{{ route('courses.index', $lesson->course->slug) }}">
+            <a href="{{ route('courses.show', $lesson->course->slug) }}">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
             </a>
             
@@ -64,7 +66,7 @@
                 @if ($lessons->id == $lesson->id)
                         <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
                 @else
-                    <a href="{{ route('lessons.index', $lessons) }}">
+                    <a href="{{ route('lessons.show', $lessons) }}">
                         <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>    
                     </a>
                 @endif
@@ -73,7 +75,7 @@
             <br>
             @can('delete', $lesson)
             <div>
-                <form action="{{ route('lessons.destroy', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
+                <form action="{{ route('lessons.create', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                     {{ __('Create New Lesson') }}</button>
@@ -85,7 +87,7 @@
 </div>
 
 
-{{-- Comments section. Add comment --}}
+{{-- Comments section. We can see total comments count and add a new comment --}}
 
 <div class="container mt-10">
     <div class="row">
@@ -121,7 +123,7 @@
 </form>
 
 
-{{-- Show comments --}}
+{{-- Show comments, replies and add new replies from another view. --}}
 
 <div class="container my-10">
     <div class="row">

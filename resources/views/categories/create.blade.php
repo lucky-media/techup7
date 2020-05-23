@@ -6,33 +6,22 @@
         <div class="col-10">
             <div class="bg-blue-500 border rounded mb-10 lg:mb-0">
                 <div class="m-10">
-                    <h2 class="text-4xl font-bold text-white">Edit Profile</h2>
+                    <h2 class="text-4xl font-bold text-white">Create Category</h2>
 
-                    <form action="{{ route('profiles.update', $user) }}" enctype="multipart/form-data" method="post">
+                    <form action="{{ route('categories.store') }}" enctype="multipart/form-data" method="post">
 
                         @csrf
-                        @method('PATCH')
 
                         <div class="col-md-6 mb-5">
-                            <label for="bio" class="text-small text-white">Bio</label>
-                            <input id="bio" type="text" class="rounded bg-gray-100 py-6 pl-2 text-black w-full
-                            @error('bio') border-2 border-red-600 @enderror" name="bio"
-                                value="{{ old('bio') ?? $user->profile->bio }}" required autofocus>
+                            <label for="name" class="text-small text-white">Name</label>
+                            <input id="name" type="text" class="rounded bg-gray-100 py-6 pl-2 text-black w-full
+                            @error('name') border-2 border-red-600 @enderror" name="name"
+                                value="{{ old('name') }}" required autofocus>
 
-                            @error('bio')
+                            @error('name')
                             <span role="alert">
                                 <strong>{{ $message }}</strong><br>
                             </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-6 mb-5">
-                            <label for="image" class="text-small text-white">Image</label>
-                            <input id="image" type="file" class="text-black text-black w-full
-                             @error('image') border-2 border-red-600 @enderror" name="image">
-
-                            @error('image')
-                            <strong>{{ $message }}</strong>
                             @enderror
                         </div>
 

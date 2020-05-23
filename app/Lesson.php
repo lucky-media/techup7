@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     protected $guarded = [];
-    protected $fillable = ['title', 'slug', 'body'];
 
     public function course()
     {

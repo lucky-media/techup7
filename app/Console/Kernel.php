@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ImageCleanup::class
     ];
 
     /**
@@ -23,8 +23,17 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')->hourly();
+    {   
+        /**
+        *   This command executes each monday at 7am
+        *   It deletes unused images at the body of the lessons
+        *   The command can be found at app/console/commands/ImageCleanup
+        *   The command can also be executed from the terminal
+        *   php artisan image:cleanup
+        */     
+        $schedule->command('image:cleanup')
+                 ->mondays()
+                 ->at('07:00');
     }
 
     /**

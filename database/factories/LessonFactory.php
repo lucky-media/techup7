@@ -5,6 +5,7 @@
 use App\Lesson;
 use Faker\Generator as Faker;
 
+// The Lesson is created with a fake sentence for the title, slug and body
 $factory->define(Lesson::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,

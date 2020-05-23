@@ -21,12 +21,14 @@ class CreateCoursesTable extends Migration
             $table->longText('body');
             $table->string('image');
             $table->string('lang', 15);
+            $table->unsignedBigInteger('category_id');
 
             $table->timestamps();
 
             $table->index('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

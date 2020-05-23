@@ -9,6 +9,7 @@
                 <div class="m-10">
                     <h2 class="text-4xl font-bold text-white">Edit User Role</h2>
 
+                    {{-- Changing the role of the user --}}
                     <form action="{{ route('admin.update', $user) }}" enctype="multipart/form-data" method="post">
 
                         @csrf
@@ -22,7 +23,7 @@
                             <option value="student" {{ ("student" == $user->role ? "selected":"") }}>Student</option>
                         </select>
 
-
+                        {{-- Save changes --}}
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-4">

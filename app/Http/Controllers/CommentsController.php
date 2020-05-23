@@ -7,13 +7,14 @@ use App\Comment;
 
 use Illuminate\Http\Request;
 
-class CommentsController extends Controller
+class CommentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
+    // Admin views all comments that are flagged as inappropriate
     public function index()
     {
         $this->middleware('role');
@@ -22,7 +23,7 @@ class CommentsController extends Controller
         
         return view('comments.index', compact('comments'));
     }
-    
+
     public function store()
     {
         $data = request()->validate([
@@ -40,6 +41,7 @@ class CommentsController extends Controller
         return back();
     }
     
+    // Adding a comment reply requires the parent comment id
     public function reply()
     {
         $data = request()->validate([
@@ -59,6 +61,7 @@ class CommentsController extends Controller
         return back();
     }
 
+    // When deleting a comment we also delete the comment replies
     public function destroy($id){
         // Getting the parent category
         $parent = Comment::findOrFail($id);
