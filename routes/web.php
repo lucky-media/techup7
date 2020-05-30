@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('lang/{locale}', 'LocalizationController@index');
+
 Route::get('/admin', 'UserController@index')->name('admin.index')->middleware('role:admin');
 Route::get('/admin/{user}/edit', 'UserController@edit')->name('admin.edit')->middleware('role:admin');
 Route::patch('/admin/{user}', 'UserController@update')->name('admin.update')->middleware('role:admin');

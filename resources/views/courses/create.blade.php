@@ -8,14 +8,14 @@
         <div class="col-10">
             <div class="bg-blue-500 border rounded mb-10 lg:mb-0">
                 <div class="m-10">
-                    <h2 class="text-4xl font-bold text-white">Add New Course</h2>
+                    <h2 class="text-4xl font-bold text-white">{{ __('general.add_new_course') }}</h2>
 
                     <form action="{{ route('courses.store') }}" enctype="multipart/form-data" method="post">
 
                         @csrf
 
                         <div class="col-md-6 mb-5">
-                            <label for="title" class="text-small text-white">Title</label>
+                            <label for="title" class="text-small text-white">{{ __('general.title') }}</label>
                             <input id="title" type="text" class="rounded bg-gray-100 py-6 pl-2 text-black w-full
                             @error('title') border-2 border-red-600 @enderror" name="title"
                                 value="{{ old('title') }}" required autofocus>
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-md-6 mb-5">
-                            <label for="body" class="text-small text-white">Body</label>
+                            <label for="body" class="text-small text-white">{{ __('general.body') }}</label>
                             <input id="body" class="w-full form-control" name="body" value="{{ old('body') }}">
 
                             @error('body')
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="col-md-6 mb-5">
-                            <label for="image" class="text-small text-white">Image</label>
+                            <label for="image" class="text-small text-white">{{ __('general.image') }}</label>
                             <input id="image" type="file" class="rounded text-black w-full
                             @error('image') border-2 border-red-600 @enderror" name="image"
                                 value="{{ old('image') }}" required>
@@ -52,13 +52,13 @@
                         </div>
 
                         <div class="col-md-6 mb-5">
-                            <label for="lang" class="text-small text-white">Language</label>
+                            <label for="lang" class="text-small text-white">{{ __('general.language') }}</label>
                             <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                             focus:outline-none focus:bg-white focus:border-gray-500 @error('lang') border-2 border-red-600 @enderror"
                             id="lang" name="lang">
-                                <option value="shqip">Shqip</option>
-                                <option value="македонски">Македонски</option>
+                                <option value="shqip">{{ __('general.albanian') }}</option>
+                                <option value="македонски">{{ __('general.macedonian') }}</option>
                             </select>
 
                             @error('lang')
@@ -69,7 +69,7 @@
                         </div>
                         
                         <div class="col-md-6 mb-5">
-                            <label for="category_id" class="text-small text-white">Category</label>
+                            <label for="category_id" class="text-small text-white">{{ __('general.category') }}</label>
                             <select
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                             focus:outline-none focus:bg-white focus:border-gray-500 @error('category_id') border-2 border-red-600 @enderror"
@@ -91,14 +91,14 @@
                                 <div class="col-4">
                                     <button type="submit"
                                 class="mt-4 transition duration-200 ease-in-out bg-orange-500 font-bold text-white py-6 px-10 rounded hover:bg-gray-200 hover:text-gray-600">
-                                {{ __('Save') }}
+                                {{ __('general.save') }}
                                     </button>
                                 </div>
                                 <div class="col-auto text-right">
                                     <a href="{{ url()->previous() }}">
                                     <div
                                         class="mt-8 transition duration-200 ease-in-out bg-white font-bold text-orange-500 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                                        {{ __('Cancel') }}
+                                        {{ __('general.cancel') }}
                                     </div>
                                     </a>
                                 </div>

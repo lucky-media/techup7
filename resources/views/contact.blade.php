@@ -5,25 +5,20 @@
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-4">
-                <h2 class="text-4xl"> Contact </h2>
+                <h2 class="text-4xl"> {{ __('contact.contact') }} </h2>
             </div>
         </div>
     </div>
 </div>
 <div class="container my-20">
     <div class="row justify-center text-center">
-        <div class="col-10">
-
-            We are ready to help you out on the different issues you might have with the platform. Please feel free to
-            contact us. We would appreciate if you could give us feedback on the platform.
-
-        </div>
+        <div class="col-10">{{ __('contact.we_are_ready_to_help') }}</div>
     </div>
 </div>
 <div class="container mt-40">
     <div class="row">
         <div class="lg:col-6">
-            <h2 class="font-bold text-4xl">Send us a Message</h2>
+            <h2 class="font-bold text-4xl">{{ __('contact.send_us_a_message') }}</h2>
         </div>
     </div>
 </div>
@@ -45,7 +40,7 @@
         <div class="row">
             <div class="lg:col-6">
                 <input class="mt-5 bg-gray-100 py-6 pl-10 w-full @error('fname') border-2 border-red-600 @enderror"
-                type="text" placeholder="First Name" id="fname" name="fname" value="{{ old('fname') }}" required autofocus />
+                type="text" placeholder="{{ __('contact.first_name') }}" id="fname" name="fname" value="{{ old('fname') }}" required autofocus />
                 
                 @error('fname')
                 <span role="alert">
@@ -56,7 +51,7 @@
 
             <div class="lg:col-6">
                 <input class="mt-5 bg-gray-100 py-6 pl-10 w-full @error('fname') border-2 border-red-600 @enderror"
-                type="text" placeholder="Last Name" id="lname" name="lname" value="{{ old('lname') }}" required />
+                type="text" placeholder="{{ __('contact.last_name') }}" id="lname" name="lname" value="{{ old('lname') }}" required />
                 
                 @error('lname')
                 <span role="alert">
@@ -67,7 +62,7 @@
 
             <div class="lg:col-6">
                 <input class="mt-5 bg-gray-100 py-6 pl-10 w-full @error('fname') border-2 border-red-600 @enderror"
-                type="text" placeholder="Email Adress" id="email" name="email" value="{{ old('email') }}" required />
+                type="text" placeholder="{{ __('contact.email_address') }}" id="email" name="email" value="{{ old('email') }}" required />
 
                 @error('email')
                 <span role="alert">
@@ -78,7 +73,7 @@
 
             <div class="lg:col-6">
                 <input class="mt-5 bg-gray-100 py-6 pl-10 w-full @error('fname') border-2 border-red-600 @enderror"
-                type="text" placeholder="Subject" id="subject" name="subject" value="{{ old('subject') }}" required />
+                type="text" placeholder="{{ __('contact.subject') }}" id="subject" name="subject" value="{{ old('subject') }}" required />
 
                 @error('subject')
                 <span role="alert">
@@ -90,7 +85,7 @@
             <div class="col-12">
                 <textarea class="bg-gray-100 py-6 pl-10 w-full @error('fname') border-2 border-red-600 @enderror mt-5"
                 id="message" name="message" rows="5" value="{{ old('message') }}"
-                    placeholder="Message" required></textarea>
+                    placeholder="{{ __('contact.message') }}" required></textarea>
 
                 @error('message')
                 <span role="alert">
@@ -99,7 +94,7 @@
                 @enderror
 
                 <button class="my-6 bg-blue-500 text-white text-center w-full py-5">
-                    Send
+                    {{ __('general.send') }}
                 </button>
                 
             </div>
@@ -110,10 +105,8 @@
 <div class="container mt-24">
     <div class="row">
         <div class="col-12">
-            <h2 class="font-bold text-4xl ">Frequently Asked Question</h2>
-            <p>Some of the most frequently asked questions. If the asnwers below do not satisfy your curiosity, please
-                feel free to contact us with the form above.
-            </p>
+            <h2 class="font-bold text-4xl ">{{ __('contact.faq') }}</h2>
+            <p>{{ __('contact.some_of_the_most') }}</p>
         </div>
     </div>
 </div>
@@ -127,52 +120,33 @@
 <div class="container">
     <div class="row text-center">
         <div class="lg:col-4 text-justify">
-            <h2 class="font-bold text-lg">Are the courses really free?</h2>
-            <p>Yes the courses are completely free of charge.
-                All you have to do is work for it!
+            <h2 class="font-bold text-lg">{{ __('contact.are_the_courses') }}</h2>
+            <p>{{ __('contact.yes_the_courses') }}
             </p>
         </div>
         <div class="lg:col-4 text-justify">
-            <h2 class="mt-5 lg:mt-0 font-bold text-lg">Where do the materials come from?</h2>
-            <p>The materials do not come from a single source, but rather from the experience and knowledge of many
-                different experts.
-            </p>
+            <h2 class="mt-5 lg:mt-0 font-bold text-lg">{{ __('contact.where_do_the_materials') }}</h2>
+            <p>{{ __('contact.the_materials_do_not') }}</p>
         </div>
         <div class="lg:col-4 text-justify">
-            <h2 class="mt-5 lg:mt-0 font-bold text-lg">Are there any age requirements?</h2>
-            <p>The courses will mostly be aimed at high school students, but they are not limited to only them. Anyone
-                with an interest in programming is free to check them out.
-            </p>
+            <h2 class="mt-5 lg:mt-0 font-bold text-lg">{{ __('contact.are_there_any_age') }}</h2>
+            <p>{{ __('contact.the_course_will_mostly') }}</p>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row text-center mt-5 mb-10 lg:mt-10 lg:mb-24">
         <div class="lg:col-4 text-justify">
-            <h2 class="mt-5 lg:mt-0 font-bold text-lg">Are there any offline courses?</h2>
-            <p>
-                Yes, TechUP started as a small web developing course and with time it slowly grew to be what it is
-                today. So except the online courses, TechUP will continue to function as it has. Before the offline
-                course starts there will be applications available in this page.
-
-            </p>
+            <h2 class="mt-5 lg:mt-0 font-bold text-lg">{{ __('contact.are_there_any_offline') }}</h2>
+            <p>{{ __('contact.yes_techup_started') }}</p>
         </div>
         <div class="lg:col-4 text-justify">
-            <h2 class="mt-5 lg:mt-0 font-bold text-lg"> Are there any previous knowledge requirements? </h2>
-            <p>
-                No there are not any previous knowledge requirements. There are more high level courses, but most of
-                them are designed to teach you what you need to know from scratch.
-
-            </p>
+            <h2 class="mt-5 lg:mt-0 font-bold text-lg">{{ __('contact.are_there_any_previous') }}</h2>
+            <p>{{ __('contact.no_there_are_not') }}</p>
         </div>
         <div class="lg:col-4 text-justify">
-            <h2 class="mt-5 lg:mt-0 font-bold text-lg">Can these courses considered as a substitute for school?</h2>
-            <p>
-                To some exten
-                t yes but not fully. If you are a high schools tudent, these courses can help you get
-                started and we greatly encourage you to continue your studies to university.
-
-            </p>
+            <h2 class="mt-5 lg:mt-0 font-bold text-lg">{{ __('contact.can_these_courses_be') }}</h2>
+            <p>{{ __('contact.to_some_extent_yes') }}</p>
         </div>
     </div>
 </div>
