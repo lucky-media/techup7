@@ -71,8 +71,8 @@ return [
     'add_new_lesson' => 'Add new lesson',
     'meet_our_instructors' => 'Meet our Instructors',
     'there_is_no_instructor' => 'There is no instructor with that name',
-    'there_is_no_course' => 'There is no course with that name.',
-    'there_is_no_lesson' => 'There is no course with that name.',
+    'there_is_no_course' => 'There is no course with that title or body.',
+    'there_is_no_lesson' => 'There is no lesson with that title or body.',
     'role' => 'Role',
     
 ];
