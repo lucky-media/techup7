@@ -72,20 +72,23 @@
             </h2>
             <div class="row">
                 @forelse($course->lesson->sortBy('position') as $lesson)
-                    <div class="col-8">
+                    <div class="col-11">
                             <a href="{{ route('lessons.show', $lesson->slug) }}">
-                                <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>
+                                <h2 class="text-black bg-gray-100 px-8 py-6 border-b-2 border-white">{{ $lesson->title }}</h2>
                             </a>
                     </div>
-                    <div class="col-4">
-                        <span class="px-2 text-sm font-normal">{{  $lesson->position }}</span>
-                            @if($lesson->position > 1)
-                                <a href="{{ route('lessons.arrangeUp', ['courseSlug'=>$course->slug, 'position'=>$lesson->position]) }}" class="px-2 text-sm font-normal">up</a>
-                            @endif
-                            @if($lesson->position < $course->lesson->count())
-                                <a href="{{ route('lessons.arrangeDown', ['courseSlug'=>$course->slug, 'position'=>$lesson->position]) }}" class="px-2 text-sm font-normal">down</a>
-                            @endif
-                    </div>
+                    @can('create', $course)
+                        <div class="col-1">                                
+                                @if($lesson->position > 1)
+                                    <a href="{{ route('courses.arrangeUp', ['course'=>$course, 'position'=>$lesson->position]) }}"
+                                    class="bg-blue-500 font-bold text-white px-2 py-1 rounded">&uarr;</a>
+                                @endif
+                                @if($lesson->position < $course->lesson->count())
+                                    <a href="{{ route('courses.arrangeDown', ['course'=>$course, 'position'=>$lesson->position]) }}"
+                                    class="bg-orange-500 font-bold text-white px-2 py-1 rounded">&darr;</a><br>
+                                @endif
+                        </div>
+                    @endcan
                 @empty
                     <p>{{ __('general.there_are_no_lessons_yet') }}</p>
                 @endforelse
