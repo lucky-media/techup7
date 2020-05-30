@@ -19,10 +19,12 @@ class CourseSeeder extends Seeder
                 ->make())
                 ->each(function ($course) {
                     $course->lesson()->saveMany(factory(App\Lesson::class, 5)->make())
-                        ->each(function ($lesson) use ($course) {
+                        ->each(function ($lesson, $position = 1) use ($course) {
+                            $lesson->position = ++$position;
+                            $lesson->save();
                             $lesson->comments()->saveMany(factory(App\Comment::class, 3)->make(['user_id' => $course->user_id]));
                         });
                 });
-        });
+        });  
     }
 }

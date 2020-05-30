@@ -19,6 +19,7 @@ class CreateLessonsTable extends Migration
             $table->string('title');
             $table->text('slug');
             $table->longText('body');
+            $table->integer('position')->default(0);
             $table->timestamps();
 
             $table->index('course_id');
