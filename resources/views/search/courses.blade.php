@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row items-center justify-between py-20">
             <div class="col-6">
-                <h2 class="text-4xl"> Search Courses </h2>
+                <h2 class="text-4xl"> {{ __('general.search_courses') }} </h2>
             </div>
             <div class="col-6">
                 <form action="{{ route('search.courses') }}" method="POST">
@@ -16,7 +16,7 @@
                     <input id="searchTerm" type="text" name="searchTerm" class="rounded bg-gray-100 border-2 border-orange-500 py-2 pl-2 text-black w-4/12" required>
                     <button type="submit" 
                         class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                        Search</button>
+                        {{ __('general.search') }}</button>
                 </form>
             </div>
         </div>
@@ -60,7 +60,7 @@
         </div>
         @empty
         <div>
-            We couldn't find a course with that search term.
+            {{ __('general.there_is_no_course') }}
         </div>
     @endforelse
     </div>

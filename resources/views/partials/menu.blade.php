@@ -11,15 +11,15 @@
         {{-- Menu link to other pages --}}
         <div class="col-5 hidden md:flex flex-row items-center justify-end">
             <a class="{{ Request::path() === '/' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('index') }}">Home</a>
+                href="{{ route('index') }}">{{ __('general.home') }}</a>
             <a class="{{ Request::path() === 'courses' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('courses.index') }}">All Courses</a>
+                href="{{ route('courses.index') }}">{{ __('general.courses') }}</a>
             <a class="{{ Request::path() === 'instructors' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('profiles.index') }}">Instructors</a>
+                href="{{ route('profiles.index') }}">{{ __('general.instructors') }}</a>
             <a class="{{ Request::path() === 'blog' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('blog') }}">Blog</a>
+                href="{{ route('blog') }}">{{ __('general.blog') }}</a>
             <a class="{{ Request::path() === 'contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
-                href="{{ route('contact') }}">Contact</a>
+                href="{{ route('contact') }}">{{ __('general.contact') }}</a>
         </div>
 
         {{-- Here we display Login/Logout/Register for visitors. --}}
@@ -27,7 +27,7 @@
             <!-- Authentication Links -->
             @guest
             <a class="transition duration-200 ease-in-out bg-blue-500 text-white ml-2 py-2 px-6 rounded hover:bg-gray-600"
-                href="{{ route('login') }}">{{ __('Login') }}</a>
+                href="{{ route('login') }}">{{ __('general.login') }}</a>
             @else
             <div
                 class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
@@ -38,9 +38,7 @@
             @if (Auth::user()->role == 'admin')
             <div
                 class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
-                <a href="{{ route('admin.index') }}">
-                    Dashboard
-                </a>
+                <a href="{{ route('admin.index') }}">{{ __('general.dashboard') }}</a>
             </div>
             @endif
 
@@ -48,16 +46,12 @@
             @if (Auth::user()->role == 'instructor')
             <div
                 class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
-                <a href="{{ route('profiles.show', Auth::user()->id) }}">
-                    Profile
-                </a>
+                <a href="{{ route('profiles.show', Auth::user()->id) }}">{{ __('general.profile') }}</a>
             </div>
             @endif
             <div class="transition duration-200 bg-gray-200 ease-in-out font-medium px-4 py-2 hover:text-purple-500">
                 <form action="{{ route('logout') }}" method="POST">
-                    <button type="submit">
-                        {{ __('Logout') }}
-                    </button>
+                    <button type="submit">{{ __('general.logout') }}</button>
                     @csrf
                 </form>
             </div>

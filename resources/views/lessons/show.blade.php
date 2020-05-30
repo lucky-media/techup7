@@ -17,7 +17,8 @@
     <div class="row">
         <div class="col-8">
             <div class="text-sm">
-                By <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>, last update on {{ $lesson->updated_at->format('M Y') }}
+                {{ __('general.by') }} <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
+                , {{ __('general.last_update_on') }} {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
         <div class="col-3">
@@ -27,7 +28,7 @@
                     <form action="{{ route('lessons.edit', $lesson) }}" enctype="multipart/form-data" method="get">
                             <button type="submit" 
                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('Edit') }}</button>
+                            {{ __('general.edit') }}</button>
                     </form>
                 @endcan
                 </div>
@@ -37,9 +38,9 @@
                     <form action="{{ route('lessons.destroy', $lesson) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button type="submit" onclick="return confirm('Are you sure?')"
+                            <button type="submit" onclick="return confirm('{{ __('general.are_you_sure') }}')"
                             class="transition duration-200 ease-in-out bg-blue-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('Delete') }}</button>
+                            {{ __('general.delete') }}</button>
                     </form>
                 @endcan
                 </div>
@@ -78,7 +79,7 @@
                 <form action="{{ route('lessons.create', $lesson->course->slug) }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                    {{ __('Create New Lesson') }}</button>
+                    {{ __('general.add_new_lesson') }}</button>
                 </form>
             </div>
         @endcan
@@ -92,7 +93,7 @@
 <div class="container mt-10">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-black py-5 border-b-2 border-white">Comments ({{ $lesson->commentsCount() }})</h2>
+            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $lesson->commentsCount() }})</h2>
         </div>
     </div>
 </div>
@@ -116,7 +117,7 @@
       <div class="col-4">
         <button type="submit"
         class="transition duration-200 ease-in-out bg-blue-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-        {{ __('Add New Comment') }}</button>
+        {{ __('general.add_new_comment') }}</button>
       </div>
     </div>
   </div>

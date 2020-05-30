@@ -30,7 +30,7 @@
                                             @can('update', $comment)
                                                 <form action="{{ route('comments.edit', $comment) }}" enctype="multipart/form-data" method="get">
                                                     <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
-                                                    {{ __('Edit') }}</button>
+                                                        {{ __('general.edit') }}</button>
                                                 </form>
                                             @endcan
                                         </div>
@@ -40,8 +40,8 @@
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded"
-                                                    onclick="return confirm('Are you sure?')">
-                                                        {{ __('Delete') }}</button>
+                                                    onclick="return confirm('{{ __('general.are_you_sure') }}')">
+                                                    {{ __('general.delete') }}</button>
                                                 </form>
                                             @endcan
                                         </div>
@@ -53,12 +53,12 @@
                                                     {{ method_field('PATCH') }}
                                                     <input id="approved" type="text" name="approved" value="false" hidden>
                                                     <button type="submit" class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
-                                                        {{ __('Inappropriate') }}</button>
+                                                        {{ __('general.inappropriate') }}</button>
                                                 </form>
                                             @endcan
                                             @can('flagged', $comment)
                                                 <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
-                                                    {{ __('Flagged') }}</button>
+                                                    {{ __('general.flagged') }}</button>
                                             @endcan
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                     <div class="col">
                                         <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                         border border-orange-500 hover:border-transparent rounded">
-                                            {{ __('Reply') }}</button>
+                                        {{ __('general.reply') }}</button>
                                     </div>
                                 </div>
                             </div>

@@ -34,14 +34,13 @@
 <div class="container mt-16">
     <div class="row justify-center text-center">
         <div class="lg:col-7">
-            <h2 class="text-3xl lg:text-5xl font-bold ">A ton of Courses</h2>
-            <p class="text-center">From graphic design to web development, it’s all here!
-                <br>You will learn how to code front end websites with HTML, Javascript & CSS, as well as the back end
-                of websites with PHP & .NET </p>
+            <h2 class="text-3xl lg:text-5xl font-bold ">{{ __('index.a_ton_of_courses') }}</h2>
+            <p class="text-center">{{ __('index.from_graphic_design') }}
+                <br>{{ __('index.you_will_learn') }}</p>
                 <form action="{{ route('courses.index') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="mt-6 bg-blue-500 text-white px-5 py-2 rounded transition duration-200 ease-in-out hover:bg-gray-600">
-                    {{ __('View All Courses') }}</button>
+                    {{ __('general.view_all_courses') }}</button>
                 </form>
         </div>
     </div>
@@ -53,11 +52,11 @@
     <div class="container">
         <div class="row py-32 items-center">
             <div class="lg:col-7">
-                <h1 class="text-white text-3xl lg:text-5xl font-bold">Don't forget to register</h1>
+                <h1 class="text-white text-3xl lg:text-5xl font-bold">{{ __('index.dont_forget_to_register') }}</h1>
                 <form action="{{ route('register') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="transition duration-200 ease-in text-white py-2 px-5 border border-white rounded hover:bg-white hover:text-indigo-900">
-                    {{ __('Register') }}</button>
+                    {{ __('general.register') }}</button>
                 </form>
             </div>
         </div>
@@ -68,18 +67,13 @@
     <div class="container">
         <div class="row justify-center text-center py-48">
             <div class="lg:col-7">
-                <h3 class="text-2xl font-bold">TechUp Courses</h3>
-                <p class="my-6">TechUP is a FREE computer programming platform, open to high school students. No
-                    previous experience
-                    is required; our platform is designed for beginners and will teach you to design a website in HTML,
-                    CSS, Javascript, Jquery, Bootstrap, WordPress and much more! Materials will be taught in Albanian
-                    and Macedonian.
-                </p>
-                <p>Enhance your skills in your field of choice</p>
+                <h3 class="text-2xl font-bold">{{ __('index.techup_courses') }}</h3>
+                <p class="my-6">{{ __('index.techup_is_a_free') }}</p>
+                <p>{{ __('index.enhance_your_skills') }}</p>
                 <form action="{{ route('courses.index') }}" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="mt-6 bg-blue-500 text-white px-5 py-2 rounded transition duration-200 ease-in-out hover:bg-gray-600">
-                    {{ __('View All Courses') }}</button>
+                    {{ __('general.view_all_courses') }}</button>
                 </form>
             </div>
         </div>
@@ -91,10 +85,10 @@
         <div class="row items-center py-8">
             <div class="lg:col-5 lg:offset-1">
                 <img src="{{ asset('/storage/brain.png') }}" alt="brain">
-                <h2 class="mt-8 font-bold text-2xl text-base">Learn by Doing</h2>
+                <h2 class="mt-8 font-bold text-2xl text-base">{{ __('index.learn_by_doing') }}</h2>
 
-                <p class="mt-5">Learn by theory and with IRL projects!<br>
-                    Grasp the information very quickly with our well thought out classes with step by step programs!
+                <p class="mt-5">{{ __('index.learn_by_theory') }}<br>
+                    {{ __('index.grasp_the_information') }}
                 </p>
             </div>
             <div class="lg:col-6 mt-8 lg:mt-0">
@@ -113,15 +107,12 @@
             </div>
         </div>
         <div class="lg:col-5 lg:offset-1 text-justify mt-12 lg:mt-0">
-            <h3 class="text-3xl font-bold">Mission</h3>
-            <p class="my-5">The Youth Empowerment Platform strives to support Gostivar’s youth by fostering their
-                leadership skills,
-                encouraging their civic engagement, providing technical skills, and ensuring all members have a space to
-                full their potential in becoming their most authentic, best version of themselves.
+            <h3 class="text-3xl font-bold">{{ __('index.mission') }}</h3>
+            <p class="my-5">{{ __('index.the_youth_empowerment') }}
             </p>
             <p>
-                YEP is achieving its goal by implementing various projects for the youth, such as: <br>
-                #techathon, #gostronic, #mycitymypride, #ihaveadream, #yeptalks and many more!.
+                {{ __('index.yep_is_achieving') }}<br>
+                {{ __('index.hashtags') }}                
             </p>
         </div>
     </div>

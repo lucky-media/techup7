@@ -15,7 +15,7 @@
                     <input id="searchTerm" type="text" name="searchTerm" class="rounded bg-gray-100 border-2 border-orange-500 py-2 pl-2 text-black w-4/12">
                     <button type="submit" 
                         class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                        Search</button>
+                        {{ __('general.search') }}</button>
                 </form>
             </div>
         </div>
@@ -27,7 +27,8 @@
     <div class="row">
         <div class="col-8">
             <div class="text-sm">
-                By <a href="{{ route('profiles.show', $course->user->id) }}" class="text-blue-500">{{ $course->user->name }}</a>, last update on {{ $course->updated_at->format('M Y') }}
+                {{ __('general.by') }} <a href="{{ route('profiles.show', $course->user->id) }}" class="text-blue-500">{{ $course->user->name }}</a>
+                , {{ __('general.last_update_on') }} {{ $course->updated_at->format('M Y') }}
             </div>
         </div>
         <div class="col-3">
@@ -37,7 +38,7 @@
                     <form action="{{ route('courses.edit', $course) }}" enctype="multipart/form-data" method="get">
                             <button type="submit"
                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('Edit') }}</button>
+                            {{ __('general.edit') }}</button>
                     </form>
                     @endcan
                 </div>
@@ -47,9 +48,9 @@
                     <form action="{{ route('courses.destroy', $course) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
-                            <button type="submit" onclick="return confirm('Are you sure?')"
+                            <button type="submit" onclick="return confirm('{{ __('general.are_you_sure') }}')"
                             class="transition duration-200 ease-in-out bg-blue-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('Delete') }}</button>
+                            {{ __('general.delete') }}</button>
                     </form>
                     @endcan
                 </div>
@@ -74,7 +75,7 @@
                         <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>
                     </a>
             @empty
-                <p>There are no lessons yet.</p>
+                <p>{{ __('general.there_are_no_lessons_yet') }}</p>
             @endforelse
             <br>
             @can('create', $course)
@@ -82,7 +83,7 @@
                     <form action="{{ route('lessons.create', $course) }}" enctype="multipart/form-data" method="get">
                         <button type="submit"
                         class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                        {{ __('Create New Lesson') }}</button>
+                        {{ __('general.add_new_lesson') }}</button>
                     </form>
                 </div>
             @endcan
