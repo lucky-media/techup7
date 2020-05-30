@@ -70,13 +70,26 @@
             <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $course->title }} &nbsp;
                 <span class="text-sm font-normal"> ( {{ $course->lesson->count() }} lessons ) </span>
             </h2>
-            @forelse($course->lesson->reverse() as $lesson)
-                    <a href="{{ route('lessons.show', $lesson->slug) }}">
-                        <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>
-                    </a>
-            @empty
-                <p>{{ __('general.there_are_no_lessons_yet') }}</p>
-            @endforelse
+            <div class="row">
+                @forelse($course->lesson->sortBy('position') as $lesson)
+                    <div class="col-8">
+                            <a href="{{ route('lessons.show', $lesson->slug) }}">
+                                <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lesson->title }}</h2>
+                            </a>
+                    </div>
+                    <div class="col-4">
+                        <span class="px-2 text-sm font-normal">{{  $lesson->position }}</span>
+                            @if($lesson->position > 1)
+                                <a href="{{ route('lessons.arrangeUp', ['courseSlug'=>$course->slug, 'position'=>$lesson->position]) }}" class="px-2 text-sm font-normal">up</a>
+                            @endif
+                            @if($lesson->position < $course->lesson->count())
+                                <a href="{{ route('lessons.arrangeDown', ['courseSlug'=>$course->slug, 'position'=>$lesson->position]) }}" class="px-2 text-sm font-normal">down</a>
+                            @endif
+                    </div>
+                @empty
+                    <p>{{ __('general.there_are_no_lessons_yet') }}</p>
+                @endforelse
+            </div>
             <br>
             @can('create', $course)
                 <div>

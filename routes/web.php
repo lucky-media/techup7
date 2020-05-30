@@ -31,6 +31,8 @@ Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.de
 Route::get('/courses', 'CourseController@index')->name('courses.index');
 
 Route::get('/lessons/create/{course}', 'LessonController@create')->name('lessons.create')->middleware('role:admin,instructor');
+Route::get('/lessons/arrangeup/{courseSlug}{position}', 'LessonController@arrangeUp')->name('lessons.arrangeUp')->middleware('role:admin,instructor');
+Route::get('/lessons/arrangedown/{courseSlug}{position}', 'LessonController@arrangeDown')->name('lessons.arrangeDown')->middleware('role:admin,instructor');
 Route::post('/lessons/store', 'LessonController@store')->name('lessons.store')->middleware('role:admin,instructor');
 Route::post('/lessons/image/upload', 'LessonController@uploadImage')->name('lessons.upload');
 Route::get('/lessons/{lesson}/edit', 'LessonController@edit')->name('lessons.edit')->middleware('role:admin,instructor');
