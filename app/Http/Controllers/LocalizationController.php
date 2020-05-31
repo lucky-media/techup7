@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 
 class LocalizationController extends Controller
 {
-    public function index($locale)
+    public function index()
     {
+        $data = request()->validate([
+            'locale' => 'required',
+        ]);
+
+        $locale = $data['locale'];
+
         App::setLocale($locale);
         Carbon::setLocale($locale);
         //storing the locale in session to get it back in the middleware
