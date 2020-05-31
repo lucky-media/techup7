@@ -135,7 +135,9 @@ class CourseController extends Controller
 
     public function show(Course $course)
     {
-        return view('courses.show', compact('course'));
+        $lessons = Lesson::where('course_id', $course->id);
+
+        return view('courses.show', compact('course', 'lessons'));
     }
 
     public function index()

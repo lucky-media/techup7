@@ -16,11 +16,6 @@ class SearchCourses extends Component
     public function render()
     { 
         // This part needs to be fixed to support pagination with Livewire
-
-        // $this->courses = Course::query()
-        // ->where('title', 'like', '%'.$this->searchTerm.'%') 
-        // ->orWhere('body', 'like', '%'.$this->searchTerm.'%')
-        // ->orderBy('created_at', 'desc')
         // ->paginate(10);
 
         $this->courses = Course::query()

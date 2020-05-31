@@ -16,12 +16,7 @@ class SearchInstructors extends Component
     public function render()
     {
         // This part needs to be fixed to support pagination with Livewire
-
-        // $this->users = User::query()
-        //                 ->where('name', 'LIKE', "%{$this->searchTerm}%") 
-        //                 ->where('role', '=', "instructor")
-        //                 ->orderBy('created_at', 'desc')
-        //                 ->paginate(9);
+        // ->paginate(9);
 
         $this->users = User::query()
                         ->where('name', 'LIKE', "%{$this->searchTerm}%") 
