@@ -28,6 +28,8 @@ Route::get('/courses/{course}/edit', 'CourseController@edit')->name('courses.edi
 Route::patch('/courses/{course}', 'CourseController@update')->name('courses.update')->middleware('role:admin,instructor');
 Route::get('/courses/{course}', 'CourseController@show')->name('courses.show');
 Route::delete('/courses/{course}', 'CourseController@destroy')->name('courses.destroy')->middleware('role:admin,instructor');
+Route::get('/courses/{course}/arrangeup/{position}', 'CourseController@arrangeUp')->name('courses.arrangeUp')->middleware('role:admin,instructor');
+Route::get('/courses/{course}/arrangedown/{position}', 'CourseController@arrangeDown')->name('courses.arrangeDown')->middleware('role:admin,instructor');
 Route::get('/courses', 'CourseController@index')->name('courses.index');
 
 Route::get('/lessons/create/{course}', 'LessonController@create')->name('lessons.create')->middleware('role:admin,instructor');

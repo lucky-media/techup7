@@ -23,6 +23,7 @@
             <p class="py-1 text-justify"><strong>{{ __('general.bio') }}:</strong> {{ $user->profile->bio ?? '' }}</p>
             <p class="py-1"><strong>{{ __('general.email') }}:</strong> {{ $user->email }}</p>
             <p class="py-1"><strong>{{ __('general.role') }}:</strong> {{ $user->role }}</p>
+            <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $user->courses->count() }}</p>
             @can('update', $user->profile)
                 <form action="{{ route('profiles.edit', $user) }}" enctype="multipart/form-data" method="get">
                         <button type="submit"
@@ -37,21 +38,6 @@
 {{-- The instructor views a button for adding new courses --}}
 <div class="container my-10">
     <div class="row">
-        <div class="col-3">
-            <div class="my-10">
-                <h2 class="text-2xl font-semibold"> <strong>{{ $user->courses->count() }}</strong> {{ __('general.courses') }}: </h2>
-            </div>
-        </div>
-        <div class="col-6">
-            <form action="{{ route('search.coursesByInstructor', $user) }}" method="POST">
-                {{ csrf_field() }}
-                
-                <input id="searchTerm" type="text" name="searchTerm" class="rounded bg-gray-100 border-2 border-orange-500 py-2 pl-2 text-black w-4/12" required>
-                <button type="submit" 
-                    class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                    {{ __('general.search') }}</button>
-            </form>
-        </div>
         @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
@@ -67,48 +53,8 @@
         @endcan
     </div>
 
-    {{-- List all courses created by the instructor --}}
-    <div class="row">
-        @forelse($courses as $course)
-        <div class="my-4 px-4 col-4">
-            <article class="overflow-hidden rounded-lg shadow-lg">
-                <a href="{{ route('courses.show', $course) }}">
-                    <img alt="course cover" class="block h-64 w-full" src="{{ asset($course->image) }}">
-                </a>
+    @livewire('search-courses-by-instructor', ['user' => $user])
 
-                <header class="flex items-center justify-between leading-tight p-2 md:p-4">
-                    <h1 class="text-lg">
-                        <a class="no-underline hover:underline text-black" href="{{ route('courses.show', $course) }}">
-                            {{ Str::limit($course->title, 30) }}
-                        </a>
-                    </h1>
-                </header>
-
-                <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-                    <a class="flex items-center no-underline hover:underline text-black" href="{{ route('profiles.show', $course->user->id) }}">
-                        <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ asset($course->user->profile->profileImage()) }}">
-                        <p class="ml-2 text-sm">
-                            {{ Str::limit($course->user->name, 20) }}
-                        </p>
-                    </a>
-                    <div class="no-underline text-grey-darker hover:text-red-dark">
-                        {{ $course->updated_at->format('M Y') }}
-                    </div>
-                </footer>
-
-            </article>
-        </div>
-        @empty
-        <div>
-            {{ __('general.there_is_no_course') }}
-        </div>
-        @endforelse
-    </div>
-    <div class="row justify-center mt-4">
-        <div class="col-6 justify-content-center">
-            {{ $courses->links() }}
-        </div>
-    </div>
 </div>
 
 @endsection

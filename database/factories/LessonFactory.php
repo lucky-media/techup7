@@ -11,5 +11,6 @@ $factory->define(Lesson::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'slug' => $faker->slug,
         'body' => $faker->text,
+        'position' => 0,
     ];
 });
