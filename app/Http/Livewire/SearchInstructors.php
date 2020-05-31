@@ -11,19 +11,19 @@ class SearchInstructors extends Component
     use WithPagination;
 
     public $searchTerm;
-    public $users;
+    protected $users;
+    protected $pagination = '9';
 
     public function render()
     {
-        // This part needs to be fixed to support pagination with Livewire
-        // ->paginate(9);
-
         $this->users = User::query()
                         ->where('name', 'LIKE', "%{$this->searchTerm}%") 
                         ->where('role', '=', "instructor")
                         ->orderBy('created_at', 'desc')
-                        ->get(); 
+                        ->paginate($this->pagination); 
 
-        return view('livewire.search-instructors');
+        return view('livewire.search-instructors', [
+            'users' => $this->users,
+        ]);
     }
 }

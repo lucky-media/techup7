@@ -39,13 +39,10 @@
             </div>
             @endforeach
         </div>
-        {{--         This part needs to be fixed to allow pagination with livewire
         <div class="row justify-center mt-4">
-            <div class="col-6 justify-content-center">
-                
+            <div class="col-6 justify-content-center">  
                 {{ $courses->links() }}
-                
             </div>
-        </div> --}}
+        </div>
     </div>
 </div>

@@ -5,12 +5,9 @@ namespace App\Http\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use App\Lesson;
-use Livewire\WithPagination;
 
 class SearchLessons extends Component
 {
-    use WithPagination;
-
     public $searchTerm;
     public $lessons;
     public $course;

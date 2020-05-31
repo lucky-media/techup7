@@ -11,19 +11,19 @@ class SearchCourses extends Component
     use WithPagination;
 
     public $searchTerm;
-    public $courses;
+    protected $courses;
+    protected $pagination = '9';
 
     public function render()
     { 
-        // This part needs to be fixed to support pagination with Livewire
-        // ->paginate(10);
-
         $this->courses = Course::query()
-        ->where('title', 'like', '%'.$this->searchTerm.'%') 
-        ->orWhere('body', 'like', '%'.$this->searchTerm.'%')
-        ->orderBy('created_at', 'desc')
-        ->get();
+                                ->where('title', 'like', '%'.$this->searchTerm.'%') 
+                                ->orWhere('body', 'like', '%'.$this->searchTerm.'%')
+                                ->orderBy('created_at', 'desc')
+                                ->paginate($this->pagination);
 
-        return view('livewire.search-courses');
+        return view('livewire.search-courses', [
+            'courses' => $this->courses,
+        ]);
     }
 }
