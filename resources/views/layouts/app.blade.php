@@ -24,6 +24,8 @@
         @include('partials.menu')
 
         @yield('content')
+
+        @stack('javascript')
     </div>
 
     <footer>
