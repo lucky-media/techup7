@@ -21,12 +21,12 @@
                         @can('create', $course)
                             <div class="col-1">                                
                                     @if($lesson->position > 1)
-                                        <a href="{{ route('courses.arrangeUp', ['course'=>$course, 'position'=>$lesson->position]) }}"
-                                        class="bg-blue-500 font-bold text-white px-2 py-1 rounded">&uarr;</a>
+                                        <button class="bg-blue-500 font-bold text-white px-2 py-1 rounded"
+                                                wire:click="arrangeUp({{ $course->id }}, '{{ $lesson->position }}')">&uarr;</button><br>
                                     @endif
                                     @if($lesson->position < $course->lesson->count())
-                                        <a href="{{ route('courses.arrangeDown', ['course'=>$course, 'position'=>$lesson->position]) }}"
-                                        class="bg-orange-500 font-bold text-white px-2 py-1 rounded">&darr;</a><br>
+                                        <button class="bg-orange-500 font-bold text-white px-2 py-1 rounded"
+                                                wire:click="arrangeDown({{ $course->id }}, '{{ $lesson->position }}')">&darr;</button>
                                     @endif
                             </div>
                         @endcan

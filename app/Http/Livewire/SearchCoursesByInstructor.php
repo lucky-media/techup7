@@ -11,8 +11,9 @@ class SearchCoursesByInstructor extends Component
     use WithPagination;
 
     public $searchTerm;
-    public $courses;
+    protected $courses;
     public $user;
+    protected $pagination = '9';
 
     public function mount($user)
     {
@@ -31,8 +32,10 @@ class SearchCoursesByInstructor extends Component
                                         ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
                                 ->orderBy('created_at', 'desc') 
-                                ->get();
+                                ->paginate($this->pagination); 
 
-        return view('livewire.search-courses');
+        return view('livewire.search-courses', [
+            'courses' => $this->courses,
+        ]);
     }
 }
