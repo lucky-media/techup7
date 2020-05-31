@@ -17,6 +17,8 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     @stack('styles')
+    
+    @livewireStyles
 
 </head>
 <body class="font-sans text-black antialiased flex flex-col">
@@ -25,7 +27,7 @@
 
         @yield('content')
 
-        @stack('javascript')
+        @livewireScripts
     </div>
 
     <footer>

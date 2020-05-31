@@ -53,10 +53,12 @@ class SearchController extends Controller
         $searchTerm = $data['searchTerm'];
 
         $courses = Course::query()
-                        ->where('title', 'LIKE', "%{$searchTerm}%") 
-                        ->orWhere('body', 'LIKE', "%{$searchTerm}%") 
-                        ->where('user_id', '=', "{$user->id}")
-                        ->orderBy('created_at', 'desc') 
+                        ->where('user_id', "{$this->user->id}")
+                        ->where(function($query) {
+                            $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
+                                ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
+                        })
+                        ->orderBy('created_at', 'desc')
                         ->paginate(3);
 
         return view('search.CoursesByInstructor', compact('courses', 'user'));

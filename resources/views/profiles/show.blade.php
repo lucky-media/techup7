@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@push('styles')
-    @livewireStyles
-@endpush
-
 @section('content')
 
 <div style="background:url({{ asset('/storage/title_img.png') }}); ">
@@ -27,6 +23,7 @@
             <p class="py-1 text-justify"><strong>{{ __('general.bio') }}:</strong> {{ $user->profile->bio ?? '' }}</p>
             <p class="py-1"><strong>{{ __('general.email') }}:</strong> {{ $user->email }}</p>
             <p class="py-1"><strong>{{ __('general.role') }}:</strong> {{ $user->role }}</p>
+            <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $user->courses->count() }}</p>
             @can('update', $user->profile)
                 <form action="{{ route('profiles.edit', $user) }}" enctype="multipart/form-data" method="get">
                         <button type="submit"
@@ -41,21 +38,6 @@
 {{-- The instructor views a button for adding new courses --}}
 <div class="container my-10">
     <div class="row">
-        <div class="col-3">
-            <div class="my-10">
-                <h2 class="text-2xl font-semibold"> <strong>{{ $user->courses->count() }}</strong> {{ __('general.courses') }}: </h2>
-            </div>
-        </div>
-        <div class="col-6">
-            <form action="{{ route('search.coursesByInstructor', $user) }}" method="POST">
-                {{ csrf_field() }}
-                
-                <input id="searchTerm" type="text" name="searchTerm" class="rounded bg-gray-100 border-2 border-orange-500 py-2 pl-2 text-black w-4/12" required>
-                <button type="submit" 
-                    class="transition duration-200 ease-in-out font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                    {{ __('general.search') }}</button>
-            </form>
-        </div>
         @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
@@ -76,7 +58,3 @@
 </div>
 
 @endsection
-
-@push('javascript')
-    @livewireScripts
-@endpush
