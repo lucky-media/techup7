@@ -64,6 +64,7 @@ return [
     'language' => 'Gjuha',
     'albanian' => 'Shqip',
     'macedonian' => 'Maqedonisht',
+    'english' => 'English',
     'category' => 'Kategoria',
     'by' => 'Nga',
     'last_update_on' => 'ndryshimi i fundit në',
@@ -74,5 +75,6 @@ return [
     'there_is_no_course' => 'Nuk ka kurs me atë titull ose përmbajtje.',
     'there_is_no_lesson' => 'Nuk ka mësim me atë titull ose përmbajtje.',
     'role' => 'Roli',
+    'both' => 'Të dyja',
     
 ];

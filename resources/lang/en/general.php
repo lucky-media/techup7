@@ -64,6 +64,7 @@ return [
     'language' => 'Language',
     'albanian' => 'Albanian',
     'macedonian' => 'Macedonian',
+    'english' => 'English',
     'category' => 'Category',
     'by' => 'By',
     'last_update_on' => 'last update on',
@@ -74,5 +75,6 @@ return [
     'there_is_no_course' => 'There is no course with that title or body.',
     'there_is_no_lesson' => 'There is no lesson with that title or body.',
     'role' => 'Role',
+    'both' => 'Both',
     
 ];

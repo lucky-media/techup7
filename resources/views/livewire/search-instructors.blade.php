@@ -1,6 +1,10 @@
 <div>
-    <input type="text" class="rounded bg-gray-100 border-2 border-orange-500" wire:model="searchTerm" />
-    <p>This supports livewire. Needs redesign</p>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <input type="text" class="rounded bg-gray-100 border-2 mr-4 border-orange-500" wire:model="searchTerm" />
+            <p>search with livewire</p>
+        </div>
+    </div>
     
     <div class="container my-20">
         <div class="row text-center">

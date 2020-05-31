@@ -57,7 +57,7 @@
                             class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight
                             focus:outline-none focus:bg-white focus:border-gray-500 @error('lang') border-2 border-red-600 @enderror"
                             id="lang" name="lang">
-                                <option value="al" {{ $course->lang == "al" ? "selected" : "" }}>{{ __('general.albanian') }}</option>
+                                <option value="sq" {{ $course->lang == "al" ? "selected" : "" }}>{{ __('general.albanian') }}</option>
                                 <option value="mk" {{ $course->lang == "mk" ? "selected" : "" }}>{{ __('general.macedonian') }}</option>
                             </select>
 
