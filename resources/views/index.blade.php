@@ -8,7 +8,7 @@
                 <h1 class="text-3xl lg:text-6xl font-bold text-white text-center pb-8 lg:pb-0 lg:text-left lg:offset-1">
                     {{ __('index.learn_to_code') }}
                 </h1>
-                <form action="lang/al" enctype="multipart/form-data" method="get">
+                <form action="lang/sq" enctype="multipart/form-data" method="get">
                     <button type="submit"
                     class="mt-6 bg-blue-500 text-white px-5 py-2 rounded transition duration-200 ease-in-out hover:bg-gray-600">
                     Albanian</button>
