@@ -1,6 +1,16 @@
 <div>
-    <input type="text" class="rounded bg-gray-100 border-2 border-orange-500" wire:model="searchTerm" />
-    <p>This supports livewire. Needs redesign</p>
+    <div class="container my-12 mx-auto px-4 md:px-12">
+        <div class="flex flex-wrap -mx-1 lg:-mx-4">
+            <input type="text" class="rounded bg-gray-100 border-2 mr-4 border-orange-500" wire:model="searchTerm" />
+            <p>search with livewire. Show only in:</p>
+            <button class="bg-blue-500 font-bold text-white px-2 py-1 rounded ml-4"
+                    wire:click="switchLanguage('sq')">{{ __('general.albanian') }}</button>
+            <button class="bg-orange-500 font-bold text-white px-2 py-1 rounded ml-4"
+                    wire:click="switchLanguage('mk')">{{ __('general.macedonian') }}</button>
+            <button class="bg-gray-500 font-bold text-white px-2 py-1 rounded ml-4"
+                    wire:click="switchLanguage()">{{ __('general.both') }}</button>
+        </div>
+    </div>
 
     {{-- We display all courses with a link, cover image, date created, owner and category --}}
     <div class="container my-12 mx-auto px-4 md:px-12">
@@ -31,7 +41,8 @@
                                 {{ $course->created_at->formatLocalized('%b %Y') }}<br>
                             <a class="no-underline hover:underline text-black" href="{{ route('courses.index') }}">
                                 {{ Str::limit($course->category->name, 10) }}
-                            </a>
+                            </a><br>
+                            <img src="{{ asset('/storage/'.$course->lang.'.png') }}" style="max-height: 20px;">
                         </div>
                     </footer>
 
