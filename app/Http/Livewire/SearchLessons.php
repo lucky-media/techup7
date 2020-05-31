@@ -18,6 +18,36 @@ class SearchLessons extends Component
         $this->course = $course;
     }
 
+    // This function arranges the lessons of a course by moving the lesson down
+    public function arrangeDown($id, $position)
+    {        
+        $nextLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position+1)->first();
+        $currentLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position)->first();
+        
+        $nextLesson->position = $position;
+        $currentLesson->position = $position+1;
+
+        $nextLesson->save();
+        $currentLesson->save();
+
+        $this->lessons = Lesson::where('course_id', $id);
+    }
+
+    // This function arranges the lessons of a course by moving the lesson up
+    public function arrangeUp($id, $position)
+    {        
+        $previousLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position-1)->first();
+        $currentLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position)->first();
+        
+        $previousLesson->position = $position;
+        $currentLesson->position = $position-1;
+
+        $previousLesson->save();
+        $currentLesson->save();
+
+        $this->lessons = Lesson::where('course_id', $id);
+    }
+
     public function render()
     {
         $this->lessons = Lesson::query()

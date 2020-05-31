@@ -176,37 +176,4 @@ class CourseController extends Controller
         return Course::select('slug')->where('slug', 'like', $slug.'%')->get();
     }
 
-    // This function arranges the lessons of a course by moving the lesson up
-    public function arrangeUp(Course $course, $position)
-    {
-        $this->middleware('role');
-        
-        $previousLesson = Lesson::where('course_id', '=', $course->id)->where('position', '=', $position-1)->first();
-        $currentLesson = Lesson::where('course_id', '=', $course->id)->where('position', '=', $position)->first();
-        
-        $previousLesson->position = $position;
-        $currentLesson->position = $position-1;
-
-        $previousLesson->save();
-        $currentLesson->save();
-        
-        return view('courses.show', compact('course'));
-    }
-
-    // This function arranges the lessons of a course by moving the lesson down
-    public function arrangeDown(Course $course, $position)
-    {
-        $this->middleware('role');
-        
-        $nextLesson = Lesson::where('course_id', '=', $course->id)->where('position', '=', $position+1)->first();
-        $currentLesson = Lesson::where('course_id', '=', $course->id)->where('position', '=', $position)->first();
-        
-        $nextLesson->position = $position;
-        $currentLesson->position = $position+1;
-
-        $nextLesson->save();
-        $currentLesson->save();
-        
-        return view('courses.show', compact('course'));
-    }
 }
