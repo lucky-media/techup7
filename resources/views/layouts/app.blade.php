@@ -27,11 +27,12 @@
 
         @yield('content')
 
-        @livewireScripts
     </div>
 
     <footer>
         @include('partials.footer')
     </footer> 
+    
+    @livewireScripts
 </body>
 </html>
