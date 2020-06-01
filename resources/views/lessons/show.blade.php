@@ -128,7 +128,7 @@
 
 <div class="container my-10">
     <div class="row">
-        @include('partials._comment_replies', ['comments' => $lesson->comments, 'lesson_id' => $lesson->id])
+        @include('partials.comment_replies', ['comments' => $lesson->comments, 'lesson_id' => $lesson->id])
     </div>
 </div>
 

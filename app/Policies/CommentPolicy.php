@@ -59,7 +59,7 @@ class CommentPolicy
      */
     public function flagInappropriate(User $user, Comment $comment)
     {
-        if ($user->id != $comment->user_id && $comment->approved == 'true')
+        if ($user->id != $comment->user_id && $comment->approved == '1')
         {
             return true;
         }
