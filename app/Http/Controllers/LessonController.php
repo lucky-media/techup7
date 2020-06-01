@@ -39,12 +39,16 @@ class LessonController extends Controller
         // We create a slug from the title, but we also check for unique slug
         $customSlug = $this->createMySlug($data['title']);
         
+        $course = Course::find($data['course_id']);
+        $position = $course->children()->count();
+
         // The Purifier is used to check for malicious code and purifies the HTML code
         $lesson = Lesson::create([
             'course_id' => $data['course_id'],
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => Purifier::clean($data['body']),
+            'position' => $position+1,
         ]);
 
         return redirect('/lessons/'. $lesson->slug);
