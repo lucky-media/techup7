@@ -53,7 +53,7 @@
         @endcan
     </div>
 
-    @livewire('search-courses-by-instructor', ['user' => $user])
+   <livewire:search-courses-by-instructor :user="$user">
 
 </div>
 

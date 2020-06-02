@@ -49,6 +49,6 @@
     </div>
 </div>
 
-@livewire('search-lessons', ['course' => $course, 'lessons' => $lessons])
+<livewire:search-lessons :course="$course" :lessons="$lessons">
 
 @endsection

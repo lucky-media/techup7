@@ -88,6 +88,6 @@
 </div>
 
 {{-- Comments --}}
-@livewire('comment-lesson', ['lesson' => $lesson]))
+<livewire:comment-lesson :lesson="$lesson">
 
 @endsection

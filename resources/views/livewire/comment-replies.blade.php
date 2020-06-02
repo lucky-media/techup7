@@ -97,7 +97,7 @@
     <div class="row">
         <div class="col-12">
             @foreach($comment->replies as $reply)
-                @livewire('comment-replies', ['comment' => $reply], key(rand() * $reply->id))
+                <livewire:comment-replies :comment="$reply" :key="rand()*$reply->id">
             @endforeach
         </div>
     </div>
