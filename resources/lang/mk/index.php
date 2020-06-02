@@ -7,11 +7,29 @@ return [
     | Home page
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used during at the home page for
+    | The following language lines are used at the home page for
     | the text and paragraphs, but not the regular buttons or links.
     |
     */
 
-    'learn_to_code' => 'Учете програмирање, бесплатно!',
-
+    'learn_to_code' => 'Учи програмирање, бесплатно!',
+    'a_ton_of_courses' => 'Еден тон курсеви!',
+    'from_graphic_design' => 'Од графички дизајн до веб програмирање, се е тука!',
+    'you_will_learn' => 'Ќе научиш како да програмираш веб страници со HTML, Javascript & CSS, истотака и со PHP & .NET',
+    'dont_forget_to_register' => 'Не заборави да се регистрираш',
+    'techup_courses' => 'TechUp Курсеви',
+    'techup_is_a_free' => 'TechUP е бесплатна платформа за компјутерско програмирање, отворена за средношколци.
+    Нема потреба за претходно искуство; нашата платформа е наменета за почетници и ќе те научи да дизајнираш веб страница со HTML,
+    CSS, Javascript, Jquery, Bootstrap, WordPress и многу други! Материјалите ќе бидат на Македонски и Албански.',
+    'enhance_your_skills' => 'Зајакни ги твоите вештини во посакуваната област',
+    'learn_by_doing' => 'Научи со практика',
+    'learn_by_theory' => 'Научи со теорија и практични проекти!',
+    'grasp_the_information' => 'Сфати ги информациите брзо со нашите курсеви по програмирање!',
+    'mission' => 'Мисија',
+    'the_youth_empowerment' => 'Платформата за зајакнување на младите се стреми да ги подржи младите во Гостивар со негување на
+    нивните лидерски вештини, охрабрување на нивниот граѓански ангажман, обезбедување технички вештини и давање простор на сите членови
+    да го исполнат својот потенцијал да станат нивна автентична, најдобра верзија на себеси.',
+    'yep_is_achieving' => 'YEP ја постигнува својата цел преку спроведување на разни проекти за младите, како што се:',
+    'hashtags' => '#techathon, #gostronic, #mycitymypride, #ihaveadream, #yeptalks and many more!.',
+    
 ];

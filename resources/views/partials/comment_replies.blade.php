@@ -57,8 +57,9 @@
                                                 </form>
                                             @endcan
                                             @can('flagged', $comment)
-                                                <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
-                                                    {{ __('general.flagged') }}</button>
+                                                <p class="text-gray-500 text-xs underline">
+                                                    {{ __('general.flagged') }}
+                                                </p>
                                             @endcan
                                         </div>
                                     </div>
@@ -104,7 +105,7 @@
     {{-- By calling this view again, we can add a new reply. --}}
     <div class="row">
         <div class="col-12">
-            @include('partials._comment_replies', ['comments' => $comment->replies])
+            @include('partials.comment_replies', ['comments' => $comment->replies])
         </div>
     </div>
 </div>

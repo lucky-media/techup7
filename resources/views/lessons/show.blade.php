@@ -63,7 +63,7 @@
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
             </a>
             
-            @foreach ($lesson->course->lesson->reverse() as $lessons)
+            @foreach ($lesson->course->lesson->sortBy('position') as $lessons)
                 @if ($lessons->id == $lesson->id)
                         <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
                 @else
@@ -87,49 +87,7 @@
     </div>
 </div>
 
-
-{{-- Comments section. We can see total comments count and add a new comment --}}
-
-<div class="container mt-10">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $lesson->commentsCount() }})</h2>
-        </div>
-    </div>
-</div>
-
-<form action="{{ route('comments.store') }}" enctype="multipart/form-data" method="post">
-    @csrf
-<div class="container">
-    <div class="row">
-      <div class="col-8">           
-                <input id="lesson_id" type="text" name="lesson_id" value="{{ $lesson->id }}" hidden>
-
-                <textarea id="body" type="text" class="rounded bg-gray-100 w-full py-2 px-2 @error('body') is-invalid @enderror"
-                name="body"></textarea>
-
-                @error('body')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-      </div>
-      <div class="col-4">
-        <button type="submit"
-        class="transition duration-200 ease-in-out bg-blue-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-        {{ __('general.add_new_comment') }}</button>
-      </div>
-    </div>
-  </div>
-</form>
-
-
-{{-- Show comments, replies and add new replies from another view. --}}
-
-<div class="container my-10">
-    <div class="row">
-        @include('partials._comment_replies', ['comments' => $lesson->comments, 'lesson_id' => $lesson->id])
-    </div>
-</div>
+{{-- Comments --}}
+@livewire('comment-lesson', ['lesson' => $lesson]))
 
 @endsection

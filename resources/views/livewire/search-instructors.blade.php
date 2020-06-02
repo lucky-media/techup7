@@ -1,7 +1,7 @@
 <div>
     <div class="container my-12 mx-auto px-4 md:px-12">
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
-            <input type="text" class="rounded bg-gray-100 border-2 mr-4 border-orange-500" wire:model="searchTerm" />
+            <input type="text" class="rounded bg-gray-100 border-2 mr-4 border-orange-500" wire:model.debounce.500ms="searchTerm" />
             <p>search with livewire</p>
         </div>
     </div>

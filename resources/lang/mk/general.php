@@ -1,0 +1,80 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Page
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used for general texts like the menu, footer etc.
+    |
+    */
+
+    'home' => 'Дома',
+    'courses' => 'Курсеви',
+    'instructors' => 'Инструктори',
+    'blog' => 'Блог',
+    'contact' => 'Контакт',
+    'view_all_courses' => 'Сите Курсеви',
+    'register' => 'Регистрирај се',
+    'send' => 'Прати',
+    'login' => 'Логирај се',
+    'dashboard' => 'Dashboard',
+    'profile' => 'Профил',
+    'logout' => 'Излези',
+    'delete' => 'Бриши',
+    'save' => 'Зачувај',
+    'cancel' => 'Откажи',
+    'edit' => 'Измени',
+    'name' => 'Име',
+    'username' => 'Корисничко име',
+    'email' => 'Емаил Адреса',
+    'verify_email' => 'Потврди ја емаил адресата',
+    'password' => 'Лозинка',
+    'confirm_password' => 'Потврди ја лозинката',
+    'reset_password' => 'Измени лозинка',
+    'forgot_your_password' => 'Ја заборави лозинката?',
+    'not_registered' => 'Не си регистриран? Кликни тука за Регистрирање',
+    'a_fresh_verification_link' => 'Нов линк за потврда е пратен кај твојата емаил адреса.',
+    'before_proceeding' => 'Пред да продолжиш, те молам провери го емаилот за линкот за потврда.',
+    'if_you_did_not' => 'Ако не доби емаил',
+    'click_here_to_request' => 'кликни тука за да се прати друг',
+    'please_confirm_your_password' => 'Те молам потврди ја лозинката пред да продолжиш',
+    'send_password_reset_link' => 'Прати линк за промена на лозинка',
+    'body' => 'Содржина',
+    'bio' => 'Биографија',
+    'add_new_comment' => 'Додај нов коментар',
+    'edit_comment' => 'Измени коментар',
+    'edit_course' => 'Измени курс',
+    'edit_lesson' => 'Измени лекција',
+    'edit_profile' => 'Измени профил',
+    'are_you_sure' => 'Дали си сигурен?',
+    'inappropriate' => 'Несоодветен',
+    'flagged' => 'Обележан',
+    'comments' => 'Коментари',
+    'reply' => 'Одговори',
+    'try_our_courses' => 'Пробај ги нашите курсеви',
+    'search' => 'Побарај',
+    'search_courses' => 'Побарај курсеви',
+    'search_instructors' => 'Побарај инструктори',
+    'add_new_course' => 'Додај нов курс',
+    'title' => 'Наслов',
+    'image' => 'Слика',
+    'language' => 'Јазик',
+    'albanian' => 'Албански',
+    'macedonian' => 'Македонски',
+    'english' => 'Англиски',
+    'category' => 'Категорија',
+    'by' => 'Од',
+    'last_update_on' => 'последна промена на',
+    'there_are_no_lessons_yet' => 'Сеуште нема лекции.',
+    'add_new_lesson' => 'Додај нова лекција',
+    'meet_our_instructors' => 'Запознај се со инструкторите',
+    'there_is_no_instructor' => 'Нема инструктор со тоа име',
+    'there_is_no_course' => 'Нема курс со тој наслов или содржина.',
+    'there_is_no_lesson' => 'Нема лекција со тој наслов или содржина.',
+    'role' => 'Улога',
+    'both' => 'Обата',
+    
+];

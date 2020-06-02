@@ -17,11 +17,13 @@ class CourseController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
 
     public function create()
     {
+        $this->middleware('role');
+
         $categories = Category::get();
         
         return view('courses.create', compact('categories'));
@@ -29,6 +31,8 @@ class CourseController extends Controller
     
     public function store()
     { 
+        $this->middleware('role');
+
         $data = request()->validate([
             'title' => 'required',
             'body' => 'required',
@@ -59,6 +63,8 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
+        $this->middleware('role');
+
         // We delete all the relationships of the course such as lessons and comments
         foreach ($course->lesson as $lesson) {
             foreach ($lesson->children as $comment) {
@@ -77,6 +83,8 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
+        $this->middleware('role');
+        
         $this->authorize('update', $course);
 
         $categories = Category::get();
@@ -86,6 +94,8 @@ class CourseController extends Controller
 
     public function update(Course $course)
     {
+        $this->middleware('role');
+        
         $this->authorize('update', $course);
         
         $data = request()->validate([

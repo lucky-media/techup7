@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Lesson;
 use App\Comment;
 
 use Illuminate\Http\Request;
@@ -22,43 +21,6 @@ class CommentController extends Controller
         $comments = Comment::where('approved', '=', 'false')->paginate(10);
         
         return view('comments.index', compact('comments'));
-    }
-
-    public function store()
-    {
-        $data = request()->validate([
-            'lesson_id' => 'required',
-            'body' => 'required|min:2',
-        ]);
-
-        $lesson = Lesson::find($data['lesson_id']);
-        
-        $lesson->comments()->create([
-            'user_id' => auth()->user()->id,
-            'body' => $data['body'],
-        ]);
-
-        return back();
-    }
-    
-    // Adding a comment reply requires the parent comment id
-    public function reply()
-    {
-        $data = request()->validate([
-            'body' => 'required|min:2',
-            'lesson_id' => 'required',
-            'comment_id' => 'required',
-        ]);
-        
-        $lesson = Lesson::find($data['lesson_id']);
-        
-        $lesson->comments()->create([
-            'user_id' => auth()->user()->id,
-            'parent_id' => $data['comment_id'],
-            'body' => $data['body'],
-        ]);
-
-        return back();
     }
 
     // When deleting a comment we also delete the comment replies
@@ -105,19 +67,6 @@ class CommentController extends Controller
             'body' => $data['body'],
             ]);
                 
-        return redirect('/lessons/'. $comment->lesson->slug);
-    }
-
-    public function flag(Comment $comment)
-    {         
-        $data = request()->validate([
-            'approved' => 'required',
-        ]);
-        
-        $comment->update([
-        'approved' => $data['approved'],
-        ]);
-
         return redirect('/lessons/'. $comment->lesson->slug);
     }
     

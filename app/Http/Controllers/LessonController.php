@@ -16,7 +16,7 @@ class LessonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('show');
     }
 
     public function create(Course $course)
@@ -39,12 +39,16 @@ class LessonController extends Controller
         // We create a slug from the title, but we also check for unique slug
         $customSlug = $this->createMySlug($data['title']);
         
+        $course = Course::find($data['course_id']);
+        $position = $course->children()->count();
+
         // The Purifier is used to check for malicious code and purifies the HTML code
         $lesson = Lesson::create([
             'course_id' => $data['course_id'],
             'title' => $data['title'],
             'slug' => $customSlug,
             'body' => Purifier::clean($data['body']),
+            'position' => $position+1,
         ]);
 
         return redirect('/lessons/'. $lesson->slug);
@@ -60,22 +64,33 @@ class LessonController extends Controller
         preg_match_all('/<img.*?src=[\'"](.*?)[\'"].*?>/i', $lesson->body, $matches);
         if(!empty($matches[1])) {
             foreach($matches[1] as $match)
-            $elements[] = $match;
+            {
+                $elements[] = $match;
+            }
+
+            // We format the images that we got from lesson body
+            foreach($elements as $element){
+                $imagesWanted[] = 'storage/uploads/lessons/'.pathinfo($element)["basename"];
+            }
+            
+            // We delete the lesson images that were uploaded in the lessons folder
+            Storage::disk('local')->delete($imagesWanted);
         }
-        
-        // We format the images that we got from lesson body
-        foreach($elements as $element){
-            $imagesWanted[] = 'storage/uploads/lessons/'.pathinfo($element)["basename"];
-        }
-        
-        // We delete the lesson images that were uploaded in the lessons folder
-        Storage::disk('local')->delete($imagesWanted);
-        
+
         // We delete all relationships of the lesson
         $lesson->children()->delete();
 
         // We delete the lesson
         $lesson->delete();
+
+        $course = Course::whereSlug($courseSlug)->first();
+        $position = 1;
+        
+        foreach($course->lesson->sortBy('position') as $lesson){
+            $lesson->position = $position;
+            $lesson->save();
+            ++$position;
+        }
         
         return redirect('/courses/'. $courseSlug);
     }

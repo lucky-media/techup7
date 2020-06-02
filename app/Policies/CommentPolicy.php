@@ -11,6 +11,18 @@ class CommentPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can create comments.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Comment  $comment
+     * @return mixed
+     */
+    public function create(User $user, Comment $comment)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can update the comment.
      *
      * @param  \App\User  $user
@@ -59,12 +71,10 @@ class CommentPolicy
      */
     public function flagInappropriate(User $user, Comment $comment)
     {
-        if ($user->id != $comment->user_id && $comment->approved == 'true')
+        if ($user->id != $comment->user_id && $comment->approved == '1')
         {
             return true;
         }
-        else
-        return false;
     }
     
     /**
@@ -76,11 +86,9 @@ class CommentPolicy
     
     public function flagged(User $user, Comment $comment)
     {
-        if ($comment->approved == 'false')
+        if ($comment->approved == '0')
         {
             return true;
         }
-        else
-        return false;
     }
 }
