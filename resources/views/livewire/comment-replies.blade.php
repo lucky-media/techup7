@@ -25,6 +25,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-2">
+                                            {{-- Edit a comment --}}
                                             @can('update', $comment)
                                             <form action="{{ route('comments.edit', $comment) }}"
                                                 enctype="multipart/form-data" method="get">
@@ -37,22 +38,24 @@
                                         {{-- Delete a comment --}}
                                         <div class="col-2">
                                             @can('delete', $comment)
-                                                <button wire:click="deleteComment" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
-                                                {{-- onclick="return confirm('{{ __('general.are_you_sure') }}')"> --}}
+                                            <button wire:click="deleteComment"
+                                                onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
+                                                class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                                                 {{ __('general.delete') }}</button>
                                             @endcan
                                         </div>
                                         {{-- Comments can be flagged as inappropriate by students or instructors. Admin manages flagged comments. --}}
                                         <div class="col-2">
                                             @can('flagInappropriate', $comment)
-                                                <button wire:click="flagInappropriate" class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
-                                                    {{-- onclick="return confirm('{{ __('general.are_you_sure') }}')"> --}}
-                                                    {{ __('general.inappropriate') }}</button>
+                                            <button wire:click="flagInappropriate"
+                                                onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
+                                                class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                                                {{ __('general.inappropriate') }}</button>
                                             @endcan
                                             @can('flagged', $comment)
-                                                <p class="text-gray-500 text-xs underline">
-                                                    {{ __('general.flagged') }}
-                                                </p>
+                                            <p class="text-gray-500 text-xs underline">
+                                                {{ __('general.flagged') }}
+                                            </p>
                                             @endcan
                                         </div>
                                     </div>
@@ -69,14 +72,14 @@
                                 <div class="row">
                                     <div class="col-auto">
                                         <textarea type="text" wire:model.lazy="bodyReply"
-                                                  class="rounded bg-gray-100 w-46 py-2 px-2 @error('bodyReply') is-invalid @enderror"></textarea>
+                                            class="rounded bg-gray-100 w-46 py-2 px-2 @error('bodyReply') is-invalid @enderror"></textarea>
                                         <div>
                                             @error('bodyReply') <span class="error">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col">
                                         <button type="submit"
-                                                class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                            class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                                 border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
                                     </div>
                                 </div>
@@ -94,7 +97,7 @@
     <div class="row">
         <div class="col-12">
             @foreach($comment->replies as $reply)
-            @livewire('comment-replies', ['comment' => $reply], key(rand() * $reply->id))
+                @livewire('comment-replies', ['comment' => $reply], key(rand() * $reply->id))
             @endforeach
         </div>
     </div>
