@@ -11,6 +11,18 @@ class CommentPolicy
     use HandlesAuthorization;
 
     /**
+     * Determine whether the user can create comments.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Comment  $comment
+     * @return mixed
+     */
+    public function create(User $user, Comment $comment)
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can update the comment.
      *
      * @param  \App\User  $user
