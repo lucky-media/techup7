@@ -75,8 +75,6 @@ class CommentPolicy
         {
             return true;
         }
-        else
-        return false;
     }
     
     /**
@@ -88,11 +86,9 @@ class CommentPolicy
     
     public function flagged(User $user, Comment $comment)
     {
-        if ($comment->approved == 'false')
+        if ($comment->approved == '0')
         {
             return true;
         }
-        else
-        return false;
     }
 }

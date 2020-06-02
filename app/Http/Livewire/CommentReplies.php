@@ -12,6 +12,9 @@ class CommentReplies extends Component
     public $bodyReply;
     public $lessonComment;
 
+    // The listener is used to refresh the component if a comment is deleted or flaged
+    protected $listeners = ['refresh' => '$refresh'];
+    
     public function mount(Comment $comment)
     {
         $this->comment = $comment;
@@ -32,9 +35,11 @@ class CommentReplies extends Component
         // Destroying all of them
         Comment::destroy($array_of_ids);
 
-        $this->emitUp('foo');
+        // Refreshing the component parent, because this comment is deleted
+        $this->emitUp('refresh');
     }
 
+    // This function gets all the children of a comment
     private function getChildren($category){
         $ids = [];
 
@@ -44,7 +49,16 @@ class CommentReplies extends Component
         }
         return $ids;
     }
+    
+    // Flags a comment as inappropriate and the admin choose if he deletes it
+    public function flagInappropriate()
+    {
+        $this->comment->update([
+        'approved' => false,
+        ]);
+    }
 
+    // Replying a comment is done by adding the parent id, which is the id of the comment
     public function replyComment()
     {
         $this->validate([
@@ -59,8 +73,10 @@ class CommentReplies extends Component
             'body' => $this->bodyReply,
         ]);
 
+        // The input field is set to empty
         $this->reset('bodyReply');
         
+        // We refresh the reply component data by calling a refreshed comment
         $this->comment = $this->comment->refresh();
     }
 

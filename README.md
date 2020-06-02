@@ -1,9 +1,11 @@
 # TechUP
 
-The code for the techup.mk website, using Tailwind CSS and Laravel. This website will be used as a free programming platform that will allow independent professional teachers to add free courses for highschool students. The courses will be in Albanian and Macedonian language, which covers interested students from at least three different countries. The platform is currently functional but it's built with Wordpress and many plugins. Now, we are refactoring the platform with a much better approach and greater customization options.
+The code for the techup.mk website, using Tailwind CSS and Laravel. We also make use of the wonderful Livewire framework to add some dynamic functionalities and the TinyMCE editor for adding course content. This website will be used as a free programming platform that will allow independent professional teachers to add free courses for highschool students. The courses will be in Albanian and Macedonian language, which covers interested students from at least three different countries. The platform is currently functional but it's built with Wordpress and many plugins. Now, we are refactoring the platform with a much better approach and greater customization options.
 
 - Laravel 7
+- Livewire
 - Tailwind CSS
+- TinyMCE
 
 # How to install
 - Start by cloning the project

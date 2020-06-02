@@ -38,13 +38,10 @@ Route::patch('/lessons/{lesson}', 'LessonController@update')->name('lessons.upda
 Route::get('/lessons/{lesson}', 'LessonController@show')->name('lessons.show');
 Route::delete('/lessons/{lesson}', 'LessonController@destroy')->name('lessons.destroy')->middleware('role:admin,instructor');
 
-Route::post('/reply/store', 'CommentController@reply')->name('comments.reply');
-Route::post('/comments/store', 'CommentController@store')->name('comments.store');
 Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 Route::put('/comments/{comment}', 'CommentController@approved')->name('comments.approved')->middleware('role:admin');
 Route::get('/comments/{comment}/edit', 'CommentController@edit')->name('comments.edit');
 Route::patch('/comments/{comment}', 'CommentController@update')->name('comments.update');
-Route::patch('/comments/flag/{comment}', 'CommentController@flag')->name('comments.flag');
 Route::get('/comments', 'CommentController@index')->name('comments.index')->middleware('role:admin');
 
 Route::get('/categories/create', 'CategoryController@create')->name('categories.create')->middleware('role:admin');

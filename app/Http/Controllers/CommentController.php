@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Lesson;
 use App\Comment;
 
 use Illuminate\Http\Request;
@@ -68,19 +67,6 @@ class CommentController extends Controller
             'body' => $data['body'],
             ]);
                 
-        return redirect('/lessons/'. $comment->lesson->slug);
-    }
-
-    public function flag(Comment $comment)
-    {         
-        $data = request()->validate([
-            'approved' => 'required',
-        ]);
-        
-        $comment->update([
-        'approved' => $data['approved'],
-        ]);
-
         return redirect('/lessons/'. $comment->lesson->slug);
     }
     

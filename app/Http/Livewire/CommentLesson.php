@@ -11,7 +11,8 @@ class CommentLesson extends Component
     public $lesson;
     public $comments;
 
-    protected $listeners = ['foo' => '$refresh'];
+    // The listener is used to refresh the component if a comment is deleted or flaged
+    protected $listeners = ['refresh' => '$refresh'];
 
     public function mount(Lesson $lesson)
      {
@@ -19,6 +20,7 @@ class CommentLesson extends Component
          $this->comments = $this->lesson->comments;
      }
 
+    // We add only the body and the lesson->id when creating a comment
     public function addComment()
     {
         $data = $this->validate([
@@ -30,8 +32,10 @@ class CommentLesson extends Component
             'body' => $data['body'],
         ]);
 
+        // The input field is set to empty
         $this->reset('body');
         
+        // We refresh the component data by calling a refreshed lesson and comments
         $this->lesson = $this->lesson->refresh();
         $this->comments = $this->lesson->comments;
     }

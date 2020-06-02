@@ -45,20 +45,14 @@
                                         {{-- Comments can be flagged as inappropriate by students or instructors. Admin manages flagged comments. --}}
                                         <div class="col-2">
                                             @can('flagInappropriate', $comment)
-                                            <form action="{{ route('comments.flag', $comment) }}"
-                                                enctype="multipart/form-data" method="post">
-                                                {{ csrf_field() }}
-                                                {{ method_field('PATCH') }}
-                                                <input id="approved" type="text" name="approved" value="false" hidden>
-                                                <button type="submit"
-                                                    class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                                                <button wire:click="flagInappropriate" class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                                                    {{-- onclick="return confirm('{{ __('general.are_you_sure') }}')"> --}}
                                                     {{ __('general.inappropriate') }}</button>
-                                            </form>
                                             @endcan
                                             @can('flagged', $comment)
-                                            <p class="text-gray-500 text-xs underline">
-                                                {{ __('general.flagged') }}
-                                            </p>
+                                                <p class="text-gray-500 text-xs underline">
+                                                    {{ __('general.flagged') }}
+                                                </p>
                                             @endcan
                                         </div>
                                     </div>
