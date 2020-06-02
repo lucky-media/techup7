@@ -24,43 +24,6 @@ class CommentController extends Controller
         return view('comments.index', compact('comments'));
     }
 
-    public function store()
-    {
-        $data = request()->validate([
-            'lesson_id' => 'required',
-            'body' => 'required|min:2',
-        ]);
-
-        $lesson = Lesson::find($data['lesson_id']);
-        
-        $lesson->comments()->create([
-            'user_id' => auth()->user()->id,
-            'body' => $data['body'],
-        ]);
-
-        return back();
-    }
-    
-    // Adding a comment reply requires the parent comment id
-    public function reply()
-    {
-        $data = request()->validate([
-            'body' => 'required|min:2',
-            'lesson_id' => 'required',
-            'comment_id' => 'required',
-        ]);
-        
-        $lesson = Lesson::find($data['lesson_id']);
-        
-        $lesson->comments()->create([
-            'user_id' => auth()->user()->id,
-            'parent_id' => $data['comment_id'],
-            'body' => $data['body'],
-        ]);
-
-        return back();
-    }
-
     // When deleting a comment we also delete the comment replies
     public function destroy($id){
         // Getting the parent category

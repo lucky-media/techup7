@@ -11,6 +11,8 @@ class CommentLesson extends Component
     public $lesson;
     public $comments;
 
+    protected $listeners = ['foo' => '$refresh'];
+
     public function mount(Lesson $lesson)
      {
          $this->lesson = $lesson;

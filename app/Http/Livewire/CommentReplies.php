@@ -17,6 +17,33 @@ class CommentReplies extends Component
         $this->comment = $comment;
     }
     
+    // When deleting a comment we also delete the comment replies
+    public function deleteComment()
+    {
+        // Getting the parent category
+        $parent = Comment::findOrFail($this->comment->id);
+        
+        // Getting all children ids
+        $array_of_ids = $this->getChildren($parent);
+        
+        // Appending the parent category id
+        array_push($array_of_ids, $this->comment->id);
+        
+        // Destroying all of them
+        Comment::destroy($array_of_ids);
+
+        $this->emitUp('foo');
+    }
+
+    private function getChildren($category){
+        $ids = [];
+
+        foreach ($category->children as $cat) {
+            $ids[] = $cat->id;
+            $ids = array_merge($ids, $this->getChildren($cat));
+        }
+        return $ids;
+    }
 
     public function replyComment()
     {
