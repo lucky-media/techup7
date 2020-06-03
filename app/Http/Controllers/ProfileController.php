@@ -25,7 +25,9 @@ class ProfileController extends Controller
             return view('profiles.show', compact('user', 'courses'));
         }
         else
-        return view('index');
+        {
+            return view('profiles.show', compact('user'));
+        }
     }
 
     public function edit(User $user)

@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         // We create the superadmin, an instructor and a student for testing purposes
         // The password for all of them is "secret"
+
         $users = [
             [
                 'name' => 'Admin',
@@ -36,19 +37,11 @@ class UserSeeder extends Seeder
                 'username' => 'student',
                 'role' => 'student',
                 'password' => Hash::make('secret'),
-            ],
+            ]
         ];
 
-        // We insert the three above mentioned users
-        User::insert($users);
-
-        // We get the created instructor
-        $instructor = User::find(2);
-
-        // We create a profile page for that instructor
-        $instructor->profile()->create([
-            'bio' => 'My goal is to help my society evolve and develop in every aspect.',
-            'image' => asset('storage/no_image.jpg')
-        ]);
+        foreach ($users as $user){
+            factory(App\User::class)->create($user);
+        }
     }
 }
