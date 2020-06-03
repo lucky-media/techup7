@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class, 'lesson_user');
+        return $this->belongsToMany(Lesson::class, 'lesson_user')->distinct();
     }
 
     public function hasRole($role)

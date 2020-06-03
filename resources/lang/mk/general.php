@@ -78,5 +78,7 @@ return [
     'both' => 'Обата',
     'completed_lesson' => 'Лекцијата е завршена',
     'uncompleted_lesson' => 'Обележи како Завршено',
+    'courses_created_by' => 'Курсеви креирани од',
+    'courses_attended_by' => 'Курсеви потсетени од',
     
 ];

@@ -21,8 +21,7 @@ class ProfileController extends Controller
     {   
         //This will redirect to home if the requested user profile is not that of an instructor
         if ($user->role == 'instructor'){
-            $courses = Course::where("user_id", $user->id)->latest()->paginate(3);
-            return view('profiles.show', compact('user', 'courses'));
+            return view('profiles.show', compact('user'));
         }
         else
         {

@@ -78,5 +78,7 @@ return [
     'both' => 'Both',
     'completed_lesson' => 'Lesson Completed',
     'uncompleted_lesson' => 'Lesson not Completed',
+    'courses_created_by' => 'Courses created by',
+    'courses_attended_by' => 'Courses attended by',
     
 ];

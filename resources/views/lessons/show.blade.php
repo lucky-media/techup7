@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-6">
             <div class="text-sm">
-                {{ __('general.by') }} <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
+                {{ __('general.by') }} <a href="{{ route('profiles.show', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
                 , {{ __('general.last_update_on') }} {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
