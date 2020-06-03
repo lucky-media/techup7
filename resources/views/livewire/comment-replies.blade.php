@@ -64,7 +64,6 @@
                         </div>
                     </div>
 
-                    @can('create', $comment)
                     {{-- Add a reply --}}
                     <div class="col">
                         <form wire:submit.prevent="replyComment">
@@ -78,15 +77,21 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <button type="submit"
-                                            class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
-                                                border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
+                                        @auth
+                                            <button type="submit"
+                                                    class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                    border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
+                                        @endauth
+                                        @guest
+                                            <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                        border border-orange-500 hover:border-transparent rounded"
+                                                href="{{ route('login') }}">{{ __('general.login') }}</a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    @endcan
 
                 </div>
             </div>

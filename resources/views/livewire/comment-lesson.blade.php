@@ -21,8 +21,15 @@
                                 <div>@error('body') <span class="error">{{ $message }}</span> @enderror</div>
                             </div>
                             <div class="col-3">
-                                <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
-                                border border-orange-500 hover:border-transparent rounded">{{ __('general.add_new_comment') }}</button>
+                                @auth
+                                    <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                    border border-orange-500 hover:border-transparent rounded">{{ __('general.add_new_comment') }}</button>
+                                @endauth
+                                @guest
+                                    <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                border border-orange-500 hover:border-transparent rounded"
+                                        href="{{ route('login') }}">{{ __('general.login') }}</a>
+                                @endguest
                             </div>
                     </div>
                 </form>
