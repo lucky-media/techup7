@@ -24,6 +24,36 @@ class CourseLessons extends Component
             $this->completedLessons[] = $lesson->id;
        }
     }
+
+    // This function arranges the lessons of a course by moving the lesson down
+    public function arrangeDown($id, $position)
+    {        
+        $nextLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position+1)->first();
+        $currentLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position)->first();
+        
+        $nextLesson->position = $position;
+        $currentLesson->position = $position+1;
+
+        $nextLesson->save();
+        $currentLesson->save();
+
+        $this->course = Course::find($currentLesson->course->id);
+    }
+
+    // This function arranges the lessons of a course by moving the lesson up
+    public function arrangeUp($id, $position)
+    {        
+        $previousLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position-1)->first();
+        $currentLesson = Lesson::where('course_id', '=', $id)->where('position', '=', $position)->first();
+        
+        $previousLesson->position = $position;
+        $currentLesson->position = $position-1;
+
+        $previousLesson->save();
+        $currentLesson->save();
+
+        $this->course = Course::find($currentLesson->course->id);
+    }
     
     // we get the student owner of the current profile
     public function mount(Lesson $lesson)

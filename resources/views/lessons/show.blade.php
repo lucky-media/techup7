@@ -65,12 +65,9 @@
         <div class="col-5 mb-10">
             <a href="{{ route('courses.show', $lesson->course->slug) }}">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
-            </a>
-            
-            
-            {{-- All lessons --}}
-            <livewire:course-lessons :lesson="$lesson">
-
+            </a>            
+                {{-- All lessons --}}
+                <livewire:course-lessons :lesson="$lesson">
             <br>
             @can('delete', $lesson)
             <div>
