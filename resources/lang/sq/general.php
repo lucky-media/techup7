@@ -76,5 +76,7 @@ return [
     'there_is_no_lesson' => 'Nuk ka mësim me atë titull ose përmbajtje.',
     'role' => 'Roli',
     'both' => 'Të dyja',
+    'completed_lesson' => 'Mësim i përfunduar',
+    'uncompleted_lesson' => 'Shëno të përfunduar mësimin',
     
 ];

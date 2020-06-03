@@ -76,5 +76,7 @@ return [
     'there_is_no_lesson' => 'Нема лекција со тој наслов или содржина.',
     'role' => 'Улога',
     'both' => 'Обата',
+    'completed_lesson' => 'Лекцијата е завршена',
+    'uncompleted_lesson' => 'Обележи како Завршено',
     
 ];

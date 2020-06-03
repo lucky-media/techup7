@@ -15,15 +15,15 @@
 {{-- The owner can edit or delete the lesson --}}
 <div class="container my-4">
     <div class="row">
-        <div class="col-8">
+        <div class="col-6">
             <div class="text-sm">
                 {{ __('general.by') }} <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
                 , {{ __('general.last_update_on') }} {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-6">
             <div class="row">
-                <div class="col-6 px-4">
+                <div class="col-4 px-4">
                 @can('update', $lesson)    
                     <form action="{{ route('lessons.edit', $lesson) }}" enctype="multipart/form-data" method="get">
                             <button type="submit" 
@@ -33,7 +33,7 @@
                 @endcan
                 </div>
 
-                <div class="col-6 px-4">
+                <div class="col-4 px-4">
                 @can('delete', $lesson)
                     <form action="{{ route('lessons.destroy', $lesson) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
@@ -43,6 +43,10 @@
                             {{ __('general.delete') }}</button>
                     </form>
                 @endcan
+                </div>
+                <div class="col-4 px-4">
+                    {{-- Mark lesson as completed --}}
+                    <livewire:completed-lessons :lesson="$lesson">
                 </div>
             </div>
         </div>

@@ -76,5 +76,7 @@ return [
     'there_is_no_lesson' => 'There is no lesson with that title or body.',
     'role' => 'Role',
     'both' => 'Both',
+    'completed_lesson' => 'Lesson Completed',
+    'uncompleted_lesson' => 'Lesson not Completed',
     
 ];

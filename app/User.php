@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_user');
+    }
+
     public function hasRole($role)
     {
         if ($role == $this->role)
