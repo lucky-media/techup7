@@ -76,7 +76,7 @@ class CommentReplies extends Component
         // The input field is set to empty
         $this->reset('bodyReply');
         
-        // We refresh the reply component data by calling a refreshed comment
+        // We refresh the reply component data by calling a refreshed comment collection
         $this->comment = $this->comment->refresh();
     }
 

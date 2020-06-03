@@ -33,6 +33,9 @@ class CompletedLessons extends Component
         $this->lesson->users()->toggle(auth()->user()->id);
         
         $this->completed = $this->getCompleted();
+
+        // Refreshing the component courseLessons after we mark this lesson as completed
+        $this->emit('refreshList');
     }
 
     public function render()

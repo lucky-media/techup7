@@ -11,11 +11,17 @@ class SearchLessons extends Component
     public $searchTerm;
     public $lessons;
     public $course;
+    public $completedLessons = [];
 
     public function mount($lessons, $course)
     {
         $this->lessons = $lessons;
         $this->course = $course;
+
+        // Get the id of all the lessons that are marked as complete by current user
+        foreach (auth()->user()->lessons as $lesson) {
+            $this->completedLessons[] = $lesson->id;
+       }
     }
 
     // This function arranges the lessons of a course by moving the lesson down
