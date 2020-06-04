@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
 |
 | 
 | The User is created with a fake name, username and a unique email
-| The role is by default set as student, and the password is set as "secret"
+| The role is randomly set as student or instructor, and the password is set as "secret"
 | 
 */
 $factory->define(User::class, function (Faker $faker) {
@@ -25,7 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'username' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'role' => 'student',
+        'role' => $faker->randomElement(['student', 'instructor']),
         'email_verified_at' => now(),
         'password' => Hash::make('secret'), // secret
         'remember_token' => Str::random(10),
