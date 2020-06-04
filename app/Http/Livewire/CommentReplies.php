@@ -4,20 +4,20 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Comment;
-use App\Lesson;
 
 class CommentReplies extends Component
 {
     public $comment;
     public $bodyReply;
-    public $lessonComment;
+    public $commentable;
 
-    // The listener is used to refresh the component if a comment is deleted or flaged
+    // The listener is used to refresh the component if a comment is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
     
     public function mount(Comment $comment)
     {
         $this->comment = $comment;
+        $this->commentable = $comment->commentable;
     }
     
     // When deleting a comment we also delete the comment replies
@@ -58,16 +58,14 @@ class CommentReplies extends Component
         ]);
     }
 
-    // Replying a comment is done by adding the parent id, which is the id of the comment
+    // Replying a comment is done by adding the parent id
     public function replyComment()
     {
         $this->validate([
             'bodyReply' => 'required|min:2',
         ]);
-        
-        $this->lessonComment = Lesson::find($this->comment->commentable_id);
-        
-        $this->lessonComment->comments()->create([
+                
+        $this->commentable->comments()->create([
             'user_id' => auth()->user()->id,
             'parent_id' => $this->comment->id,
             'body' => $this->bodyReply,

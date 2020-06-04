@@ -28,13 +28,6 @@ class Lesson extends Model
         return $this->hasMany(Comment::class, 'commentable_id', 'id');
     }
 
-    public function commentsCount()
-    {
-        $comments = Comment::where('commentable_id', '=', $this->id)->get();
-
-        return $comments->count();
-    }
-
     public function getRouteKeyName()
     {
         return 'slug';

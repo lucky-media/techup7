@@ -8,9 +8,9 @@ class Comment extends Model
 {
     protected $guarded = [];
     
-    public function lesson()
+    public function commentable()
     {
-        return $this->belongsTo(Lesson::class, 'commentable_id', 'id');
+        return $this->morphTo();
     }
 
     public function user()

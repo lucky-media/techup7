@@ -52,7 +52,7 @@ class CommentController extends Controller
     
     public function edit(Comment $comment)
     {        
-        $this->authorize('update', $comment);
+        $this->authorize('update', $comment);    
         
         return view('comments.edit', compact('comment'));
     }
@@ -66,8 +66,17 @@ class CommentController extends Controller
         $comment->update([
             'body' => $data['body'],
             ]);
-                
-        return redirect('/lessons/'. $comment->lesson->slug);
+
+        $commentable = $comment->commentable;
+
+        if (class_basename(get_class($commentable)) == 'Lesson'){    
+            return redirect('/lessons/'. $comment->lesson->slug);
+        }
+        else
+        {
+            return redirect('/courses/'. $comment->course->slug);
+        }
+        
     }
     
     public function approved(Comment $comment)
