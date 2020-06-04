@@ -2,22 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use App\Course;
 use App\Lesson;
 
-class SearchLessons extends Component
+class CourseLessons extends Component
 {
-    public $searchTerm;
-    public $lessons;
+    public $lesson;
     public $course;
     public $completedLessons = [];
 
-    public function mount($lessons, $course)
-    {
-        $this->lessons = $lessons;
-        $this->course = $course;
+    // The listener is used to refresh the component if a lesson is marked as complete
+    protected $listeners = ['refreshList' => 'refreshList'];
 
+    public function refreshList(){
+        $this->course = Course::find($this->course->id);
+        $this->completedLessons = [];
+        
         // Get the id of all the lessons that are marked as complete by current user
         foreach (auth()->user()->lessons as $lesson) {
             $this->completedLessons[] = $lesson->id;
@@ -36,7 +37,7 @@ class SearchLessons extends Component
         $nextLesson->save();
         $currentLesson->save();
 
-        $this->lessons = Lesson::where('course_id', $id);
+        $this->course = Course::find($currentLesson->course->id);
     }
 
     // This function arranges the lessons of a course by moving the lesson up
@@ -51,19 +52,24 @@ class SearchLessons extends Component
         $previousLesson->save();
         $currentLesson->save();
 
-        $this->lessons = Lesson::where('course_id', $id);
+        $this->course = Course::find($currentLesson->course->id);
+    }
+    
+    // we get the student owner of the current profile
+    public function mount(Lesson $lesson)
+    {
+        $this->lesson = $lesson;
+
+        $this->course = Course::find($lesson->course->id);
+        
+        // Get the id of all the lessons that are marked as complete by current user
+        foreach (auth()->user()->lessons as $lesson) {
+            $this->completedLessons[] = $lesson->id;
+       }
     }
 
     public function render()
-    {
-        $this->lessons = Lesson::query()
-                                ->where('course_id', "{$this->course->id}")
-                                ->where(function($query) {
-                                    $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
-                                          ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
-                                })
-                                ->get();
-
-        return view('livewire.search-lessons');
+    {                 
+        return view('livewire.course-lessons');
     }
 }

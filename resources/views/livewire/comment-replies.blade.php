@@ -2,7 +2,7 @@
     <div class="row no-gutters">
         <div class="px-0">
             {{-- Display profile image for instructors, or display no_image for students --}}
-            <img src="{{ $comment->user->profile()->exists() ? asset($comment->user->profile->profileImage()) : asset('/storage/no_image.jpg') }}"
+            <img src="{{ asset($comment->user->profile->profileImage())}}"
                 alt="profile image" class="rounded-full w-12 h-12">
         </div>
         <div class="col-10">
@@ -64,7 +64,6 @@
                         </div>
                     </div>
 
-                    @can('create', $comment)
                     {{-- Add a reply --}}
                     <div class="col">
                         <form wire:submit.prevent="replyComment">
@@ -78,15 +77,21 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <button type="submit"
-                                            class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
-                                                border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
+                                        @auth
+                                            <button type="submit"
+                                                    class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                    border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
+                                        @endauth
+                                        @guest
+                                            <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                        border border-orange-500 hover:border-transparent rounded"
+                                                href="{{ route('login') }}">{{ __('general.login') }}</a>
+                                        @endguest
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    @endcan
 
                 </div>
             </div>
@@ -97,7 +102,7 @@
     <div class="row">
         <div class="col-12">
             @foreach($comment->replies as $reply)
-                @livewire('comment-replies', ['comment' => $reply], key(rand() * $reply->id))
+                <livewire:comment-replies :comment="$reply" :key="rand()*$reply->id">
             @endforeach
         </div>
     </div>

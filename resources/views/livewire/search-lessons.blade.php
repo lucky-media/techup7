@@ -19,7 +19,12 @@
                     @forelse($lessons->sortBy('position') as $lesson)
                         <div class="col-11">
                                 <a href="{{ route('lessons.show', $lesson->slug) }}">
-                                    <h2 class="text-black bg-gray-100 px-8 py-6 border-b-2 border-white">{{ $lesson->title }}</h2>
+                                    <h2 class="text-black bg-gray-100 px-8 py-6 border-b-2 border-white">
+                                        {{-- Checks if this lesson is completed --}}
+                                        @if (in_array($lesson->id, $this->completedLessons))
+                                            &#10004;
+                                        @endif
+                                        {{ $lesson->title }}</h2>
                                 </a>
                         </div>
                         @can('create', $course)

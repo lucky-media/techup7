@@ -37,6 +37,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+     /**
+     * Create a profile automatically when creating a user
+     *
+     * @var array
+     */
+    protected static function boot(){
+        
+        parent::boot();
+        
+        static::created(function ($user) {
+            $user->profile()->create([
+                'bio' => 'My goal is to help my society evolve and develop in every aspect.',
+                'image' => asset('storage/no_image.jpg')
+            ]);
+        });
+    }
+
     public function courses()
     {
         return $this->hasMany(Course::class)->orderBy('created_at', 'DESC');
@@ -50,6 +67,11 @@ class User extends Authenticatable
     public function comment()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class, 'lesson_user')->distinct();
     }
 
     public function hasRole($role)

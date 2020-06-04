@@ -48,7 +48,7 @@
                 <tbody>
                     @foreach($instructors as $instructor)
                         <tr>
-                            <td class="px-4 py-2"><a href="{{ route('profiles.index', $instructor) }}">{{ $instructor->name }}<a></td>
+                            <td class="px-4 py-2"><a href="{{ route('profiles.show', $instructor) }}">{{ $instructor->name }}<a></td>
                             <td class="px-4 py-2">{{ $instructor->role }}</td>
                             <td class="px-4 py-2">
                                 <form action="{{ route('admin.edit', $instructor) }}" enctype="multipart/form-data" method="get">
@@ -85,7 +85,7 @@
                 <tbody>
                     @foreach($students as $student)
                         <tr>
-                            <td class="px-4 py-2">{{ $student->name }}</td>
+                            <td class="px-4 py-2"><a href="{{ route('profiles.show', $student) }}">{{ $student->name }}<a></td>
                             <td class="px-4 py-2">{{ $student->role }}</td>
                             <td class="px-4 py-2">
                                 <form action="{{ route('admin.edit', $student) }}" enctype="multipart/form-data" method="get">

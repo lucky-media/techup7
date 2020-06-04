@@ -18,6 +18,11 @@ class Lesson extends Model
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'lesson_user');
+    }
+
     public function children()
     {
         return $this->hasMany(Comment::class, 'commentable_id', 'id');

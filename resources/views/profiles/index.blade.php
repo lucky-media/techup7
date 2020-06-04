@@ -12,6 +12,6 @@
     </div>
 </div>
 
-@livewire('search-instructors')
+<livewire:search-instructors>
 
 @endsection

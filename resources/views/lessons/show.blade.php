@@ -15,15 +15,15 @@
 {{-- The owner can edit or delete the lesson --}}
 <div class="container my-4">
     <div class="row">
-        <div class="col-8">
+        <div class="col-6">
             <div class="text-sm">
-                {{ __('general.by') }} <a href="{{ route('profiles.index', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
+                {{ __('general.by') }} <a href="{{ route('profiles.show', $lesson->course->user->id) }}" class="text-blue-500">{{ $lesson->course->user->name }}</a>
                 , {{ __('general.last_update_on') }} {{ $lesson->updated_at->format('M Y') }}
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-6">
             <div class="row">
-                <div class="col-6 px-4">
+                <div class="col-4 px-4">
                 @can('update', $lesson)    
                     <form action="{{ route('lessons.edit', $lesson) }}" enctype="multipart/form-data" method="get">
                             <button type="submit" 
@@ -33,7 +33,7 @@
                 @endcan
                 </div>
 
-                <div class="col-6 px-4">
+                <div class="col-4 px-4">
                 @can('delete', $lesson)
                     <form action="{{ route('lessons.destroy', $lesson) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
@@ -43,6 +43,10 @@
                             {{ __('general.delete') }}</button>
                     </form>
                 @endcan
+                </div>
+                <div class="col-4 px-4">
+                    {{-- Mark lesson as completed --}}
+                    <livewire:completed-lessons :lesson="$lesson">
                 </div>
             </div>
         </div>
@@ -61,18 +65,9 @@
         <div class="col-5 mb-10">
             <a href="{{ route('courses.show', $lesson->course->slug) }}">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $lesson->course->title }}</h2>
-            </a>
-            
-            @foreach ($lesson->course->lesson->sortBy('position') as $lessons)
-                @if ($lessons->id == $lesson->id)
-                        <h2 class="text-white bg-gray-600 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>  
-                @else
-                    <a href="{{ route('lessons.show', $lessons) }}">
-                        <h2 class="text-black bg-gray-100 px-8 py-5 border-b-2 border-white">{{ $lessons->title }}</h2>    
-                    </a>
-                @endif
-            @endforeach
-
+            </a>            
+                {{-- All lessons --}}
+                <livewire:course-lessons :lesson="$lesson">
             <br>
             @can('delete', $lesson)
             <div>
@@ -88,6 +83,6 @@
 </div>
 
 {{-- Comments --}}
-@livewire('comment-lesson', ['lesson' => $lesson]))
+<livewire:comment-lesson :lesson="$lesson">
 
 @endsection

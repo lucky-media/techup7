@@ -13,6 +13,6 @@
     </div>
 </div>
 
-@livewire('search-courses')
+<livewire:search-courses>
 
 @endsection

@@ -18,7 +18,7 @@
 
     @stack('styles')
     
-    @livewireStyles
+    <livewire:styles>
 
 </head>
 <body class="font-sans text-black antialiased flex flex-col">
@@ -33,6 +33,6 @@
         @include('partials.footer')
     </footer> 
     
-    @livewireScripts
+    <livewire:scripts>
 </body>
 </html>

@@ -25,6 +25,6 @@ class CourseSeeder extends Seeder
                             $lesson->comments()->saveMany(factory(App\Comment::class, 3)->make(['user_id' => $course->user_id]));
                         });
                 });
-        });  
+        });
     }
 }

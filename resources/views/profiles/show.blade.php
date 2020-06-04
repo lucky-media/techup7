@@ -16,14 +16,17 @@
 <div class="container my-20">
     <div class="row items-center">
         <div class="col-4">
-            <img src="{{ asset($user->profile->profileImage()) ?? asset('/svg/techup.svg') }}" class="rounded-lg">
+            <img src="{{ asset($user->profile->profileImage()) }}" class="rounded-lg">
         </div>
         <div class="col-6">
             <h2 class="font-semibold text-2xl text-orange-500 py-2">{{ $user->name }}</h2>
             <p class="py-1 text-justify"><strong>{{ __('general.bio') }}:</strong> {{ $user->profile->bio ?? '' }}</p>
             <p class="py-1"><strong>{{ __('general.email') }}:</strong> {{ $user->email }}</p>
             <p class="py-1"><strong>{{ __('general.role') }}:</strong> {{ $user->role }}</p>
-            <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $user->courses->count() }}</p>
+            {{-- Display total courses only for instructors --}}
+            @if ($user->role === 'instructor')
+                <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $user->courses->count() }}</p>
+            @endif
             @can('update', $user->profile)
                 <form action="{{ route('profiles.edit', $user) }}" enctype="multipart/form-data" method="get">
                         <button type="submit"
@@ -53,8 +56,21 @@
         @endcan
     </div>
 
-    @livewire('search-courses-by-instructor', ['user' => $user])
-
+    @if ($user->role === 'student')
+        <div class="container my-12 mx-auto px-4 md:px-12">
+            <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                <h3>{{ __('general.courses_attended_by') }} <strong>{{$user->name}}</strong></h3>
+            </div>
+        </div>
+        <livewire:search-courses-by-student :user="$user">
+    @else
+        <div class="container my-12 mx-auto px-4 md:px-12">
+            <div class="flex flex-wrap -mx-1 lg:-mx-4">
+                <h3>{{ __('general.courses_created_by') }} <strong>{{$user->name}}</strong></h3>
+            </div>
+        </div>
+        <livewire:search-courses-by-instructor :user="$user">
+    @endif
 </div>
 
 @endsection
