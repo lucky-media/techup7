@@ -39,7 +39,9 @@
     <div class="row justify-center">
         @foreach($posts as $post)
         <div class="lg:col-8 mt-8">
-            <div class="py-4 px-8 bg-white shadow-lg rounded-lg my-20">
+            <div class="py-4 px-8 shadow-lg rounded-lg my-20
+            {{ ($post->status == 1) ? 'bg-orange-500' : 'bg-white' }}
+            ">
                 <div class="flex float-right -mt-16">
                     <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
                         src="{{ asset($post->user->profile->profileImage()) }}">
@@ -57,7 +59,7 @@
                 <div class="flex justify-between items-center mt-4">
                     <div class="flex items-end mt-4">                        
                         <a href="{{ route('profiles.show', $post->user->id) }}" class="ml-4 text-xl font-medium text-indigo-500">
-                            {{ Str::limit($post->user->name, 20) }}
+                            {{ Str::limit($post->user->name, 15) }}
                         </a>
                         <p class="ml-8 text-gray-600">{{ $post->created_at->formatLocalized('%b %Y') }}</p>
                         <p class="ml-8 text-gray-600">Total comments: {{ $post->commentsCount() }}</p>

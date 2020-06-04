@@ -10,7 +10,7 @@ $factory->define(Lesson::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
         'slug' => $faker->slug,
-        'body' => $faker->text,
+        'body' => $faker->paragraph($nbSentences = 5, $variableNbSentences = true),
         'position' => 0,
     ];
 });
