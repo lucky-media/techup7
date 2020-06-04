@@ -56,6 +56,14 @@ Route::get('/profiles/{user}', 'ProfileController@show')->name('profiles.show');
 Route::patch('/profiles/{user}', 'ProfileController@update')->name('profiles.update');
 Route::get('/instructors', 'ProfileController@index')->name('profiles.index');
 
-Route::get('/blog', 'HomeController@blog')->name('blog');
+Route::get('/posts/create', 'PostController@create')->name('posts.create');
+Route::post('/posts/store', 'PostController@store')->name('posts.store');
+Route::post('/posts/image/upload', 'PostController@uploadImage')->name('posts.upload');
+Route::get('/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+Route::patch('/posts/{post}', 'PostController@update')->name('posts.update');
+Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
+Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
+Route::get('/blog', 'PostController@index')->name('posts.index');
+
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/', 'HomeController@index')->name('index');

@@ -17,7 +17,7 @@
             <a class="{{ Request::path() === 'instructors' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
                 href="{{ route('profiles.index') }}">{{ __('general.instructors') }}</a>
             <a class="{{ Request::path() === 'blog' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out mr-6 hover:text-purple-500"
-                href="{{ route('blog') }}">{{ __('general.blog') }}</a>
+                href="{{ route('posts.index') }}">{{ __('general.blog') }}</a>
             <a class="{{ Request::path() === 'contact' ? 'font-bold' : 'font-medium' }} transition duration-200 ease-in-out hover:text-purple-500"
                 href="{{ route('contact') }}">{{ __('general.contact') }}</a>
         </div>
