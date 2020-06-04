@@ -44,33 +44,37 @@
         <div class="col-4 hidden md:flex flex-row items-center justify-end">
             <!-- Authentication Links -->
             @guest
-            <a class="transition duration-200 ease-in-out bg-blue-500 text-white ml-2 py-2 px-6 rounded hover:bg-gray-600"
-                href="{{ route('login') }}">{{ __('general.login') }}</a>
+                <a class="transition duration-200 ease-in-out bg-blue-500 text-white ml-2 py-2 px-6 rounded hover:bg-gray-600"
+                    href="{{ route('login') }}">{{ __('general.login') }}</a>
             @endguest
             @auth
-            <div
-                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
-                {{ Auth::user()->username }} 
-            </div>
+                <div
+                    class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
+                    {{ Auth::user()->username }} 
+                </div>
 
             {{-- The admin can view the dashboard for managing users, comments and categories --}}
             @if (Auth::user()->role == 'admin')
-            <div
-                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
-                <a href="{{ route('admin.index') }}">{{ __('general.dashboard') }}</a>
-            </div>
+                <div
+                    class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-2 px-4 py-2 hover:text-purple-500">
+                    <a href="{{ route('admin.index') }}">{{ __('general.dashboard') }}</a>
+                </div>
+            
+            {{-- The users or instructors can view their profile page --}}
+            @else
+                <div
+                    class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
+                    <a href="{{ route('profiles.show', Auth::user()->id) }}">{{ __('general.profile') }}</a>
+                </div>
             @endif
 
-            <div
-                class="transition duration-200 bg-gray-200 ease-in-out font-medium mr-4 px-4 py-2 hover:text-purple-500">
-                <a href="{{ route('profiles.show', Auth::user()->id) }}">{{ __('general.profile') }}</a>
-            </div>
-            <div class="transition duration-200 bg-gray-200 ease-in-out font-medium px-4 py-2 hover:text-purple-500">
-                <form action="{{ route('logout') }}" method="POST">
-                    <button type="submit">{{ __('general.logout') }}</button>
-                    @csrf
-                </form>
-            </div>
+                {{-- Display logout button for all logged in users --}}
+                <div class="transition duration-200 bg-gray-200 ease-in-out font-medium px-4 py-2 hover:text-purple-500">
+                    <form action="{{ route('logout') }}" method="POST">
+                        <button type="submit">{{ __('general.logout') }}</button>
+                        @csrf
+                    </form>
+                </div>
             @endauth
         </div>
     </div>

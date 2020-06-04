@@ -19,9 +19,9 @@ class ProfileController extends Controller
 
     public function show(User $user)
     {   
-        //This will redirect to home if the requested user profile is not that of an instructor
-        if ($user->role == 'instructor'){
-            return view('profiles.show', compact('user'));
+        //This will return back if the requested user profile is for the admin
+        if ($user->role == 'admin'){
+            return back();
         }
         else
         {
