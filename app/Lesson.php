@@ -32,4 +32,13 @@ class Lesson extends Model
     {
         return 'slug';
     }
+
+    public function commentsCount()	
+    {	
+        $comments = Comment::where('commentable_id', '=', $this->id)
+                            ->where('commentable_type', '=', 'App\Lesson')
+                            ->get();	
+
+        return $comments->count();	
+    }
 }

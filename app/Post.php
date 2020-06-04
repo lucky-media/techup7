@@ -13,7 +13,7 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bestComment()
+    public function bestAnswer()
     {
         return $this->belongsTo(Comment::class);
     }
@@ -31,5 +31,14 @@ class Post extends Model
     public function children()
     {
         return $this->hasMany(Comment::class, 'commentable_id', 'id');
+    }
+
+    public function commentsCount()	
+    {	
+        $comments = Comment::where('commentable_id', '=', $this->id)
+                            ->where('commentable_type', '=', 'App\Post')
+                            ->get();	
+
+        return $comments->count();
     }
 }
