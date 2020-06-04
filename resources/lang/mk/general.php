@@ -70,6 +70,7 @@ return [
     'last_update_on' => 'последна промена на',
     'there_are_no_lessons_yet' => 'Сеуште нема лекции.',
     'add_new_lesson' => 'Додај нова лекција',
+    'add_new_post' => 'Додај ново прашање',
     'meet_our_instructors' => 'Запознај се со инструкторите',
     'there_is_no_instructor' => 'Нема инструктор со тоа име',
     'there_is_no_course' => 'Нема курс со тој наслов или содржина.',

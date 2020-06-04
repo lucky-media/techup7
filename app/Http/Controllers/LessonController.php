@@ -109,8 +109,8 @@ class LessonController extends Controller
         $this->middleware('role');
         
         $data = request()->validate([
-            'title' => '',
-            'body' => '',
+            'title' => 'required',
+            'body' => 'required',
         ]);
 
         // We create a slug from the title

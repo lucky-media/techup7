@@ -70,6 +70,7 @@ return [
     'last_update_on' => 'last update on',
     'there_are_no_lessons_yet' => 'There are no lessons yet.',
     'add_new_lesson' => 'Add new lesson',
+    'add_new_post' => 'Add new question',
     'meet_our_instructors' => 'Meet our Instructors',
     'there_is_no_instructor' => 'There is no instructor with that name',
     'there_is_no_course' => 'There is no course with that title or body.',

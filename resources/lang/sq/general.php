@@ -70,6 +70,7 @@ return [
     'last_update_on' => 'ndryshimi i fundit në',
     'there_are_no_lessons_yet' => 'Ende nuk ka mësime.',
     'add_new_lesson' => 'Shto një mësim',
+    'add_new_post' => 'Shto një pyetje',
     'meet_our_instructors' => 'Takohuni me instruktorët tanë',
     'there_is_no_instructor' => 'Nuk ka instruktor me atë emër',
     'there_is_no_course' => 'Nuk ka kurs me atë titull ose përmbajtje.',

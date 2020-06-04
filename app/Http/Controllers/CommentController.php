@@ -18,7 +18,7 @@ class CommentController extends Controller
     {
         $this->middleware('role');
         
-        $comments = Comment::where('approved', '=', 'false')->paginate(10);
+        $comments = Comment::where('approved', '=', false)->paginate(10);
         
         return view('comments.index', compact('comments'));
     }
@@ -82,13 +82,9 @@ class CommentController extends Controller
     public function approved(Comment $comment)
     {
         $this->middleware('role');
-        
-        $data = request()->validate([
-            'approved' => 'required',
-        ]);
     
         $comment->update([
-            'approved' => $data['approved'],
+            'approved' => true,
         ]);
         
         return redirect('/comments');

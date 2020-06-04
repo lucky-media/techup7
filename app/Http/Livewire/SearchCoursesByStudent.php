@@ -29,23 +29,29 @@ class SearchCoursesByStudent extends Component
        }
     }
 
-    public function switchLanguage($val = NULL){
-        $this->lang = $val;
-    }
-
     /*  Search courses where the student profile owner has completed at least one lesson
      *  Filter by language, or the query matching the title or body
      */
-    public function render()
-    {                 
-        $this->courses = Course::whereIn('id', $this->courseIds)
+    public function getCoursesById(){
+        $this->courses = Course::query()
+                                ->whereIn('id', $this->courseIds)
                                 ->where('lang', 'LIKE', "%". ($this->lang) ? $this->lang : '' . "%")
                                 ->where(function($query) {
                                     $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
-                                          ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
+                                        ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
                                 ->orderBy('created_at', 'desc')
-                                ->paginate($this->pagination);                       
+                                ->paginate($this->pagination);
+    }
+
+    public function switchLanguage($val = NULL){
+        $this->lang = $val;
+        $this->getCoursesById();
+    }
+
+    public function render()
+    {
+        $this->getCoursesById();                     
 
         return view('livewire.search-courses', [
             'courses' => $this->courses,
