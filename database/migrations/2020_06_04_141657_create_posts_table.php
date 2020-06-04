@@ -21,13 +21,12 @@ class CreatePostsTable extends Migration
             $table->longText('body');
             $table->integer('status')->default(false);
             $table->string('lang', 3);
-            $table->unsignedBigInteger('comment_id')->nullable();
+            $table->integer('best_answer')->nullable();
             $table->timestamps();
 
             $table->index('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('comment_id')->references('id')->on('comments');
         });
     }
 
