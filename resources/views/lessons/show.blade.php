@@ -82,7 +82,15 @@
     </div>
 </div>
 
-{{-- Comments --}}
-<livewire:comment-lesson :lesson="$lesson">
+{{-- Comments section. We can see total comments count and add a new comment --}}
+<div class="container mt-10">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $lesson->comments->count() }})</h2>
+        </div>
+    </div>
+</div>
+
+<livewire:add-comment :commentable="$lesson">
 
 @endsection
