@@ -44,13 +44,11 @@
         @can('create', $user->profile)
         <div class="col-3">
             <div class="my-10">
-
-                    <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
-                            <button type="submit"
-                            class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                            {{ __('general.add_new_course') }}</button>
-                    </form>
-
+                <form action="{{ route('courses.create') }}" enctype="multipart/form-data" method="get">
+                        <button type="submit"
+                        class="transition duration-200 ease-in-out bg-blue-500 font-bold text-white py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
+                        {{ __('general.add_new_course') }}</button>
+                </form>
             </div>
         </div>
         @endcan
