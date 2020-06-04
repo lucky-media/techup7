@@ -29,21 +29,20 @@
             <div class="col-6 my-4">
                     <div class="flex flex-row items-center mb-4">
                         <div>
-                            {{-- We have a link to the lesson where the comment is posted --}}
-                            <a href="{{ route('lessons.show', $comment->lesson->slug) }}">
-                                <h2 class="text-2xl font-bold">{{ $comment->lesson->title }}</h2>
-                                <p>{{ $comment->body }}</p>
-                            </a>
+                            {{-- We check if the comment belongs to a lesson or course --}}
+                            @if (class_basename(get_class($comment->commentable)) == 'Lesson')
+                                <a href="{{ route('lessons.show', $comment->commentable->slug) }}">
+                            @elseif (class_basename(get_class($comment->commentable)) == 'Course')
+                                <a href="{{ route('courses.show', $comment->commentable->slug) }}">  
+                            @endif
+                                    <h2 class="text-2xl font-bold">{{ $comment->commentable->title }}</h2>
+                                    <p>{{ $comment->body }}</p>
+                                </a>
                             <div class="row">
                                 <div class="col-6">  
                                     <form action="{{ route('comments.approved', $comment) }}" shenctype="multipart/form-data" method="post">
                                         {{ csrf_field() }}                                            
                                         {{ method_field('PUT') }}
-                                            <input id="approved"
-                                            type="text"
-                                            name="approved"
-                                            value="true" hidden>
-
                                             <button type="submit" 
                                             class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
                                             {{ __('Approve') }}</button>

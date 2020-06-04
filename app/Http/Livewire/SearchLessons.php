@@ -19,9 +19,11 @@ class SearchLessons extends Component
         $this->course = $course;
 
         // Get the id of all the lessons that are marked as complete by current user
-        foreach (auth()->user()->lessons as $lesson) {
-            $this->completedLessons[] = $lesson->id;
-       }
+        if (!empty(auth()->user()->lessons)){
+            foreach (auth()->user()->lessons as $lesson) {
+                $this->completedLessons[] = $lesson->id;
+           }
+        }
     }
 
     // This function arranges the lessons of a course by moving the lesson down
