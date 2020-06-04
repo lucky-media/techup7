@@ -55,7 +55,7 @@
 <div class="container mt-10">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $course->comments->count() }})</h2>
+            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $course->commentsCount() }})</h2>
         </div>
     </div>
 </div>
