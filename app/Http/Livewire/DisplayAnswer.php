@@ -18,6 +18,13 @@ class DisplayAnswer extends Component
 
     public function deleteAnswer()
     {
+        if ($this->answer->id == $this->answer->commentable->best_answer)
+        {
+            $this->answer->commentable->update([
+                'best_answer' => null,
+                ]);
+        }
+        
         $this->answer->delete();
 
         // Refreshing the component parent, because this answer is deleted

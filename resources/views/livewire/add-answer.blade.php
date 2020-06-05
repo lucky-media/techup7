@@ -48,11 +48,11 @@
                         </div>
                         <div class="col-3">
                             @auth
-                                <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                <button type="submit" class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                 border border-orange-500 hover:border-transparent rounded">{{ __('general.add_new_answer') }}</button>
                             @endauth
                             @guest
-                                <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                <a class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                             border border-orange-500 hover:border-transparent rounded"
                                     href="{{ route('login') }}">{{ __('general.login') }}</a>
                             @endguest

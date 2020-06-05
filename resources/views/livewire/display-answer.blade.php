@@ -32,7 +32,7 @@
                         <form action="{{ route('comments.edit', $answer) }}"
                             enctype="multipart/form-data" method="get">
                             <button type="submit"
-                                class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
+                                class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                                 {{ __('general.edit') }}</button>
                         </form>
                     @endcan
@@ -40,14 +40,14 @@
                     @can('delete', $answer)
                         <button wire:click="deleteAnswer"
                             onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
-                            class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
+                            class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                             {{ __('general.delete') }}</button>
                     @endcan
                     {{-- answers can be flagged as inappropriate by students or instructors. Admin manages flagged answers. --}}
                     @can('flagInappropriate', $answer)
                         <button wire:click="flagInappropriate"
                             onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
-                            class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                            class="bg-white hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
                             {{ __('general.inappropriate') }}</button>
                     @endcan
                     @can('flagged', $answer)

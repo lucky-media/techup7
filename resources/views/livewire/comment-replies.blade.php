@@ -30,7 +30,7 @@
                                             <form action="{{ route('comments.edit', $comment) }}"
                                                 enctype="multipart/form-data" method="get">
                                                 <button type="submit"
-                                                    class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
+                                                    class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                                                     {{ __('general.edit') }}</button>
                                             </form>
                                             @endcan
@@ -40,7 +40,7 @@
                                             @can('delete', $comment)
                                             <button wire:click="deleteComment"
                                                 onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
-                                                class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
+                                                class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                                                 {{ __('general.delete') }}</button>
                                             @endcan
                                         </div>
@@ -49,7 +49,7 @@
                                             @can('flagInappropriate', $comment)
                                             <button wire:click="flagInappropriate"
                                                 onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
-                                                class="bg-transparent hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                                                class="bg-white hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
                                                 {{ __('general.inappropriate') }}</button>
                                             @endcan
                                             @can('flagged', $comment)
@@ -79,11 +79,11 @@
                                     <div class="col">
                                         @auth
                                             <button type="submit"
-                                                    class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                                    class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                                     border border-orange-500 hover:border-transparent rounded">{{ __('general.reply') }}</button>
                                         @endauth
                                         @guest
-                                            <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                            <a class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                                         border border-orange-500 hover:border-transparent rounded"
                                                 href="{{ route('login') }}">{{ __('general.login') }}</a>
                                         @endguest
