@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             {{-- Edit a comment --}}
                                             @can('update', $comment)
                                             <form action="{{ route('comments.edit', $comment) }}"
@@ -36,7 +36,7 @@
                                             @endcan
                                         </div>
                                         {{-- Delete a comment --}}
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             @can('delete', $comment)
                                             <button wire:click="deleteComment"
                                                 onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
@@ -45,7 +45,7 @@
                                             @endcan
                                         </div>
                                         {{-- Comments can be flagged as inappropriate by students or instructors. Admin manages flagged comments. --}}
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             @can('flagInappropriate', $comment)
                                             <button wire:click="flagInappropriate"
                                                 onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
@@ -57,6 +57,21 @@
                                                 {{ __('general.flagged') }}
                                             </p>
                                             @endcan
+                                        </div>
+                                        {{-- Like or Dislike comment --}}
+                                        <div class="col-3">
+                                            <button type="submit"
+                                                {{-- only authenticated users can like --}}
+                                                @auth wire:click="likeComment" @endauth
+                                                class="text-xs py-2 px-2 ml-4 rounded
+                                                    @if($liked === 0)
+                                                        bg-white text-gray-600
+                                                    @else
+                                                        bg-blue-500 text-white
+                                                    @endif
+                                                ">
+                                                    &#128077; {{ $totalLikes }}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
