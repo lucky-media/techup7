@@ -10,7 +10,8 @@ class CommentReplies extends Component
     public $comment;
     public $bodyReply;
     public $commentable;
-    public $liked;
+    public $liked = 0;
+    public $totalLikes;
 
     // The listener is used to refresh the component if a comment is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
@@ -23,6 +24,8 @@ class CommentReplies extends Component
         if (auth()->user()){
             $this->liked = $this->getLike();
         }
+
+        $this->totalLikes = $this->getTotalLikes();
     }
     
     // When deleting a comment we also delete the comment replies
@@ -86,8 +89,8 @@ class CommentReplies extends Component
         $this->emitUp('refresh');
     }
 
-     // Check if user has liked this comment
-     private function getLike(){
+    // Check if user has liked this comment
+    private function getLike(){
         $data = DB::table('comment_user')
                                 ->where('user_id', auth()->user()->id)
                                 ->where('comment_id', $this->comment->id)
@@ -104,6 +107,14 @@ class CommentReplies extends Component
 
         // Refreshing the component parent
         $this->emitUp('refresh');
+    }
+
+    // Get total likes for this comment
+    private function getTotalLikes(){
+        $data = DB::table('comment_user')
+                                ->where('comment_id', $this->comment->id)
+                                ->count();
+        return $data;
     }
 
     public function render()

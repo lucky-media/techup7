@@ -60,8 +60,9 @@
                                         </div>
                                         {{-- Like or Dislike comment --}}
                                         <div class="col-3">
-                                            @auth
-                                                <button type="submit" wire:click="likeComment"
+                                            <button type="submit"
+                                                {{-- only authenticated users can like --}}
+                                                @auth wire:click="likeComment" @endauth
                                                 class="text-xs py-2 px-2 ml-4 rounded
                                                     @if($liked === 0)
                                                         bg-white text-gray-600
@@ -69,9 +70,8 @@
                                                         bg-blue-500 text-white
                                                     @endif
                                                 ">
-                                                    &#128077; {{ $liked }}
-                                                </button>
-                                            @endauth
+                                                    &#128077; {{ $totalLikes }}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
