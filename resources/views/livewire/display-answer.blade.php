@@ -1,5 +1,7 @@
 <div class="lg:col-12">
-    <div class="py-8 px-8 shadow-lg rounded-lg my-20 bg-gray-100">
+    <div class="py-8 px-8 shadow-lg rounded-lg my-20
+        {{ ($answer->commentable->best_answer == $answer->id) ? 'bg-orange-500' : 'bg-white' }}
+    ">
         <div class="flex float-right -mt-16">
             <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($answer->user->name) }}"
                 src="{{ asset($answer->user->profile->profileImage()) }}">
@@ -18,6 +20,13 @@
             </div>
             <div class="flex justify-between items-center mt-4">
                 <div class="float-right mt-4">
+                    {{-- Delete a answer --}}
+                    @can('update', $answer->commentable)
+                        <button wire:click="bestAnswer"
+                            onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
+                            class="bg-blue-500 hover:bg-transparent text-gray-600 text-xs hover:text-white rounded">
+                            {{ __('general.best_answer') }}</button>
+                    @endcan
                     {{-- Edit a answer --}}
                     @can('update', $answer)
                         <form action="{{ route('comments.edit', $answer) }}"

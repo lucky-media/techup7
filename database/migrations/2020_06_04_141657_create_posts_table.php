@@ -19,7 +19,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('slug');
             $table->longText('body');
-            $table->integer('status')->default(false);
             $table->string('lang', 3);
             $table->integer('best_answer')->nullable();
             $table->timestamps();

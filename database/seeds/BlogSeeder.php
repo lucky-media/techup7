@@ -22,13 +22,12 @@ class BlogSeeder extends Seeder
         foreach ($usersCompleted as $user)
         {
             $post = factory(App\Post::class, 1)->create([
-                'user_id' => $user->id,
-                'status' => true
+                'user_id' => $user->id
                 ])
                 ->each(function ($post) {
-                        $comment = $post->comments()->save(factory(App\Comment::class)
+                        $answer = $post->answers()->save(factory(App\Comment::class)
                         ->make());
-                        $post->best_answer = $comment->id;
+                        $post->best_answer = $answer->id;
                         $post->save();
                         });
         }

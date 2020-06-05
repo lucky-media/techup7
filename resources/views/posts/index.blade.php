@@ -40,7 +40,7 @@
         @foreach($posts as $post)
         <div class="lg:col-8 mt-8">
             <div class="py-4 px-8 shadow-lg rounded-lg my-20
-            {{ ($post->status == 1) ? 'bg-orange-500' : 'bg-white' }}
+            {{ ($post->best_answer) ? 'bg-orange-500' : 'bg-white' }}
             ">
                 <div class="flex float-right -mt-16">
                     <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
@@ -63,7 +63,7 @@
                         </a>
                         <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
                         <p class="ml-8 text-gray-600">Total comments: {{ $post->answersCount() }}</p>
-                        <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
+                        <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->best_answer) ? 'Solved' : 'Unsolved' }}</strong></p>
                     </div>
                     <div class="float-right mt-4">
                         <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500" alt="{{ $post->lang }}"

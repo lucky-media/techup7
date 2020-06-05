@@ -24,11 +24,19 @@ class DisplayAnswer extends Component
         $this->emitUp('refresh');
     }
 
-     // Flags a answer as inappropriate and the admin choose if he deletes it
+    // Flags a answer as inappropriate and the admin choose if he deletes it
     public function flagInappropriate()
     {
         $this->answer->update([
         'approved' => false,
+        ]);
+    }
+    
+    // Choose best answer
+    public function bestAnswer()
+    {
+        $this->answer->commentable->update([
+        'best_answer' => $this->answer->id,
         ]);
     }
 

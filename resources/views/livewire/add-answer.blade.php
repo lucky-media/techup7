@@ -12,7 +12,7 @@
                             </a>
                             <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
                             <p class="ml-8 text-gray-600">Total answers: {{ $post->answersCount() }}</p>
-                            <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
+                            <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->best_answer) ? 'Solved' : 'Unsolved' }}</strong></p>
                         </div>                    
                         <div class="float-right">
                             <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-900" alt="{{ $post->lang }}"
