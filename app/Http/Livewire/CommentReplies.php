@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Comment;
 
@@ -10,6 +10,7 @@ class CommentReplies extends Component
     public $comment;
     public $bodyReply;
     public $commentable;
+    public $liked;
 
     // The listener is used to refresh the component if a comment is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
@@ -18,6 +19,10 @@ class CommentReplies extends Component
     {
         $this->comment = $comment;
         $this->commentable = $comment->commentable;
+
+        if (auth()->user()){
+            $this->liked = $this->getLike();
+        }
     }
     
     // When deleting a comment we also delete the comment replies
@@ -78,6 +83,26 @@ class CommentReplies extends Component
         $this->comment = $this->comment->refresh();
 
         // Refreshing the component parent, because this comment is deleted
+        $this->emitUp('refresh');
+    }
+
+     // Check if user has liked this comment
+     private function getLike(){
+        $data = DB::table('comment_user')
+                                ->where('user_id', auth()->user()->id)
+                                ->where('comment_id', $this->comment->id)
+                                ->count();
+        return $data;
+    }
+
+    // Like the comment
+    public function likeComment()
+    {
+        $this->comment->likes()->toggle(auth()->user()->id);
+        
+        $this->liked = $this->getLike();
+
+        // Refreshing the component parent
         $this->emitUp('refresh');
     }
 

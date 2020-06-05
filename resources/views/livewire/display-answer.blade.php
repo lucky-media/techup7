@@ -20,6 +20,19 @@
                     {{ $answer->user->name }}
                 </a>
                 <p class="ml-8 text-gray-600">{{ $answer->created_at->diffForHumans() }}</p>
+                {{-- Like or Dislike answer --}}
+                @auth
+                    <button type="submit" wire:click="likeAnswer"
+                    class="text-xs py-2 px-2 ml-4 rounded
+                        @if($liked === 0)
+                            bg-white text-gray-600
+                        @else
+                            bg-blue-500 text-white
+                        @endif
+                    ">
+                        &#128077; {{ $liked }}
+                    </button>
+                @endauth
             </div>
             <div class="flex justify-between items-center mt-4">
                 <div class="float-right mt-4">
