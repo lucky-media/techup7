@@ -37,7 +37,7 @@
 <div class="container">
     <div class="row justify-center">
         <div class="lg:col-10 mt-8">
-            <div class="py-4 px-8 shadow-lg rounded-lg my-20 bg-gray-100">
+            <div class="py-4 px-8 shadow-lg rounded-lg mt-20 bg-orange-500">
                 <div class="flex float-right -mt-16">
                     <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
                         src="{{ asset($post->user->profile->profileImage()) }}">
@@ -50,26 +50,12 @@
                         {!! $post->body !!}
                     </p>
                 </div>
-                <div class="flex justify-between items-center mt-4">
-                    <div class="flex items-end mt-4">                        
-                        <a href="{{ route('profiles.show', $post->user->id) }}" class="ml-4 text-xl font-medium text-indigo-500">
-                            {{ $post->user->name }}
-                        </a>
-                        <p class="ml-8 text-gray-600">{{ $post->created_at->formatLocalized('%b %Y') }}</p>
-                        <p class="ml-8 text-gray-600">Total answers: {{ $post->answersCount() }}</p>
-                        <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
-                    </div>
-                    <div class="float-right mt-4">
-                        <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500" alt="{{ $post->lang }}"
-                            src="{{ asset('/storage/'.$post->lang.'.png') }}">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 
 {{-- Answer section --}}
-{{-- <livewire:add-answer :post="$post"> --}}
+<livewire:add-answer :post="$post">
 
 @endsection

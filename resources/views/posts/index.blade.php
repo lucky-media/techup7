@@ -47,21 +47,21 @@
                         src="{{ asset($post->user->profile->profileImage()) }}">
                 </div>
                 <div>
-                    <h2 class="text-gray-800 text-3xl font-semibold">
-                        <a class="no-underline hover:underline text-black" href="{{ route('posts.show', $post->slug) }}">
+                    <a class="no-underline hover:underline text-black" href="{{ route('posts.show', $post->slug) }}">
+                        <h2 class="text-gray-800 text-3xl font-semibold">
                             {{ Str::limit($post->title, 30) }}
-                        </a>
-                    </h2>
-                    <p class="mt-2 text-gray-600">
-                        {!! Str::of(strip_tags($post->body))->limit(300) !!}
-                    </p>
+                        </h2>
+                        <p class="mt-2 text-gray-600">
+                            {!! Str::of(strip_tags($post->body))->limit(300) !!}
+                        </p>
+                    </a>
                 </div>
                 <div class="flex justify-between items-center mt-4">
                     <div class="flex items-end mt-4">                        
                         <a href="{{ route('profiles.show', $post->user->id) }}" class="ml-4 text-xl font-medium text-indigo-500">
                             {{ Str::limit($post->user->name, 15) }}
                         </a>
-                        <p class="ml-8 text-gray-600">{{ $post->created_at->formatLocalized('%b %Y') }}</p>
+                        <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
                         <p class="ml-8 text-gray-600">Total comments: {{ $post->answersCount() }}</p>
                         <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
                     </div>

@@ -23,7 +23,7 @@ class Post extends Model
         return 'slug';
     }
 
-    public function comments()
+    public function answers()
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
@@ -33,12 +33,12 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'commentable_id', 'id');
     }
 
-    public function commentsCount()	
+    public function answersCount()	
     {	
-        $comments = Comment::where('commentable_id', '=', $this->id)
+        $answers = Comment::where('commentable_id', '=', $this->id)
                             ->where('commentable_type', '=', 'App\Post')
                             ->get();	
 
-        return $comments->count();
+        return $answers->count();
     }
 }
