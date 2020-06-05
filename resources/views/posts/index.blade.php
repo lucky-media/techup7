@@ -62,8 +62,9 @@
                             {{ Str::limit($post->user->name, 15) }}
                         </a>
                         <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
-                        <p class="ml-8 text-gray-600">Total comments: {{ $post->answersCount() }}</p>
-                        <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->best_answer) ? 'Solved' : 'Unsolved' }}</strong></p>
+                        <p class="ml-8 text-gray-600">{{ __('general.total_answers') }}: {{ $post->answersCount() }}</p>
+                        <p class="ml-8 text-gray-600">{{ __('general.status') }}:
+                            <strong>{{ ($post->best_answer) ? __('general.solved') : __('general.unsolved') }}</strong></p>
                     </div>
                     <div class="float-right mt-4">
                         <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500" alt="{{ $post->lang }}"

@@ -3,6 +3,9 @@
         {{ ($answer->commentable->best_answer == $answer->id) ? 'bg-orange-500' : 'bg-white' }}
     ">
         <div class="flex float-right -mt-16">
+            @if ($answer->commentable->best_answer == $answer->id)
+                <strong>{{ __('general.best_answer') }}</strong>
+            @endif
             <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($answer->user->name) }}"
                 src="{{ asset($answer->user->profile->profileImage()) }}">
         </div>
@@ -20,14 +23,17 @@
             </div>
             <div class="flex justify-between items-center mt-4">
                 <div class="float-right mt-4">
-                    {{-- Delete a answer --}}
+                    {{-- Choose best answer --}}
                     @can('update', $answer->commentable)
-                        <button wire:click="bestAnswer"
-                            onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
-                            class="bg-blue-500 hover:bg-transparent text-gray-600 text-xs hover:text-white rounded">
-                            {{ __('general.best_answer') }}</button>
+                        {{-- Don't display the button if the answer is already chosen as the best --}}
+                        @if ($answer->commentable->best_answer != $answer->id)
+                            <button wire:click="bestAnswer"
+                                onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
+                                class="bg-blue-500 hover:bg-transparent text-gray-600 text-xs hover:text-white rounded">
+                                {{ __('general.best_answer') }}</button>
+                        @endif
                     @endcan
-                    {{-- Edit a answer --}}
+                    {{-- Edit an answer --}}
                     @can('update', $answer)
                         <form action="{{ route('comments.edit', $answer) }}"
                             enctype="multipart/form-data" method="get">
@@ -36,14 +42,14 @@
                                 {{ __('general.edit') }}</button>
                         </form>
                     @endcan
-                    {{-- Delete a answer --}}
+                    {{-- Delete an answer --}}
                     @can('delete', $answer)
                         <button wire:click="deleteAnswer"
                             onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
                             class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white rounded">
                             {{ __('general.delete') }}</button>
                     @endcan
-                    {{-- answers can be flagged as inappropriate by students or instructors. Admin manages flagged answers. --}}
+                    {{-- answers can be flagged as inappropriate. Admin manages flagged answers. --}}
                     @can('flagInappropriate', $answer)
                         <button wire:click="flagInappropriate"
                             onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"

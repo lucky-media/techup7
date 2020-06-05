@@ -83,5 +83,10 @@ return [
     'uncompleted_lesson' => 'Lesson not Completed',
     'courses_created_by' => 'Courses created by',
     'courses_attended_by' => 'Courses attended by',
+    'best_answer' => 'Best Answer',
+    'total_answers' => 'Total answers',
+    'status' => 'Status',
+    'unsolved' => 'Unsolved',
+    'solved' => 'Solved',
     
 ];

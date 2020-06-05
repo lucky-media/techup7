@@ -37,6 +37,9 @@ class DisplayAnswer extends Component
         $this->answer->update([
         'approved' => false,
         ]);
+
+        // Refreshing the component parent, because this answer is deleted
+        $this->emitUp('refresh');
     }
     
     // Choose best answer
@@ -45,6 +48,9 @@ class DisplayAnswer extends Component
         $this->answer->commentable->update([
         'best_answer' => $this->answer->id,
         ]);
+
+        // Refreshing the component parent, because this answer is deleted
+        $this->emitUp('refresh');
     }
 
     public function render()

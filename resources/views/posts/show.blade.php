@@ -33,29 +33,8 @@
     </div>
 </div>
 
-{{-- We display all posts with a link, date created, owner and language --}}
-<div class="container">
-    <div class="row justify-center">
-        <div class="lg:col-10 mt-8">
-            <div class="py-4 px-8 shadow-lg rounded-lg mt-20
-            {{ ($post->best_answer) ? 'bg-orange-500' : 'bg-white' }}
-            ">
-                <div class="flex float-right -mt-16">
-                    <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
-                        src="{{ asset($post->user->profile->profileImage()) }}">
-                </div>
-                <div>
-                    <h2 class="text-gray-800 text-3xl font-semibold">
-                            {{ $post->title }}
-                    </h2>
-                    <p class="mt-2 text-gray-600">
-                        {!! $post->body !!}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{-- Display Post --}}
+<livewire:display-post :post="$post">
 
 {{-- Answer section --}}
 <livewire:add-answer :post="$post">

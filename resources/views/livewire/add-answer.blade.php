@@ -1,29 +1,4 @@
 <div>
-
-    {{-- Total answers and status --}}
-    <div class="container">
-        <div class="row justify-center">
-            <div class="lg:col-10">
-                <div class="py-4 px-8 shadow-lg rounded-lg bg-gray-100">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-end">                        
-                            <a href="{{ route('profiles.show', $post->user->id) }}" class="ml-4 text-xl font-medium text-indigo-900">
-                                {{ $post->user->name }}
-                            </a>
-                            <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
-                            <p class="ml-8 text-gray-600">Total answers: {{ $post->answersCount() }}</p>
-                            <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->best_answer) ? 'Solved' : 'Unsolved' }}</strong></p>
-                        </div>                    
-                        <div class="float-right">
-                            <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-900" alt="{{ $post->lang }}"
-                                src="{{ asset('/storage/'.$post->lang.'.png') }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- All answers --}}
     <div class="container">
         <div class="row justify-center">

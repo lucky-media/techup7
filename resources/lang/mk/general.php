@@ -83,5 +83,10 @@ return [
     'uncompleted_lesson' => 'Обележи како Завршено',
     'courses_created_by' => 'Курсеви креирани од',
     'courses_attended_by' => 'Курсеви потсетени од',
+    'best_answer' => 'Најдобар одговор',
+    'total_answers' => 'Тотал одговори',
+    'status' => 'Статус',
+    'unsolved' => 'Нерешено',
+    'solved' => 'Решено',
     
 ];

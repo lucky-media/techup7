@@ -83,5 +83,10 @@ return [
     'uncompleted_lesson' => 'Shëno të përfunduar mësimin',
     'courses_created_by' => 'Kurset e krijuar nga',
     'courses_attended_by' => 'Kurset e ndjekura nga',
+    'best_answer' => 'Përgjigjja më e mirë',
+    'total_answers' => 'Gjithsej përgjigje',
+    'status' => 'Statusi',
+    'unsolved' => 'E pazgjidhur',
+    'solved' => 'E zgjidhur',
     
 ];
