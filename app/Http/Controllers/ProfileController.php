@@ -67,8 +67,6 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $users = User::where('role', '=' , "instructor")->latest()->paginate(6);
-
         return view('profiles.index', compact('users'));
     }
 }
