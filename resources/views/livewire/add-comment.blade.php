@@ -1,5 +1,11 @@
 <div>
-    {{-- Add a new comment --}}
+    <div class="container mt-10">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $this->commentsCount }})</h2>
+            </div>
+        </div>
+    </div>
     <div class="container mt-10">
         <div class="row">
             <div class="col-12">
@@ -12,11 +18,11 @@
                         </div>
                         <div class="col-3">
                             @auth
-                                <button type="submit" class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                <button type="submit" class="hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                 border border-orange-500 hover:border-transparent rounded">{{ __('general.add_new_comment') }}</button>
                             @endauth
                             @guest
-                                <a class="bg-transparent hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
+                                <a class="bg-white hover:bg-blue-500 text-gray-600 text-xs hover:text-white py-2 px-2
                                             border border-orange-500 hover:border-transparent rounded"
                                     href="{{ route('login') }}">{{ __('general.login') }}</a>
                             @endguest

@@ -53,6 +53,7 @@ return [
     'inappropriate' => 'Несоодветен',
     'flagged' => 'Обележан',
     'comments' => 'Коментари',
+    'answers' => 'Одговори',
     'reply' => 'Одговори',
     'try_our_courses' => 'Пробај ги нашите курсеви',
     'search' => 'Побарај',
@@ -71,6 +72,7 @@ return [
     'there_are_no_lessons_yet' => 'Сеуште нема лекции.',
     'add_new_lesson' => 'Додај нова лекција',
     'add_new_post' => 'Додај ново прашање',
+    'add_new_answer' => 'Додај нов одговор',
     'meet_our_instructors' => 'Запознај се со инструкторите',
     'there_is_no_instructor' => 'Нема инструктор со тоа име',
     'there_is_no_course' => 'Нема курс со тој наслов или содржина.',
@@ -81,5 +83,10 @@ return [
     'uncompleted_lesson' => 'Обележи како Завршено',
     'courses_created_by' => 'Курсеви креирани од',
     'courses_attended_by' => 'Курсеви потсетени од',
+    'best_answer' => 'Најдобар одговор',
+    'total_answers' => 'Тотал одговори',
+    'status' => 'Статус',
+    'unsolved' => 'Нерешено',
+    'solved' => 'Решено',
     
 ];

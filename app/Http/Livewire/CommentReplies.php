@@ -76,6 +76,9 @@ class CommentReplies extends Component
         
         // We refresh the reply component data by calling a refreshed comment collection
         $this->comment = $this->comment->refresh();
+
+        // Refreshing the component parent, because this comment is deleted
+        $this->emitUp('refresh');
     }
 
     public function render()

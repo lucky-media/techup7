@@ -9,15 +9,25 @@ class AddComment extends Component
     public $body;
     public $commentable;
     public $comments;
+    public $commentsCount;
 
     // The listener is used to refresh the component if a comment is deleted or flaged
-    protected $listeners = ['refresh' => '$refresh'];
+    protected $listeners = ['refresh' => 'refreshComments'];
 
     public function mount($commentable)
      {
         $this->commentable = $commentable;
         $this->comments = $this->commentable->comments;
+        $this->commentsCount = $this->commentable->commentsCount();
      }
+
+    public function refreshComments()
+    {
+        // We refresh the component data by calling a refreshed commentable and comments
+        $this->commentable = $this->commentable->refresh();
+        $this->comments = $this->commentable->comments;
+        $this->commentsCount = $this->commentable->commentsCount();
+    }
 
     // We add only the body and commentable->id when creating a comment
     public function addComment()
@@ -34,9 +44,7 @@ class AddComment extends Component
         // The input field is set to empty
         $this->reset('body');
         
-        // We refresh the component data by calling a refreshed commentable and comments
-        $this->commentable = $this->commentable->refresh();
-        $this->comments = $this->commentable->comments;
+        $this->refreshComments();
     }
 
     public function render()

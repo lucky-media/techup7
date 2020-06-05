@@ -36,4 +36,13 @@ class Course extends Model
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
+
+    public function commentsCount()	
+    {	
+        $comments = Comment::where('commentable_id', '=', $this->id)
+                            ->where('commentable_type', '=', 'App\Course')
+                            ->get();	
+
+        return $comments->count();
+    }
 }

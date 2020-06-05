@@ -53,6 +53,7 @@ return [
     'inappropriate' => 'Inappropriate',
     'flagged' => 'Flagged',
     'comments' => 'Comments',
+    'answers' => 'Answers',
     'reply' => 'Reply',
     'try_our_courses' => 'Try our Courses',
     'search' => 'Search',
@@ -71,6 +72,7 @@ return [
     'there_are_no_lessons_yet' => 'There are no lessons yet.',
     'add_new_lesson' => 'Add new lesson',
     'add_new_post' => 'Add new question',
+    'add_new_answer' => 'Add new answer',
     'meet_our_instructors' => 'Meet our Instructors',
     'there_is_no_instructor' => 'There is no instructor with that name',
     'there_is_no_course' => 'There is no course with that title or body.',
@@ -81,5 +83,10 @@ return [
     'uncompleted_lesson' => 'Lesson not Completed',
     'courses_created_by' => 'Courses created by',
     'courses_attended_by' => 'Courses attended by',
+    'best_answer' => 'Best Answer',
+    'total_answers' => 'Total answers',
+    'status' => 'Status',
+    'unsolved' => 'Unsolved',
+    'solved' => 'Solved',
     
 ];
