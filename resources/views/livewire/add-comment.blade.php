@@ -1,5 +1,11 @@
 <div>
-    {{-- Add a new comment --}}
+    <div class="container mt-10">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $this->commentsCount }})</h2>
+            </div>
+        </div>
+    </div>
     <div class="container mt-10">
         <div class="row">
             <div class="col-12">

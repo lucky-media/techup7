@@ -62,7 +62,7 @@
                             {{ Str::limit($post->user->name, 15) }}
                         </a>
                         <p class="ml-8 text-gray-600">{{ $post->created_at->formatLocalized('%b %Y') }}</p>
-                        <p class="ml-8 text-gray-600">Total comments: {{ $post->commentsCount() }}</p>
+                        <p class="ml-8 text-gray-600">Total comments: {{ $post->answersCount() }}</p>
                         <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
                     </div>
                     <div class="float-right mt-4">

@@ -2,25 +2,9 @@
 
 @section('content')
 
-<div style="background:url({{ asset('/storage/title_img.png') }}); ">
-    <div class="container">
-        <div class="row items-center justify-between py-20">
-            <div class="col-6">
-                <h2 class="text-4xl"> {{ $post->title }} </h2>
-            </div>
-        </div>
-    </div>
-</div>
-
 {{-- The owner of the post can edit or delete post--}}
 <div class="container my-4">
     <div class="row">
-        <div class="col-8">
-            <div class="text-sm">
-                {{ __('general.by') }} <a href="{{ route('profiles.show', $post->user->id) }}" class="text-blue-500">{{ $post->user->name }}</a>
-                , {{ __('general.last_update_on') }} {{ $post->updated_at->format('M Y') }}
-            </div>
-        </div>
         <div class="col-3">
             <div class="row">
                 <div class="col-6 px-4">
@@ -49,16 +33,43 @@
     </div>
 </div>
 
-{{-- Comments section. We can see total comments count and add a new comment --}}
-<div class="container mt-10">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-black py-5 border-b-2 border-white">{{ __('general.comments') }} ({{ $post->comments->count() }})</h2>
-            <h2 class="text-black py-5 border-b-2 border-white">{!! $post->body !!}</h2>
+{{-- We display all posts with a link, date created, owner and language --}}
+<div class="container">
+    <div class="row justify-center">
+        <div class="lg:col-10 mt-8">
+            <div class="py-4 px-8 shadow-lg rounded-lg my-20 bg-gray-100">
+                <div class="flex float-right -mt-16">
+                    <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
+                        src="{{ asset($post->user->profile->profileImage()) }}">
+                </div>
+                <div>
+                    <h2 class="text-gray-800 text-3xl font-semibold">
+                            {{ $post->title }}
+                    </h2>
+                    <p class="mt-2 text-gray-600">
+                        {!! $post->body !!}
+                    </p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <div class="flex items-end mt-4">                        
+                        <a href="{{ route('profiles.show', $post->user->id) }}" class="ml-4 text-xl font-medium text-indigo-500">
+                            {{ $post->user->name }}
+                        </a>
+                        <p class="ml-8 text-gray-600">{{ $post->created_at->formatLocalized('%b %Y') }}</p>
+                        <p class="ml-8 text-gray-600">Total answers: {{ $post->answersCount() }}</p>
+                        <p class="ml-8 text-gray-600">Status: <strong>{{ ($post->status == 1) ? 'Solved' : 'Unsolved' }}</strong></p>
+                    </div>
+                    <div class="float-right mt-4">
+                        <img class="w-10 h-10 object-cover rounded-full border-2 border-indigo-500" alt="{{ $post->lang }}"
+                            src="{{ asset('/storage/'.$post->lang.'.png') }}">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-{{-- <livewire:add-comment :commentable="$post"> --}}
+{{-- Answer section --}}
+{{-- <livewire:add-answer :post="$post"> --}}
 
 @endsection
