@@ -152,7 +152,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        return view('courses.index', compact('courses'));
+        return view('courses.index');
     }
 
     // We make sure that the slug is always unique and it increases by 1

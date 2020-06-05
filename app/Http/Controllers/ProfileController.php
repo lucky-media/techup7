@@ -67,6 +67,6 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profiles.index', compact('users'));
+        return view('profiles.index');
     }
 }
