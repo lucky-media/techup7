@@ -17,6 +17,10 @@ Auth::routes();
 
 Route::post('/lang', 'LocalizationController@index')->name('lang.index');
 
+Route::get('/contact', 'ContactFormController@create')->name('contact');
+Route::post('/contact', 'ContactFormController@store')->name('contact.store');
+
+
 Route::get('/admin', 'UserController@index')->name('admin.index')->middleware('role:admin');
 Route::get('/admin/{user}/edit', 'UserController@edit')->name('admin.edit')->middleware('role:admin');
 Route::patch('/admin/{user}', 'UserController@update')->name('admin.update')->middleware('role:admin');
@@ -65,5 +69,4 @@ Route::get('/posts/{post}', 'PostController@show')->name('posts.show');
 Route::delete('/posts/{post}', 'PostController@destroy')->name('posts.destroy');
 Route::get('/blog', 'PostController@index')->name('posts.index');
 
-Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/', 'HomeController@index')->name('index');
