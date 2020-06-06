@@ -11,15 +11,23 @@ class BlogSeeder extends Seeder
      */
     public function run()
     {
-        $users = App\User::whereIn('id', [2, 3, 4])->get();
-        $usersCompleted = App\User::whereIn('id', [5, 6])->get();
+        $someUsers = App\User::whereIn('id', [2, 3, 4])->get();
+        $otherUsers = App\User::whereIn('id', [5, 6])->get();
 
-        foreach ($users as $user)
+        // Create some posts with no answer yet
+        foreach ($someUsers as $user)
         {
-            factory(App\Post::class, 1)->create(['user_id' => $user->id]);
+            factory(App\Post::class, 1)->create([
+                'user_id' => $user->id
+                ])
+                ->each(function ($post) {
+                        $post->answers()->saveMany(factory(App\Comment::class, 2)
+                        ->make());
+                        });
         }
 
-        foreach ($usersCompleted as $user)
+        // Create posts with a best answer already chosen
+        foreach ($otherUsers as $user)
         {
             $post = factory(App\Post::class, 1)->create([
                 'user_id' => $user->id
