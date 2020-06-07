@@ -61,14 +61,24 @@ class AddComment extends Component
         $info['email'] = auth()->user()->email;
         $info['comment'] = $data;
 
-        // Check if we are currently at a course, or a lesson page
+        
+        /* 
+         * Check if we are currently at a course, or a lesson page
+         * Notify the course owner if he has enabled emails on the settings
+        */ 
+        
         if ($this->commentable->user){
-            $info['url'] = asset('/').'courses/'.$this->commentable->slug;
-            $this->commentable->user->notify(new NewComment($info));
+            if ($this->commentable->user->settings->new_comment){
+                $info['url'] = asset('/').'courses/'.$this->commentable->slug;
+                $this->commentable->user->notify(new NewComment($info));
+            }
         }
+        // If we are at a lesson then notify lesson owner if he has enabled emails
         else{
-            $info['url'] = asset('/').'lessons/'.$this->commentable->slug;
-            $this->commentable->course->user->notify(new NewComment($info));
+            if ($this->commentable->course->user->settings->new_comment){
+                $info['url'] = asset('/').'lessons/'.$this->commentable->slug;
+                $this->commentable->course->user->notify(new NewComment($info));
+            }
         }
     }
 

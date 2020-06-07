@@ -48,13 +48,18 @@ class AddAnswer extends Component
         $info['comment'] = $data;
         $info['url'] = asset('/').'posts/'.$this->post->slug;
         
-        // Notify the post owner
-        $this->post->user->notify(new NewComment($info));
+        // Notify the post owner if he has enabled emails on the settings
+        if ($this->post->user->settings->new_answer){
+            $this->post->user->notify(new NewComment($info));
+        }
 
         // Notify all other commenters on this post, but not the post owner
+        // Also check if the users have enabled emails to be sent for new answers
         foreach ($this->post->answers->unique('user_id') as $reply){
             if ($this->post->user->id != $reply->user->id){
-                $reply->user->notify((new NewComment($info)));
+                if ($reply->user->settings->new_answer){
+                    $reply->user->notify((new NewComment($info)));
+                }
             }
         }
     }

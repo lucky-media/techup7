@@ -131,8 +131,10 @@ class CommentReplies extends Component
         $info['comment'] = $data;
         $info['url'] = asset('/').'courses/'.$this->commentable->slug;
 
-        // Send notification to content owner
-        $this->comment->user->notify(new NewComment($info));
+        // Notify the comment owner if he has enabled emails on the settings
+        if ($this->comment->user->settings->new_reply){
+            $this->comment->user->notify(new NewComment($info));
+        }
     }
 
     public function render()
