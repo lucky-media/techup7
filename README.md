@@ -90,3 +90,28 @@ On your server you can also schedule this command by using the following code:
 
 Note: You may need to modify the /techup7/ to match the exact folder of your application on the server.
 But don't modify the artisan image:cleanup >> /dev/null 2>&1
+
+## Sending emails and notifications with queues
+The contact form accepts emails that are sent to the email address that we want. We can use Mailtrap
+for development to test this features and we also need to change the .env file for the mail settings,
+changing the username and password:
+
+```
+MAIL_USERNAME=providedByMailtrap
+MAIL_PASSWORD=providedByMailtrap
+```
+
+Each new comment sends an email notification to the content owner or comment owner if it's a reply.
+Emails are also sent for new answers on the blog posts. However, on the blog post the email is sent
+to the owner of the post and to all those that have written an answer previously on the post.
+
+Livewire is used to write comments very fast without loading the page. However, there is a serious delay
+as the number of emails to be sent at once increases. Thus, queueing is used to keep the emails on a jobs
+table at the database and a worker is used to process the jobs in the queue. To use the worker we need
+to enter the following command so that the worker accepts new queues:
+
+`php artisan queue:work`
+
+Note: This process requires a new migration file to insert a new table called jobs. The .env file should be
+updated with the following change:
+`QUEUE_CONNECTION=database`

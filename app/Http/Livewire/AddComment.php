@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Notifications\NewComment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 use Livewire\Component;
 
 class AddComment extends Component
@@ -43,8 +47,39 @@ class AddComment extends Component
 
         // The input field is set to empty
         $this->reset('body');
+
+        $this->sendNotification($data['body']);
         
         $this->refreshComments();
+    }
+
+    // Send notification to content owner
+    public function sendNotification($data)
+    {        
+        // Info about the user adding the comment
+        $info['name'] = auth()->user()->name;
+        $info['email'] = auth()->user()->email;
+        $info['comment'] = $data;
+
+        
+        /* 
+         * Check if we are currently at a course, or a lesson page
+         * Notify the course owner if he has enabled emails on the settings
+        */ 
+        
+        if ($this->commentable->user){
+            if ($this->commentable->user->settings->new_comment){
+                $info['url'] = asset('/').'courses/'.$this->commentable->slug;
+                $this->commentable->user->notify(new NewComment($info));
+            }
+        }
+        // If we are at a lesson then notify lesson owner if he has enabled emails
+        else{
+            if ($this->commentable->course->user->settings->new_comment){
+                $info['url'] = asset('/').'lessons/'.$this->commentable->slug;
+                $this->commentable->course->user->notify(new NewComment($info));
+            }
+        }
     }
 
     public function render()

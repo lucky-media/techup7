@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactFormEmail extends Mailable
+class ContactFormEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -30,6 +30,6 @@ class ContactFormEmail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.contact-form');
+        return $this->subject('Contact form Techup')->markdown('emails.contact-form');
     }
 }

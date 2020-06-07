@@ -79,6 +79,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Lesson::class, 'lesson_user')->distinct();
     }
 
+    public function settings()
+    {
+        return $this->hasOne(Setting::class);
+    }
+
     public function likes()
     {
         return $this->belongsToMany(Comment::class, 'comment_user');

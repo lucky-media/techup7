@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire;
+
+use App\Notifications\NewComment;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use App\Comment;
@@ -69,24 +71,27 @@ class CommentReplies extends Component
     // Replying a comment is done by adding the parent id
     public function replyComment()
     {
-        $this->validate([
+        $data = $this->validate([
             'bodyReply' => 'required|min:2',
         ]);
                 
         $this->commentable->comments()->create([
             'user_id' => auth()->user()->id,
             'parent_id' => $this->comment->id,
-            'body' => $this->bodyReply,
+            'body' => $data['bodyReply'],
         ]);
 
         // The input field is set to empty
         $this->reset('bodyReply');
         
+        $this->sendNotification($data['bodyReply']);
+
         // We refresh the reply component data by calling a refreshed comment collection
         $this->comment = $this->comment->refresh();
 
         // Refreshing the component parent, because this comment is deleted
         $this->emitUp('refresh');
+
     }
 
     // Check if user has liked this comment
@@ -115,6 +120,21 @@ class CommentReplies extends Component
                                 ->where('comment_id', $this->comment->id)
                                 ->count();
         return $data;
+    }
+
+    // Send notification to content owner
+    public function sendNotification($data)
+    {
+        // Info about the user adding the comment
+        $info['name'] = auth()->user()->name;
+        $info['email'] = auth()->user()->email;
+        $info['comment'] = $data;
+        $info['url'] = asset('/').'courses/'.$this->commentable->slug;
+
+        // Notify the comment owner if he has enabled emails on the settings
+        if ($this->comment->user->settings->new_reply){
+            $this->comment->user->notify(new NewComment($info));
+        }
     }
 
     public function render()
