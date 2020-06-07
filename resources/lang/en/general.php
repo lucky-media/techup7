@@ -88,5 +88,9 @@ return [
     'status' => 'Status',
     'unsolved' => 'Unsolved',
     'solved' => 'Solved',
+    'on' => 'on',
+    'off' => 'off',
+    'settings' => 'Settings',
+    'edit_settings' => 'Edit Settings',
     
 ];

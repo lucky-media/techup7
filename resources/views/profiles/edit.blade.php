@@ -60,4 +60,17 @@
         </div>
     </div>
 </div>
+
+<div class="container my-10">
+    <div class="row justify-center">
+        <div class="col-10">
+            <div class="bg-blue-500 border rounded mb-10 lg:mb-0">
+                <div class="m-10">
+                    <h2 class="text-4xl font-bold text-white">{{ __('general.edit_settings') }}</h2>
+                        <livewire:edit-settings>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
