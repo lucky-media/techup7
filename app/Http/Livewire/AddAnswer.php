@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Notifications\NewComment;
 use Livewire\Component;
 use App\Post;
 
@@ -32,8 +33,30 @@ class AddAnswer extends Component
 
         // The input field is set to empty
         $this->reset('body');
-
+        
         $this->post = $this->post->refresh();
+
+        $this->sendNotification($data['body']);
+    }
+
+    // Send notification to content owner
+    public function sendNotification($data)
+    {        
+        // Info about the user adding the comment
+        $info['name'] = auth()->user()->name;
+        $info['email'] = auth()->user()->email;
+        $info['comment'] = $data;
+        $info['url'] = asset('/').'posts/'.$this->post->slug;
+        
+        // Notify the post owner
+        $this->post->user->notify(new NewComment($info));
+
+        // Notify all other commenters on this post, but not the post owner
+        foreach ($this->post->answers->unique('user_id') as $reply){
+            if ($this->post->user->id != $reply->user->id){
+                $reply->user->notify((new NewComment($info)));
+            }
+        }
     }
 
     public function render()

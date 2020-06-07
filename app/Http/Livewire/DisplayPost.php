@@ -17,15 +17,6 @@ class DisplayPost extends Component
         $this->post = $post;
     }
 
-    // We add only the body and post->id when creating a comment
-    public function addAnswer()
-    {
-        // The input field is set to empty
-        $this->reset('body');
-
-        $this->post = $this->post->refresh();
-    }
-
     public function render()
     {
         return view('livewire.display-post');
