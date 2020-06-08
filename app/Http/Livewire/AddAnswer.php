@@ -53,8 +53,11 @@ class AddAnswer extends Component
             $this->post->user->notify(new NewComment($info));
         }
 
-        // Notify all other commenters on this post, but not the post owner
-        // Also check if the users have enabled emails to be sent for new answers
+        /* 
+         * Notify all other commenters on this post, but not the post owner
+         * Also check if the users have enabled emails to be sent for new answers
+        */ 
+        
         foreach ($this->post->answers->unique('user_id') as $reply){
             if ($this->post->user->id != $reply->user->id){
                 if ($reply->user->settings->new_answer){
