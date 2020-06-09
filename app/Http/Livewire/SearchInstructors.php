@@ -14,11 +14,18 @@ class SearchInstructors extends Component
     protected $users;
     protected $pagination = '9';
 
+    /*  
+     *  Showing all instructors
+     *  Search by matching the name of the instructor
+     *  We eager load the profile table with('profile)
+     */
+
     public function render()
     {
         $this->users = User::query()
                         ->where('name', 'LIKE', "%{$this->searchTerm}%") 
                         ->where('role', '=', "instructor")
+                        ->with('profile')
                         ->orderBy('created_at', 'desc')
                         ->paginate($this->pagination); 
 

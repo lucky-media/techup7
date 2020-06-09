@@ -13,10 +13,10 @@
             </div>
             <div class="col-5">
                 <h2 class="text-white font-bold text-2xl bg-blue-500 px-8 py-5">{{ $course->title }} &nbsp;
-                    <span class="text-sm font-normal"> ( {{ $course->lesson->count() }} lessons ) </span>
+                    <span class="text-sm font-normal"> ( {{ $course->lesson_count }} lessons ) </span>
                 </h2>
                 <div class="row">
-                    @forelse($lessons->sortBy('position') as $lesson)
+                    @forelse($lessons as $lesson)
                         <div class="col-11">
                                 <a href="{{ route('lessons.show', $lesson->slug) }}">
                                     <h2 class="text-black bg-gray-100 px-8 py-6 border-b-2 border-white">
@@ -33,7 +33,7 @@
                                         <button class="bg-blue-500 font-bold text-white px-2 py-1 rounded"
                                                 wire:click="arrangeUp({{ $course->id }}, '{{ $lesson->position }}')">&uarr;</button><br>
                                     @endif
-                                    @if($lesson->position < $course->lesson->count())
+                                    @if($lesson->position < $course->lesson_count)
                                         <button class="bg-orange-500 font-bold text-white px-2 py-1 rounded"
                                                 wire:click="arrangeDown({{ $course->id }}, '{{ $lesson->position }}')">&darr;</button>
                                     @endif

@@ -40,7 +40,7 @@
                         <div class="no-underline text-grey-darker text-right text-sm hover:text-red-dark">
                                 {{ $course->created_at->formatLocalized('%b %Y') }}<br>
                             <a class="no-underline hover:underline text-black" href="{{ route('courses.index') }}">
-                                {{ Str::limit($course->category->name, 10) }}
+                                {{-- {{ Str::limit($course->category->name, 10) }} --}}
                             </a><br>
                             <img src="{{ asset('/storage/'.$course->lang.'.png') }}" style="max-height: 20px;">
                         </div>
