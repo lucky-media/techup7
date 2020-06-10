@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row justify-center">
             <div class="lg:col-10 mt-8">
-                @foreach($post->answers as $answer)
+                @foreach($answers as $answer)
                     <livewire:display-answer :answer="$answer" :key="rand()*$answer->id">
                 @endforeach
             </div>

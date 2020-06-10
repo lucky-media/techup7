@@ -12,9 +12,12 @@ class DisplayPost extends Component
     // The listener is used to refresh the component if an answer is deleted or flaged
     protected $listeners = ['refresh' => '$refresh'];
 
-    public function mount(Post $post)
+    public function mount($post)
     {
-        $this->post = $post;
+        $this->post = Post::whereId($post->id)
+                            ->with('user.profile')
+                            ->withCount('children')
+                            ->first();
     }
 
     public function render()

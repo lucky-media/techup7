@@ -2,21 +2,29 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use App\Notifications\NewComment;
 use Livewire\Component;
-use App\Post;
+use App\Comment;
 
 class AddAnswer extends Component
 {
     public $body;
+    public $answers;
     public $post;
 
     // The listener is used to refresh the component if an answer is deleted or flaged
     protected $listeners = ['refresh' => '$refresh'];
 
-    public function mount(Post $post)
+    public function mount($post)
     {
         $this->post = $post;
+        $this->answers = Comment::where('commentable_id' , $post->id)
+                            ->where('commentable_type', 'App\\Post')
+                            ->with('user.profile')
+                            ->withCount('likes')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
     }
 
     // We add only the body and post->id when creating a comment
