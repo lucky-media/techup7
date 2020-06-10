@@ -16,7 +16,7 @@ class SearchLessons extends Component
     public function mount($lessons, $course)
     {
         $this->lessons = $lessons;
-        $this->course = $course;
+        $this->course = $course->loadCount('lesson');
 
         // Get the id of all the lessons that are marked as complete by current user
         if (!empty(auth()->user()->lessons)){
@@ -64,6 +64,7 @@ class SearchLessons extends Component
                                     $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
                                           ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
+                                ->orderBy('position')
                                 ->get();
 
         return view('livewire.search-lessons');
