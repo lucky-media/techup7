@@ -49,7 +49,7 @@
                                 {{ Str::limit($post->user->name, 15) }}
                             </a>
                             <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
-                            <p class="ml-8 text-gray-600">{{ __('general.total_answers') }}: {{ $post->answersCount() }}</p>
+                            <p class="ml-8 text-gray-600">{{ __('general.total_answers') }}: {{ $post->children_count }}</p>
                             <p class="ml-8 text-gray-600">{{ __('general.status') }}:
                                 <strong>{{ ($post->best_answer) ? __('general.solved') : __('general.unsolved') }}</strong></p>
                         </div>
