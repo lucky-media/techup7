@@ -36,7 +36,7 @@
     {{-- Show comments, replies and add new replies from another view. --}}
     <div class="container my-10">
         <div class="row">
-            @foreach($comments->reverse() as $comment)
+            @foreach($comments as $comment)
                 <livewire:comment-replies :comment="$comment" :key="rand()*$comment->id">
             @endforeach
         </div>

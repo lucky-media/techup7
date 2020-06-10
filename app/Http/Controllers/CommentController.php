@@ -43,11 +43,11 @@ class CommentController extends Controller
         $commentable = $comment->commentable;
 
         if (class_basename(get_class($commentable)) == 'Lesson'){    
-            return redirect('/lessons/'. $comment->lesson->slug);
+            return redirect('/lessons/'. $commentable->slug);
         }
         else
         {
-            return redirect('/courses/'. $comment->course->slug);
+            return redirect('/courses/'. $commentable->slug);
         }
         
     }
