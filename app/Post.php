@@ -27,4 +27,11 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class, 'commentable_id', 'id')->where('commentable_type', 'App\Post');
     }
+
+    public function answersCount()	
+    {	
+        return Comment::where('commentable_id', '=', $this->id)
+                            ->where('commentable_type', '=', 'App\Post')
+                            ->count();
+    }
 }

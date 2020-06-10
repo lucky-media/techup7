@@ -31,7 +31,7 @@
                             bg-blue-500 text-white
                         @endif
                     ">
-                        &#128077; {{ $answer->likes_count }}
+                        &#128077; {{ $totalLikes }}
                 </button>
             </div>
             <div class="flex justify-between items-center mt-4">

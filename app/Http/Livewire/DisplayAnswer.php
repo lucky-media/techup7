@@ -9,6 +9,7 @@ class DisplayAnswer extends Component
 {
     public $answer;
     public $liked = 0;
+    public $totalLikes;
 
     // The listener is used to refresh the component if a answer is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
@@ -20,6 +21,8 @@ class DisplayAnswer extends Component
         if (auth()->user()){
             $this->liked = $this->getLike();
         }
+
+        $this->totalLikes = $this->getTotalLikes();
     }
 
     public function deleteAnswer()
@@ -77,6 +80,14 @@ class DisplayAnswer extends Component
 
         // Refreshing the component parent
         $this->emitUp('refresh');
+    }
+
+    // Get total likes for this comment
+    private function getTotalLikes(){
+        $data = DB::table('comment_user')
+                                ->where('comment_id', $this->answer->id)
+                                ->count();
+        return $data;
     }
 
     public function render()
