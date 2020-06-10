@@ -52,6 +52,7 @@ return [
     'are_you_sure' => 'Are you sure?',
     'inappropriate' => 'Inappropriate',
     'flagged' => 'Flagged',
+    'approve' => 'Approve',
     'comments' => 'Comments',
     'answers' => 'Answers',
     'reply' => 'Reply',

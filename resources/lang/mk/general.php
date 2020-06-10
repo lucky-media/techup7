@@ -52,6 +52,7 @@ return [
     'are_you_sure' => 'Дали си сигурен?',
     'inappropriate' => 'Несоодветен',
     'flagged' => 'Обележан',
+    'approve' => 'Одобри',
     'comments' => 'Коментари',
     'answers' => 'Одговори',
     'reply' => 'Одговори',

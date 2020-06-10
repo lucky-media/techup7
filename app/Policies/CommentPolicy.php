@@ -91,4 +91,19 @@ class CommentPolicy
             return true;
         }
     }
+
+    /**
+     * Approve flagged comments
+     *
+     * @param  \App\Comment  $comment
+     * @return mixed
+     */
+    
+    public function approve(User $user, Comment $comment)
+    {
+        if ($comment->approved == '0' && auth()->user()->role == 'admin')
+        {
+            return true;
+        }
+    }
 }

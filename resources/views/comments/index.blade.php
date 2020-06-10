@@ -42,25 +42,6 @@
                             <p><strong>Commented by:</strong> {{ $comment->user->name }}</p>
                         </a>
                 </div>
-                    <div class="col-2">  
-                        <form action="{{ route('comments.approved', $comment) }}" shenctype="multipart/form-data" method="post">
-                            {{ csrf_field() }}                                            
-                            {{ method_field('PUT') }}
-                                <button type="submit" onclick="return confirm('Are you sure?')" 
-                                class="transition duration-200 ease-in-out bg-orange-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                                {{ __('Approve') }}</button>
-                        </form>
-                    </div>
-    
-                    <div class="col-2 px-2">
-                        <form action="{{ route('comments.destroy', $comment) }}" enctype="multipart/form-data" method="post">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-                                <button type="submit" onclick="return confirm('Are you sure?')"
-                                class="transition duration-200 ease-in-out bg-blue-500 font-bold text-gray-600 py-2 px-5 rounded hover:bg-gray-200 hover:text-gray-600">
-                                {{ __('Delete') }}</button>
-                        </form>
-                    </div>
             </div>
         @empty
             <div>

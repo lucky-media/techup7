@@ -57,6 +57,12 @@
                                                 {{ __('general.flagged') }}
                                             </p>
                                             @endcan
+                                            @can('approve', $comment)
+                                            <button wire:click="approveComment"
+                                                onclick="confirm('{{ __('general.are_you_sure') }}') || event.stopImmediatePropagation()"
+                                                class="bg-white hover:bg-blue-500 text-orange-500 text-xs hover:text-white rounded">
+                                                {{ __('general.approve') }}</button>
+                                            @endcan
                                         </div>
                                         {{-- Like or Dislike comment --}}
                                         <div class="col-3">

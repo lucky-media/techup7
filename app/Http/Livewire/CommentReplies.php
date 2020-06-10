@@ -68,6 +68,14 @@ class CommentReplies extends Component
         ]);
     }
 
+    // Approve flagged comment
+    public function approveComment()
+    {
+        $this->comment->update([
+            'approved' => true,
+        ]);
+    }
+
     // Replying a comment is done by adding the parent id
     public function replyComment()
     {

@@ -52,6 +52,7 @@ return [
     'are_you_sure' => 'A je i sigurtë?',
     'inappropriate' => 'Raporto komentin',
     'flagged' => 'Raportuar',
+    'approve' => 'Mirato',
     'comments' => 'Komente',
     'answers' => 'Përgjigje',
     'reply' => 'Përgjigju',
