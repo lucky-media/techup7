@@ -89,5 +89,9 @@ return [
     'status' => 'Statusi',
     'unsolved' => 'E pazgjidhur',
     'solved' => 'E zgjidhur',
+    'on' => 'on',
+    'off' => 'off',
+    'settings' => 'Settings',
+    'edit_settings' => 'Edit Settings',
     
 ];

@@ -89,5 +89,9 @@ return [
     'status' => 'Статус',
     'unsolved' => 'Нерешено',
     'solved' => 'Решено',
+    'on' => 'on',
+    'off' => 'off',
+    'settings' => 'Settings',
+    'edit_settings' => 'Edit Settings',
     
 ];
