@@ -34,7 +34,7 @@ class SearchCourses extends Component
                                     $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
                                         ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
-                                ->with('user.profile')
+                                ->with('user')
                                 ->orderBy('created_at', 'desc')
                                 ->paginate($this->pagination);
 

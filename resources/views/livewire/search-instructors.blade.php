@@ -11,7 +11,8 @@
             @forelse($users as $user)
             <div class="lg:col-4 my-10">
                 <a class="hover:text-orange-500" href="{{ route('profiles.show', $user) }}">
-                    <img class="rounded-full h-64 w-64 border-2 border-orange-500" src="{{ asset($user->profile->profileImage()) }}" alt="profile image">
+                    <img class="rounded-full h-64 w-64 border-2 border-orange-500"
+                         src="{{ asset((Cache::get('profileImage.'.$user->id)) ?? $user->profile->profileImage()) }}" alt="profile image">
                     <h2 class="font-semibold text-2xl transition duration-200 ease-in">{{ Str::limit($user->name, 25) }}</h2>
                 </a>
             </div>

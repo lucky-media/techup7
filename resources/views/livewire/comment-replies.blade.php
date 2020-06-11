@@ -2,7 +2,7 @@
     <div class="row no-gutters">
         <div class="px-0">
             {{-- Display profile image for instructors, or display no_image for students --}}
-            <img src="{{ asset($comment->user->profile->profileImage())}}"
+            <img src="{{ asset($profileImage)}}"
                 alt="profile image" class="rounded-full w-12 h-12">
         </div>
         <div class="col-10">

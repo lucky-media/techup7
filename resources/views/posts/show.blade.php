@@ -41,7 +41,7 @@
             ">
                 <div class="flex float-right -mt-16">
                     <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
-                        src="{{ asset($post->user->profile->profileImage()) }}">
+                        src="{{ asset($profileImage) }}">
                 </div>
                 <div>
                     <h2 class="text-gray-800 text-3xl font-semibold">

@@ -25,7 +25,6 @@ class SearchInstructors extends Component
         $this->users = User::query()
                         ->where('name', 'LIKE', "%{$this->searchTerm}%") 
                         ->where('role', '=', "instructor")
-                        ->with('profile')
                         ->orderBy('created_at', 'desc')
                         ->paginate($this->pagination); 
 

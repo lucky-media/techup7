@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -51,8 +52,15 @@ class PostController extends Controller
     }
 
     public function show(Post $post)
-    {
-        return view('posts.show', compact('post'));
+    {            
+        $profileImage = Cache::remember(
+            'profileImage.' . $post->user->id,
+            now()->addHours(1),
+            function () use ($post) {
+            return $post->user->profile->profileImage();
+            });
+
+        return view('posts.show', compact('post', 'profileImage'));
     }
 
     public function edit(Post $post)

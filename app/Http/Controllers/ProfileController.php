@@ -26,18 +26,19 @@ class ProfileController extends Controller
         }
         else
         {
-            $profileImage = Cache::remember(
-                'profileImage.' . $user->id,
-                now()->addSeconds(60),
-                function () use ($user) {
-                return $user->profile->profileImage();
-                });
-
-            $coursesCount = Cache::remember(
-                'coursesCount.' . $user->id,
-                now()->addSeconds(60),
-                function () use ($user) {
-                return $user->courses->count();
+            if (!Cache::has('profileImage.'.$user->id)){
+            $profileImage = Cache::rememberForever
+                ('profileImage.' . $user->id, function () use ($user) {
+                    return $user->profile->profileImage();
+                });  
+            }
+            else
+            {
+                $profileImage = Cache::get('profileImage.'.$user->id);
+            }
+            $coursesCount = Cache::rememberForever
+                ('coursesCount.' . $user->id, function () use ($user) {
+                    return $user->courses->count();
                 });
 
             return view('profiles.show', compact('user', 'profileImage', 'coursesCount'));
@@ -78,7 +79,7 @@ class ProfileController extends Controller
         ));
 
         Cache::forget('profileImage.'.$user->id);
-        Cache::forget('coursesCount.'.$user->id);
+        Cache::forget('user.'.$user->id);
 
         return redirect(route('profiles.show', $user->id));
     }

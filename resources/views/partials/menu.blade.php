@@ -26,32 +26,17 @@
         <div class="col-2 md:flex flex-row items-center justify-end">
             <form action="{{ route('lang.index') }}" method="POST">
                 @csrf
-                    @auth
-                        <select class="block appearance-none w-full bg-gray-500 font-bold text-white px-4 py-2 rounded" name="locale" onchange="this.form.submit();">
-                            <option value="en" {{ ("en" == auth()->user()->settings->locale ? "selected":"") }}>
-                                {{ __('general.english') }}
-                            </option>
-                            <option value="sq" {{ ("sq" == auth()->user()->settings->locale ? "selected":"") }}>
-                                {{ __('general.albanian') }}
-                            </option>
-                            <option value="mk" {{ ("mk" == auth()->user()->settings->locale ? "selected":"") }}>
-                                {{ __('general.macedonian') }}
-                            </option>
-                        </select>
-                    @endauth
-                    @guest
-                        <select class="block appearance-none w-full bg-gray-500 font-bold text-white px-4 py-2 rounded" name="locale" onchange="this.form.submit();">
-                            <option value="en" {{ ("en" == session()->get('locale') ? "selected":"") }}>
-                                {{ __('general.english') }}
-                            </option>
-                            <option value="sq" {{ ("sq" == session()->get('locale') ? "selected":"") }}>
-                                {{ __('general.albanian') }}
-                            </option>
-                            <option value="mk" {{ ("mk" == session()->get('locale') ? "selected":"") }}>
-                                {{ __('general.macedonian') }}
-                            </option>
-                        </select>
-                    @endguest
+                    <select class="block appearance-none w-full bg-gray-500 font-bold text-white px-4 py-2 rounded" name="locale" onchange="this.form.submit();">
+                        <option value="en" {{ ("en" == session()->get('locale') ? "selected":"") }}>
+                            {{ __('general.english') }}
+                        </option>
+                        <option value="sq" {{ ("sq" == session()->get('locale') ? "selected":"") }}>
+                            {{ __('general.albanian') }}
+                        </option>
+                        <option value="mk" {{ ("mk" == session()->get('locale') ? "selected":"") }}>
+                            {{ __('general.macedonian') }}
+                        </option>
+                    </select>
             </form>
         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class DisplayAnswer extends Component
@@ -10,6 +11,7 @@ class DisplayAnswer extends Component
     public $answer;
     public $liked = 0;
     public $totalLikes;
+    public $profileImage;
 
     // The listener is used to refresh the component if a answer is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
@@ -17,6 +19,11 @@ class DisplayAnswer extends Component
     public function mount($answer)
     {
         $this->answer = $answer;
+
+        $this->profileImage = Cache::rememberForever
+                ('profileImage.' . $answer->user->id, function () use ($answer) {
+                    return $answer->user->profile->profileImage();
+                });
 
         if (auth()->user()){
             $this->liked = $this->getLike();
