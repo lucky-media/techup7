@@ -7,8 +7,9 @@ use App\Course;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -25,7 +26,22 @@ class ProfileController extends Controller
         }
         else
         {
-            return view('profiles.show', compact('user'));
+            if (!Cache::has('profileImage.'.$user->id)){
+            $profileImage = Cache::rememberForever
+                ('profileImage.' . $user->id, function () use ($user) {
+                    return $user->profile->profileImage();
+                });  
+            }
+            else
+            {
+                $profileImage = Cache::get('profileImage.'.$user->id);
+            }
+            $coursesCount = Cache::rememberForever
+                ('coursesCount.' . $user->id, function () use ($user) {
+                    return $user->courses->count();
+                });
+
+            return view('profiles.show', compact('user', 'profileImage', 'coursesCount'));
         }
     }
 
@@ -61,6 +77,9 @@ class ProfileController extends Controller
             $data,
             $imageArray ?? []
         ));
+
+        Cache::forget('profileImage.'.$user->id);
+        Cache::forget('user.'.$user->id);
 
         return redirect(route('profiles.show', $user->id));
     }

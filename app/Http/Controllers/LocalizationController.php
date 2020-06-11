@@ -16,6 +16,11 @@ class LocalizationController extends Controller
 
         $locale = $data['locale'];
 
+        if (auth()->user()){
+            auth()->user()->settings->locale = $locale;
+            auth()->user()->settings->save();
+        }
+
         App::setLocale($locale);
         Carbon::setLocale($locale);
         //storing the locale in session to get it back in the middleware

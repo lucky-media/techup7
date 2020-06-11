@@ -51,6 +51,7 @@ class User extends Authenticatable
                 'bio' => 'My goal is to help my society evolve and develop in every aspect.',
                 'image' => asset('storage/no_image.jpg')
             ]);
+            $user->settings()->create();
         });
     }
 

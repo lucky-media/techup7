@@ -31,7 +31,7 @@
                 ">
                     <div class="flex float-right -mt-16">
                         <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($post->user->name) }}"
-                            src="{{ asset($post->user->profile->profileImage()) }}">
+                            src="{{ asset((Cache::get('profileImage.'.$post->user->id)) ?? $post->user->profile->profileImage()) }}">
                     </div>
                     <div>
                         <a class="no-underline hover:underline text-black" href="{{ route('posts.show', $post->slug) }}">
@@ -49,7 +49,7 @@
                                 {{ Str::limit($post->user->name, 15) }}
                             </a>
                             <p class="ml-8 text-gray-600">{{ $post->created_at->diffForHumans() }}</p>
-                            <p class="ml-8 text-gray-600">{{ __('general.total_answers') }}: {{ $post->answersCount() }}</p>
+                            <p class="ml-8 text-gray-600">{{ __('general.total_answers') }}: {{ $post->children_count }}</p>
                             <p class="ml-8 text-gray-600">{{ __('general.status') }}:
                                 <strong>{{ ($post->best_answer) ? __('general.solved') : __('general.unsolved') }}</strong></p>
                         </div>

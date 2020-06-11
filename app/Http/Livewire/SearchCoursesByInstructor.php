@@ -26,9 +26,12 @@ class SearchCoursesByInstructor extends Component
         $this->lang = $val;
     }
 
-    /*  Showing all courses created by instructor profile owner
+    /*  
+     *  Showing all courses created by instructor profile owner
      *  Filter by language, or the query matching the title or body
+     *  Eager loading the user table and through the user we eager load the profile table
      */
+    
     public function render()
     { 
         $this->courses = Course::query()
@@ -38,6 +41,7 @@ class SearchCoursesByInstructor extends Component
                                     $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
                                           ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
+                                ->with('user')
                                 ->orderBy('created_at', 'desc') 
                                 ->paginate($this->pagination);
 

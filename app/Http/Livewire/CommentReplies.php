@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Notifications\NewComment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 use App\Comment;
 
@@ -14,6 +15,7 @@ class CommentReplies extends Component
     public $commentable;
     public $liked = 0;
     public $totalLikes;
+    public $profileImage;
 
     // The listener is used to refresh the component if a comment is deleted or flagged
     protected $listeners = ['refresh' => '$refresh'];
@@ -22,6 +24,11 @@ class CommentReplies extends Component
     {
         $this->comment = $comment;
         $this->commentable = $comment->commentable;
+
+        $this->profileImage = Cache::rememberForever
+                ('profileImage.' . $comment->user->id, function () use ($comment) {
+                    return $comment->user->profile->profileImage();
+                });
 
         if (auth()->user()){
             $this->liked = $this->getLike();
@@ -65,6 +72,14 @@ class CommentReplies extends Component
     {
         $this->comment->update([
         'approved' => false,
+        ]);
+    }
+
+    // Approve flagged comment
+    public function approveComment()
+    {
+        $this->comment->update([
+            'approved' => true,
         ]);
     }
 

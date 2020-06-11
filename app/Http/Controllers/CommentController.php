@@ -18,38 +18,11 @@ class CommentController extends Controller
     {
         $this->middleware('role');
         
-        $comments = Comment::where('approved', '=', false)->paginate(10);
+        $comments = Comment::with('user.profile')->where('approved', '=', false)->get();
         
         return view('comments.index', compact('comments'));
     }
-
-    // When deleting a comment we also delete the comment replies
-    public function destroy($id){
-        // Getting the parent category
-        $parent = Comment::findOrFail($id);
         
-        // Getting all children ids
-        $array_of_ids = $this->getChildren($parent);
-        
-        // Appending the parent category id
-        array_push($array_of_ids, $id);
-        
-        // Destroying all of them
-        Comment::destroy($array_of_ids);
-        
-        return back();
-    }
-    
-    private function getChildren($category){
-        $ids = [];
-
-        foreach ($category->children as $cat) {
-            $ids[] = $cat->id;
-            $ids = array_merge($ids, $this->getChildren($cat));
-        }
-        return $ids;
-    }
-    
     public function edit(Comment $comment)
     {        
         $this->authorize('update', $comment);    
@@ -70,23 +43,12 @@ class CommentController extends Controller
         $commentable = $comment->commentable;
 
         if (class_basename(get_class($commentable)) == 'Lesson'){    
-            return redirect('/lessons/'. $comment->lesson->slug);
+            return redirect('/lessons/'. $commentable->slug);
         }
         else
         {
-            return redirect('/courses/'. $comment->course->slug);
+            return redirect('/courses/'. $commentable->slug);
         }
         
-    }
-    
-    public function approved(Comment $comment)
-    {
-        $this->middleware('role');
-    
-        $comment->update([
-            'approved' => true,
-        ]);
-        
-        return redirect('/comments');
     }
 }

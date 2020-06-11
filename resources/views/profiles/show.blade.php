@@ -16,7 +16,7 @@
 <div class="container my-20">
     <div class="row items-center">
         <div class="col-4">
-            <img src="{{ asset($user->profile->profileImage()) }}" class="rounded-lg">
+            <img src="{{ asset($profileImage) }}" class="rounded-lg">
         </div>
         <div class="col-6">
             <h2 class="font-semibold text-2xl text-orange-500 py-2">{{ $user->name }}</h2>
@@ -25,7 +25,7 @@
             <p class="py-1"><strong>{{ __('general.role') }}:</strong> {{ $user->role }}</p>
             {{-- Display total courses only for instructors --}}
             @if ($user->role === 'instructor')
-                <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $user->courses->count() }}</p>
+                <p class="py-1"><strong>{{ __('general.courses') }}:</strong> {{ $coursesCount }}</p>
             @endif
             @can('update', $user->profile)
                 <form action="{{ route('profiles.edit', $user) }}" enctype="multipart/form-data" method="get">

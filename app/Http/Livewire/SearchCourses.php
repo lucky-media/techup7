@@ -20,8 +20,11 @@ class SearchCourses extends Component
         $this->lang = $val;
     }
 
-    // Showing all courses and provides searching with the term entered by user
-    // If language is not available, all courses are displayed. Or we display the required language only
+    /*  
+     *  Showing all courses and provides searching with the term entered by user
+     *  If language is not available, all courses are displayed. Or we display the required language only
+     *  Eager loading the user table and through the user we eager load the profile table
+     */
 
     public function render()
     {             
@@ -29,8 +32,9 @@ class SearchCourses extends Component
                                 ->where('lang', 'LIKE', "%". ($this->lang) ? $this->lang : '' . "%")
                                 ->where(function($query) {
                                     $query->where('title', 'LIKE', "%{$this->searchTerm}%") 
-                                          ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
+                                        ->orWhere('body', 'LIKE', "%{$this->searchTerm}%");
                                 })
+                                ->with('user')
                                 ->orderBy('created_at', 'desc')
                                 ->paginate($this->pagination);
 

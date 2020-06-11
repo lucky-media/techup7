@@ -39,10 +39,8 @@ class Course extends Model
 
     public function commentsCount()	
     {	
-        $comments = Comment::where('commentable_id', '=', $this->id)
-                            ->where('commentable_type', '=', 'App\Course')
-                            ->get();	
-
-        return $comments->count();
+        return Comment::where('commentable_id', $this->id)
+                            ->where('commentable_type', 'App\Course')
+                            ->count();	
     }
 }

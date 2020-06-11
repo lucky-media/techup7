@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    
+    protected function authenticated(Request $request, $user)
+    {
+        App::setLocale(auth()->user()->settings->locale);
+        Carbon::setLocale(auth()->user()->settings->locale);
+        //storing the locale in session to get it back in the middleware
+        session()->put('locale', auth()->user()->settings->locale);
     }
 }

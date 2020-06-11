@@ -7,7 +7,7 @@
                 <strong>{{ __('general.best_answer') }}</strong>
             @endif
             <img class="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" alt="{{ asset($answer->user->name) }}"
-                src="{{ asset($answer->user->profile->profileImage()) }}">
+                src="{{ asset($profileImage) }}">
         </div>
         <div>
             <p class="mt-2 text-gray-600">

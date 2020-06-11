@@ -9,6 +9,7 @@ use App\Lesson;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -58,6 +59,8 @@ class CourseController extends Controller
             'category_id' => $data['category_id'],
         ]);
         
+        Cache::forget('coursesCount.'.auth()->user()->id);
+
         return redirect('/profiles/'. auth()->user()->id);
     }
 

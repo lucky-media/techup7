@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('new_comment')->default(true);
             $table->string('new_reply')->default(true);
             $table->string('new_answer')->default(true);
+            $table->string('locale')->default('en');
             
             $table->index('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

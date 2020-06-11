@@ -25,15 +25,13 @@ class Post extends Model
 
     public function children()
     {
-        return $this->hasMany(Comment::class, 'commentable_id', 'id');
+        return $this->hasMany(Comment::class, 'commentable_id', 'id')->where('commentable_type', 'App\Post');
     }
 
     public function answersCount()	
     {	
-        $answers = Comment::where('commentable_id', '=', $this->id)
+        return Comment::where('commentable_id', '=', $this->id)
                             ->where('commentable_type', '=', 'App\Post')
-                            ->get();	
-
-        return $answers->count();
+                            ->count();
     }
 }

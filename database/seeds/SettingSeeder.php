@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class SettingSeeder extends Seeder
 {
@@ -13,8 +14,12 @@ class SettingSeeder extends Seeder
     {
         $users = App\User::all();
         
+        $locale = ['en', 'sq', 'mk'];
+
         foreach($users as $user){
-            $user->settings()->create();
+            $user->settings()->create([
+                'locale' => Arr::random($locale)
+            ]);
         }
     }
 }

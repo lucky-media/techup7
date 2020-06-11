@@ -32,7 +32,8 @@
 
                     <footer class="flex items-center justify-between leading-none p-2 md:p-4">
                         <a class="flex items-center no-underline hover:underline text-black" href="{{ route('profiles.show', $course->user->id) }}">
-                            <img alt="profile photo" class="block rounded-full w-12 h-12" src="{{ asset($course->user->profile->profileImage()) }}">
+                            <img alt="profile photo" class="block rounded-full w-12 h-12"
+                                 src="{{ asset((Cache::get('profileImage.'.$course->user->id)) ?? $course->user->profile->profileImage() ) }}">
                             <p class="ml-2 text-sm">
                                 {{ Str::limit($course->user->name, 20) }}
                             </p>
@@ -40,7 +41,7 @@
                         <div class="no-underline text-grey-darker text-right text-sm hover:text-red-dark">
                                 {{ $course->created_at->formatLocalized('%b %Y') }}<br>
                             <a class="no-underline hover:underline text-black" href="{{ route('courses.index') }}">
-                                {{ Str::limit($course->category->name, 10) }}
+                                {{-- {{ Str::limit($course->category->name, 10) }} --}}
                             </a><br>
                             <img src="{{ asset('/storage/'.$course->lang.'.png') }}" style="max-height: 20px;">
                         </div>

@@ -2,21 +2,27 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use App\Notifications\NewComment;
 use Livewire\Component;
-use App\Post;
+use App\Comment;
 
 class AddAnswer extends Component
 {
     public $body;
     public $post;
 
-    // The listener is used to refresh the component if an answer is deleted or flaged
-    protected $listeners = ['refresh' => '$refresh'];
+    // The listener is used to refresh the component if an answer is modified
+    protected $listeners = ['refresh' => 'refresh'];
 
-    public function mount(Post $post)
+    public function mount($post)
     {
         $this->post = $post;
+    }
+
+    public function refresh()
+    {
+        $this->post->refresh();
     }
 
     // We add only the body and post->id when creating a comment
@@ -34,7 +40,8 @@ class AddAnswer extends Component
         // The input field is set to empty
         $this->reset('body');
         
-        $this->post = $this->post->refresh();
+        // Refreshing the component parent
+        $this->emitUp('refresh');
 
         $this->sendNotification($data['body']);
     }
@@ -53,8 +60,11 @@ class AddAnswer extends Component
             $this->post->user->notify(new NewComment($info));
         }
 
-        // Notify all other commenters on this post, but not the post owner
-        // Also check if the users have enabled emails to be sent for new answers
+        /* 
+         * Notify all other commenters on this post, but not the post owner
+         * Also check if the users have enabled emails to be sent for new answers
+        */ 
+        
         foreach ($this->post->answers->unique('user_id') as $reply){
             if ($this->post->user->id != $reply->user->id){
                 if ($reply->user->settings->new_answer){

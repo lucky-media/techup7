@@ -52,6 +52,7 @@ return [
     'are_you_sure' => 'Дали си сигурен?',
     'inappropriate' => 'Несоодветен',
     'flagged' => 'Обележан',
+    'approve' => 'Одобри',
     'comments' => 'Коментари',
     'answers' => 'Одговори',
     'reply' => 'Одговори',
@@ -88,5 +89,9 @@ return [
     'status' => 'Статус',
     'unsolved' => 'Нерешено',
     'solved' => 'Решено',
+    'on' => 'on',
+    'off' => 'off',
+    'settings' => 'Settings',
+    'edit_settings' => 'Edit Settings',
     
 ];
